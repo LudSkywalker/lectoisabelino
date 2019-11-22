@@ -11,10 +11,10 @@ class ControlElementosDao extends ConexDBMySQL {
 
     public function seleccionarTodos() {
 
-        $consulta = "SELECT ce.conEId, ce.conEPrestado,pe.perId, pe.perDocumento, pe.perNombre, pe.perApellido, el.eleLecId,
+        $consulta = "SELECT ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido, el.eleLecId,
                                   el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
                                   ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
-                                  FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_perId= pe.perId)
+                                  FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
                                   LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
                                   LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId); ";
 
@@ -37,16 +37,16 @@ public function insertar($registro) {
             $conEPrestado = $registro['conEPrestado'];
             $conEObsSalida = $registro['conEObsSalida'];
             $conEObsEntrada = $registro['conEObsEntrada'];
-            $personap_perId = $registro['persona_perId'];
+            $persona_usuario_s_usuId = $registro['persona_usuario_s_usuId'];
             $elementos_lecto_eleLecId  = $registro['elementos_lecto_eleLecId'];
 
         try {
             $query = "INSERT INTO contr_elementos (conEFechaSal,conEFechaEnt,conEFechaDev,
-                                conEPrestado,conEObsSalida, conEObsEntrada,persona_perId,elementos_lecto_eleLecId )
+                                conEPrestado,conEObsSalida, conEObsEntrada,persona_usuario_s_usuId,elementos_lecto_eleLecId )
                                VALUES(?,?,?,?,?,?,?,?);";
             $inserta = $this->conexion->prepare($query);
 
-            $inserta->execute(array($conEFechaSal,$conEFechaEnt,$conEFechaDev,$conEPrestado,$conEObsSalida,$conEObsEntrada,$personap_perId,$elementos_lecto_eleLecId));
+            $inserta->execute(array($conEFechaSal,$conEFechaEnt,$conEFechaDev,$conEPrestado,$conEObsSalida,$conEObsEntrada,$persona_usuario_s_usuId,$elementos_lecto_eleLecId));
 
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
 
@@ -90,7 +90,7 @@ public function insertar($registro) {
             $conEPrestado = $registro[0]['conEPrestado'];
             $conEObsSalida = $registro[0]['conEObsSalida'];
             $conEObsEntrada = $registro[0]['conEObsEntrada'];
-            $persona_perId = $registro[0]['persona_perId'];
+            $persona_usuario_s_usuId = $registro[0]['persona_usuario_s_usuId'];
             $elementos_lecto_eleLecId = $registro[0]['elementos_lecto_eleLecId'];
             $conEId  = $registro[0]['conEId '];
 
@@ -98,10 +98,10 @@ public function insertar($registro) {
                 $actualizar = "UPDATE contr_elementos SET 
                                              conEFechaSal= ?, conEFechaEnt= ? ,conEFechaDev= ?,
                                              conEPrestado= ?,conEObsSalida= ?,conEObsEntrada= ?,
-                                             persona_perId= ?,elementos_lecto_eleLecId= ?
+                                             persona_usuario_s_usuId= ?,elementos_lecto_eleLecId= ?
                                              WHERE conEId= ?";
                 $actuali=$this->conexion->prepare($actualizar);
-                $actualizacion =$actuali->execute(array($conEFechaSal, $conEFechaEnt, $conEFechaDev, $conEPrestado, $conEObsSalida,$conEObsEntrada,$persona_perId,$elementos_lecto_eleLecId,$conEId ));
+                $actualizacion =$actuali->execute(array($conEFechaSal, $conEFechaEnt, $conEFechaDev, $conEPrestado, $conEObsSalida,$conEObsEntrada,$persona_usuario_s_usuId,$elementos_lecto_eleLecId,$conEId ));
                 $actu= ['actualizacion' => $actualizacion, 'mensaje' => "Actualizacion realizada."];
                 return $actu;
             }

@@ -11,10 +11,10 @@ class ControlPrestamoLibrosDao extends ConexDBMySQL {
 
     public function seleccionarTodos() {
 
-        $consulta = "SELECT cpl.conPId, cpl.conPPrestado,pe.perId, pe.perDocumento, pe.perNombre, pe.perApellido,
+        $consulta = "SELECT cpl.conPId, cpl.conPPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido,
                                   ll.libLecId, ll.libLecCodigo,ll.libLecTitulo,
                                   cpl.conPFechaSal,cpl.conPFechaEnt,cpl.conPFechaDev,cpl.conPObsSalida,cpl.conPObsEntrada 
-                                  FROM ((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_perId= pe.perId )
+                                  FROM ((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_usuario_s_usuId=pe.usuario_s_usuId )
                                   LEFT JOIN libros_lecto ll ON cpl.libros_lecto_libLecId= ll.libLecId); ";
 
         $registrar = $this->conexion->prepare($consulta);
@@ -37,16 +37,16 @@ public function insertar($registro) {
             $conPPrestado = $registro['conPPrestado'];
             $conPObsSalida = $registro['conPObsSalida'];
             $conPObsEntrada = $registro['conPObsEntrada'];
-            $personap_perId = $registro['persona_perId'];
+            $persona_usuario_s_usuId= $registro['persona_usuario_s_usuId'];
             $libros_lecto_libLecId = $registro['libros_lecto_libLecId'];
 
         try {
             $query = "INSERT INTO contr_prestamos_libros 
-                                (conPFechaSal,conPFechaEnt,conPFechaDev,conPPrestado,conPObsSalida,conPObsEntrada,persona_perId,libros_lecto_libLecId)
+                                (conPFechaSal,conPFechaEnt,conPFechaDev,conPPrestado,conPObsSalida,conPObsEntrada,persona_usuario_s_usuId,libros_lecto_libLecId)
                                 VALUES (?,?,?,?,?,?,?,?)";
             $inserta = $this->conexion->prepare($query);
 
-            $inserta->execute(array($conPFechaSal,$conPFechaEnt,$conPFechaDev,$conPPrestado,$conPObsSalida,$conPObsEntrada,$personap_perId,$libros_lecto_libLecId));
+            $inserta->execute(array($conPFechaSal,$conPFechaEnt,$conPFechaDev,$conPPrestado,$conPObsSalida,$conPObsEntrada,$persona_usuario_s_usuId,$libros_lecto_libLecId));
 
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
 
@@ -72,7 +72,6 @@ public function insertar($registro) {
         }
 
         $this->cierreDB();
-        //Retorna si fue exitoso o no hallar el registro con la llave primaria y sus datos o vacÃ­o       
         if (!empty($registroEncontrado)) {
             return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEncontrado];
         } else {
@@ -90,7 +89,7 @@ public function insertar($registro) {
             $conPPrestado = $registro[0]['conPPrestado'];
             $conPObsSalida = $registro[0]['conPObsSalida'];
             $conPObsEntrada = $registro[0]['conPObsEntrada'];
-            $persona_perId = $registro[0]['persona_perId'];
+            $persona_usuario_s_usuId = $registro[0]['persona_usuario_s_usuId'];
             $libros_lecto_libLecId = $registro[0]['libros_lecto_libLecId'];
             $conPId  = $registro[0]['conPId '];
 
@@ -98,10 +97,10 @@ public function insertar($registro) {
                 $actualizar = "UPDATE contr_prestamos_libros  SET 
                                              conPFechaSal= ?, conPFechaEnt= ? ,conPFechaDev= ?,
                                              conPPrestado= ?,conPObsSalida= ?,conPObsEntrada= ?,
-                                             persona_perId= ?,libros_lecto_libLecId= ?
+                                             persona_usuario_s_usuId= ?,libros_lecto_libLecId= ?
                                              WHERE conPId= ?";
                 $actuali=$this->conexion->prepare($actualizar);
-                $actualizacion =$actuali->execute(array($conPFechaSal, $conPFechaEnt, $conPFechaDev, $conPPrestado, $conPObsSalida,$conPObsEntrada,$persona_perId,$libros_lecto_libLecId,$conPId ));
+                $actualizacion =$actuali->execute(array($conPFechaSal, $conPFechaEnt, $conPFechaDev, $conPPrestado, $conPObsSalida,$conPObsEntrada,$persona_usuario_s_usuId,$libros_lecto_libLecId,$conPId ));
                 $actu= ['actualizacion' => $actualizacion, 'mensaje' => "Actualizacion realizada."];
                 return $actu;
             }

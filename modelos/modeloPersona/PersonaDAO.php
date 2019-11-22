@@ -30,14 +30,11 @@ class PersonaDao extends ConexDBMySQL {
 
         try {
 
-            $inserta = $this->conexion->prepare('INSERT INTO persona (perId, perDocumento, perNombre, perApellido, usuario_s_usuId) VALUES ( :perId, :perDocumento, :perNombre, :perApellido, :usuario_s_usuId );');
-            $inserta->bindParam(":perId", $registro['perId']);
-            $inserta->bindParam(":perDocumento", $registro['documento']);
-            $inserta->bindParam(":perNombre", $registro['nombre']);
-            $inserta->bindParam(":perApellido", $registro['apellidos']);
-            $inserta->bindParam(":perApellido", $registro['apellidos']);
-            $inserta->bindParam(":usuario_s_usuId", $registro['perId']);
-            $insercion = $inserta->execute();
+            $inserta = $this->conexion->prepare('INSERT INTO persona ( perDocumento, perNombre, perApellido) VALUES ( :perId, :perDocumento, :perNombre, :perApellido );');
+            $inserta->bindParam(":perDocumento", $registro['perDocumento']);
+            $inserta->bindParam(":perNombre", $registro['perNombre']);
+            $inserta->bindParam(":perApellido", $registro['perApellido']);
+            $execute = $inserta->execute();
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
 
             return ['inserto' => 1, 'resultado' => $clavePrimariaConQueInserto];
@@ -58,11 +55,10 @@ class PersonaDao extends ConexDBMySQL {
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $registroEncontrado[] = $registro;
         }
-
         if ($registro != FALSE) {
-            return ['exitoSeleccionId' => TRUE, 'registroEncontrado' => $registroEncontrado];
+            return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEncontrado];
         } else {
-            return ['exitoSeleccionId' => FALSE, 'registroEncontrado' => $registroEncontrado];
+            return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEncontrado];
         }
     }
 

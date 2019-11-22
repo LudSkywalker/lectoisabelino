@@ -5,7 +5,7 @@ include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php";
 
-echo "    ";
+
 $lib = new ControlPrestamoLibrosDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
 
 //Select todos
@@ -23,7 +23,7 @@ $registro['conPFechaDev'] = NULL ;
 $registro['conPPrestado'] = 1;
 $registro['conPObsSalida'] = 'Excelente Estado';
 $registro['conPObsEntrada'] = 'Buen Estado';
-$registro['persona_perId'] = 2;
+$registro['persona_usuario_s_usuId'] = 2;
 $registro['libros_lecto_libLecId'] = 6;
 
 $insert = $lib->insertar($registro);
@@ -48,7 +48,7 @@ $registro[0]['conPFechaDev'] = '2019-05-07 15:02:04' ;
 $registro[0]['conPPrestado'] = 1;
 $registro[0]['conPObsSalida'] = 'Excelente Estado';
 $registro[0]['conPObsEntrada'] = 'Buen Estado';
-$registro[0]['persona_perId'] = 2;
+$registro[0]['persona_usuario_s_usuId'] = 2;
 $registro[0]['libros_lecto_libLecId'] = 6;
 $registro[0]['conPId ']=11;
 

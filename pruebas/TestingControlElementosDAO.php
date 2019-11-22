@@ -6,7 +6,7 @@ include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloControlElementos/ControlElementosDAO.php";
 
-echo "    ";
+
 $conEle=new ControlElementosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 
 //Select todos
@@ -25,7 +25,7 @@ $registro['conEFechaDev'] = NULL ;
 $registro['conEPrestado'] = 1;
 $registro['conEObsSalida'] = 'Excelente Estado';
 $registro['conEObsEntrada'] = 'Buen Estado';
-$registro['persona_perId'] = 2;
+$registro['persona_usuario_s_usuId'] = 2;
 $registro['elementos_lecto_eleLecId'] = 6;
 
 $insert = $conEle->insertar($registro);
@@ -50,7 +50,7 @@ $registro[0]['conEFechaDev'] = '2019-05-07 15:02:04' ;
 $registro[0]['conEPrestado'] = 1;
 $registro[0]['conEObsSalida'] = 'Excelente Estado';
 $registro[0]['conEObsEntrada'] = 'Buen Estado';
-$registro[0]['persona_perId'] = 2;
+$registro[0]['persona_usuario_s_usuId'] = 2;
 $registro[0]['elementos_lecto_eleLecId'] = 6;
 $registro[0]['conEId ']=11;
 
