@@ -163,7 +163,54 @@ public function insertar($registro) {
             $this->cierreDB();
         }
     }
+    public function consultaPaginada($limit = NULL, $offset = NULL, $filtrarBuscar = "") {
 
+        $planConsulta = "select SQL_CALC_FOUND_ROWS ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
+ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
+FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
+LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
+LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId); ";
+
+        $planConsulta .= $filtrarBuscar;
+
+        $planConsulta .= "  order by l.isbn asc";
+        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
+     
+        $listar = $this->conexion->prepare($planConsulta);
+        $listar->execute();
+
+        $listadoLibros = array();
+
+        while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
+            $listadoLibros[] = $registro;
+        }
+
+        $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
+        $listar2->execute();
+        while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
+            $totalRegistros = $registro->total;
+        }
+        $this->cantidadTotalRegistros = $totalRegistros;
+
+        return array($totalRegistros, $listadoLibros);
+
+    }
+
+    public function totalRegistros() {
+
+        $planConsulta = "SELECT count(*) as total from libros; ";
+
+        $cantidadLibros = $this->conexion->prepare($planConsulta);
+        $cantidadLibros->execute(); //Ejecución de la consulta 
+
+        $totalRegistrosLibros = "";
+
+        $totalRegistrosLibros = $cantidadLibros->fetch(PDO::FETCH_OBJ);
+
+        $this->cierreBd();
+
+        return $totalRegistrosLibros;
+    }
 
 }
 
