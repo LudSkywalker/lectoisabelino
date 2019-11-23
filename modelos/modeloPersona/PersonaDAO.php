@@ -11,8 +11,8 @@ class PersonaDao extends ConexDBMySQL {
 
     public function seleccionarTodos() {
 
-        $consulta = "SELECT p.perId,p.perDocumento,p.perNombre,p.perApellido,u.usuId,u.usuLogin 
-                                  FROM (persona p LEFT JOIN usuario_s u ON p.usuario_s_usuId=u.usuId) ;";
+        $consulta = "SELECT pe.usuario_s_usuId,pe.perDocumento,pe.perNombre,pe.perApellido,u.usuId,u.usuLogin 
+                                  FROM (persona pe LEFT JOIN usuario_s u ON pe.usuario_s_usuId=u.usuId) ;";
 
         $registrar = $this->conexion->prepare($consulta);
         $registrar->execute();
@@ -30,8 +30,9 @@ class PersonaDao extends ConexDBMySQL {
 
         try {
 
-            $inserta = $this->conexion->prepare('INSERT INTO persona ( perDocumento, perNombre, perApellido) VALUES ( :perId, :perDocumento, :perNombre, :perApellido );');
+            $inserta = $this->conexion->prepare('INSERT INTO persona (usuario_s_usuId, perDocumento, perNombre, perApellido) VALUES (:usuario_s_usuId, :perDocumento, :perNombre, :perApellido );');
             $inserta->bindParam(":perDocumento", $registro['perDocumento']);
+            $inserta->bindParam(":usuario_s_usuId", $registro['usuario_s_usuId']);
             $inserta->bindParam(":perNombre", $registro['perNombre']);
             $inserta->bindParam(":perApellido", $registro['perApellido']);
             $execute = $inserta->execute();
@@ -40,14 +41,16 @@ class PersonaDao extends ConexDBMySQL {
             return ['inserto' => 1, 'resultado' => $clavePrimariaConQueInserto];
         } catch (PDOException $pdoExc) {
             return ['inserto' => 0, 'resultado' => $pdoExc];
+        } finally {
+            $this->cierreDB();
         }
     }
 
     public function seleccionarId($sId) {
 
 
-        $planConsulta = "select * from persona p join usuario_s u on p.perId=u.usuId ";
-        $planConsulta .= " where p.perDocumento= ? or u.usuLogin = ? ;";
+        $planConsulta = "select * from persona pe join usuario_s u on pe.usuario_s_usuId=u.usuId ";
+        $planConsulta .= " where pe.perDocumento= ? or u.usuLogin = ? ;";
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute(array($sId[0], $sId[1]));
 
@@ -55,10 +58,86 @@ class PersonaDao extends ConexDBMySQL {
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $registroEncontrado[] = $registro;
         }
-        if ($registro != FALSE) {
+        $this->cierreDB();
+        if (isset($registroEncontrado)) {
             return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEncontrado];
         } else {
             return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEncontrado];
+        }
+    }
+
+    public function actualizar($registro) {
+
+        try {
+
+            $perDocumento = $registro[0]['perDocumento'];
+            $perNombre = $registro[0]['perNombre'];
+            $perApellido = $registro[0]['perApellido'];
+            $usuario_s_usuId = $registro[0]['usuario_s_usuId'];
+
+            if (isset($usuario_s_usuId)) {
+                $actualizar = "UPDATE persona SET perDocumento=? ,perNombre=? , perApellido=? WHERE usuario_s_usuId = ?";
+                $actuali = $this->conexion->prepare($actualizar);
+                $actualizacion = $actuali->execute(array($perDocumento, $perNombre, $perApellido, $usuario_s_usuId));
+                $actu = ['actualizacion' => $actualizacion, 'mensaje' => "Actualizacion realizada."];
+                return $actu;
+            }
+        } catch (PDOException $pdoExc) {
+            $act = ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+            return $act;
+        } finally {
+            $this->cierreDB();
+        }
+    }
+
+    public function eliminar($id = array()) {
+        $planConsulta = "DELETE from persona  
+                                           WHERE usuario_s_usuId=:usuario_s_usuId ";
+        $eliminar = $this->conexion->prepare($planConsulta);
+        $eliminar->bindParam(':usuario_s_usuId', $id[0], PDO::PARAM_INT);
+        $resultado = $eliminar->execute();
+
+        $this->cierreDB();
+
+        if (isset($resultado)) {
+            return ['eliminar' => TRUE, 'registroEliminado' => array($id[0])];
+        } else {
+            return ['eliminar' => FALSE, 'registroEliminado' => array($id[0])];
+        }
+    }
+    
+      public function eliminarLogico($id = array()) {
+        try {
+            $cambiarEstado = 0;
+
+            if (isset($id[0])) {
+                $actualizar = "UPDATE persona  SET perEstado = ? WHERE usuario_s_usuId= ?;";
+                $actualizacion = $this->conexion->prepare($actualizar);
+                $actualiza = $actualizacion->execute(array($cambiarEstado, $id[0]));
+                return ['actualizacion' => $actualiza, 'mensaje' => "Registro Inactivado."];
+            }
+        } catch (PDOException $pdoExc) {
+            return ['actualizacion' => $actualiza, 'mensaje' => $pdoExc];
+        } finally {
+            $this->cierreDB();
+        }
+    }
+
+    public function habilitar($id = array()) {
+        try {
+
+            $cambiarEstado = 1;
+
+            if (isset($id[0])) {
+                $actualizar = "UPDATE persona  SET perEstado = ? WHERE usuario_s_usuId= ?;";
+                $actualizacion = $this->conexion->prepare($actualizar);
+                $actualiza = $actualizacion->execute(array($cambiarEstado, $id[0]));
+                return ['actualizacion' => $actualiza, 'mensaje' => "Registro habilitado."];
+            }
+        } catch (PDOException $pdoExc) {
+            return ['actualizacion' => $actualiza, 'mensaje' => $pdoExc];
+        } finally {
+            $this->cierreDB();
         }
     }
 

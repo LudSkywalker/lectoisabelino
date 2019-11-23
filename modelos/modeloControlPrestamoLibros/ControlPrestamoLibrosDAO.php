@@ -28,17 +28,17 @@ class ControlPrestamoLibrosDao extends ConexDBMySQL {
         $this->cierreDB();
         return $listado;
     }
-    
-public function insertar($registro) {
-         
-            $conPFechaSal = $registro['conPFechaSal'];
-            $conPFechaEnt = $registro['conPFechaEnt'];
-            $conPFechaDev = $registro['conPFechaDev'];
-            $conPPrestado = $registro['conPPrestado'];
-            $conPObsSalida = $registro['conPObsSalida'];
-            $conPObsEntrada = $registro['conPObsEntrada'];
-            $persona_usuario_s_usuId= $registro['persona_usuario_s_usuId'];
-            $libros_lecto_libLecId = $registro['libros_lecto_libLecId'];
+
+    public function insertar($registro) {
+
+        $conPFechaSal = $registro['conPFechaSal'];
+        $conPFechaEnt = $registro['conPFechaEnt'];
+        $conPFechaDev = $registro['conPFechaDev'];
+        $conPPrestado = $registro['conPPrestado'];
+        $conPObsSalida = $registro['conPObsSalida'];
+        $conPObsEntrada = $registro['conPObsEntrada'];
+        $persona_usuario_s_usuId = $registro['persona_usuario_s_usuId'];
+        $libros_lecto_libLecId = $registro['libros_lecto_libLecId'];
 
         try {
             $query = "INSERT INTO contr_prestamos_libros 
@@ -46,7 +46,7 @@ public function insertar($registro) {
                                 VALUES (?,?,?,?,?,?,?,?)";
             $inserta = $this->conexion->prepare($query);
 
-            $inserta->execute(array($conPFechaSal,$conPFechaEnt,$conPFechaDev,$conPPrestado,$conPObsSalida,$conPObsEntrada,$persona_usuario_s_usuId,$libros_lecto_libLecId));
+            $inserta->execute(array($conPFechaSal, $conPFechaEnt, $conPFechaDev, $conPPrestado, $conPObsSalida, $conPObsEntrada, $persona_usuario_s_usuId, $libros_lecto_libLecId));
 
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
 
@@ -80,9 +80,9 @@ public function insertar($registro) {
     }
 
     public function actualizar($registro) {
-        
+
         try {
-            
+
             $conPFechaSal = $registro[0]['conPFechaSal'];
             $conPFechaEnt = $registro[0]['conPFechaEnt'];
             $conPFechaDev = $registro[0]['conPFechaDev'];
@@ -91,7 +91,7 @@ public function insertar($registro) {
             $conPObsEntrada = $registro[0]['conPObsEntrada'];
             $persona_usuario_s_usuId = $registro[0]['persona_usuario_s_usuId'];
             $libros_lecto_libLecId = $registro[0]['libros_lecto_libLecId'];
-            $conPId  = $registro[0]['conPId '];
+            $conPId = $registro[0]['conPId '];
 
             if (isset($conPId)) {
                 $actualizar = "UPDATE contr_prestamos_libros  SET 
@@ -99,20 +99,20 @@ public function insertar($registro) {
                                              conPPrestado= ?,conPObsSalida= ?,conPObsEntrada= ?,
                                              persona_usuario_s_usuId= ?,libros_lecto_libLecId= ?
                                              WHERE conPId= ?";
-                $actuali=$this->conexion->prepare($actualizar);
-                $actualizacion =$actuali->execute(array($conPFechaSal, $conPFechaEnt, $conPFechaDev, $conPPrestado, $conPObsSalida,$conPObsEntrada,$persona_usuario_s_usuId,$libros_lecto_libLecId,$conPId ));
-                $actu= ['actualizacion' => $actualizacion, 'mensaje' => "Actualizacion realizada."];
+                $actuali = $this->conexion->prepare($actualizar);
+                $actualizacion = $actuali->execute(array($conPFechaSal, $conPFechaEnt, $conPFechaDev, $conPPrestado, $conPObsSalida, $conPObsEntrada, $persona_usuario_s_usuId, $libros_lecto_libLecId, $conPId));
+                $actu = ['actualizacion' => $actualizacion, 'mensaje' => "Actualizacion realizada."];
                 return $actu;
             }
         } catch (PDOException $pdoExc) {
-            $act= ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+            $act = ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
             return $act;
         } finally {
             $this->cierreDB();
         }
     }
 
-    public function eliminar($id = array()) {//Recibe llave primaria a eliminar
+    public function eliminar($id = array()) {
         $planConsulta = "DELETE from contr_prestamos_libros   
                                            WHERE conPId=:conPId ";
         $eliminar = $this->conexion->prepare($planConsulta);
@@ -128,7 +128,7 @@ public function insertar($registro) {
         }
     }
 
-    public function eliminarLogico($id = array()) {// Se deshabilita un registro cambiando su estado a 0
+    public function eliminarLogico($id = array()) {
         try {
             $cambiarEstado = 0;
 
@@ -145,7 +145,7 @@ public function insertar($registro) {
         }
     }
 
-    public function habilitar($id = array()) {// Se habilita un registro cambiando su estado a 1
+    public function habilitar($id = array()) {
         try {
 
             $cambiarEstado = 1;
@@ -162,7 +162,6 @@ public function insertar($registro) {
             $this->cierreDB();
         }
     }
-
 
 }
 
