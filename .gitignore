@@ -4,14 +4,11 @@ ejercicios
 modelos
 plantillas
 pruebas
-
 controlador.php
 index.php
-
-ingresos
-
+ingresos.txt
 login.php
-notas
+notas.txt
 principal.php
 registro.php
  
