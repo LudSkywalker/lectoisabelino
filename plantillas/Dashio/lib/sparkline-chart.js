@@ -56,7 +56,7 @@ var Script = function () {
         width: '100',
         height: '100',
         borderColor: '#00bf00',
-        sliceColors: ['#41CAC0', '#A8D76F', '#F8D347', '#EF6F66']
+        sliceColors: ['#5AFF92', '#A8D76F', '#F8D347', '#EF6F66']
 //        tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
 //            '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
     });
@@ -108,7 +108,7 @@ var Script = function () {
         height: '22',
         barWidth: 5,
         barSpacing: 2,
-        barColor: '#41cac0'
+        barColor: '#5AFF92'
 //        tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
 //            '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
     });
@@ -117,7 +117,7 @@ var Script = function () {
         type: 'pie',
         width: '250',
         height: '125',
-        sliceColors: ['#41CAC0', '#A8D76F', '#F8D347', '#EF6F66']
+        sliceColors: ['#5AFF92', '#A8D76F', '#F8D347', '#EF6F66']
 //        tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
 //    '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'});
 

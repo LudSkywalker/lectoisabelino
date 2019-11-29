@@ -56,7 +56,7 @@
 
           
           </label>
-          <button class="btn btn-theme btn-block" href="plantillas/Dashio/index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+          <button class="btn btn-theme btn-block" href="plantillas/Dashio/index.html" type="submit"><i class="fa fa-lock"></i> Ingresar</button>
           <!-- Modal --
           <hr>
           <div class="login-social-link centered">
@@ -79,15 +79,15 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Forgot Password ?</h4>
+                <h4 class="modal-title">¿Olvido su contraseña?</h4>
               </div>
               <div class="modal-body">
-                <p>Enter your e-mail address below to reset your password.</p>
-                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                <p>Ingrese el correo institucional para recuperar su contraseña</p>
+                <input type="text" name="Email" placeholder="Correo institucional" autocomplete="off" class="form-control placeholder-no-fix">
               </div>
               <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                <button class="btn btn-theme" type="button">Submit</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                <button class="btn btn-theme" type="button">Aceptar</button>
               </div>
             </div>
           </div>

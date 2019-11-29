@@ -21,7 +21,7 @@ var Script = function () {
         xkey: 'period',
         ykeys: ['licensed', 'sorned'],
         labels: ['Licensed', 'Off the road'],
-        lineColors:['#4ECDC4','#ed5565']
+        lineColors:['#5AFF92','#ed5565']
       });
 
       Morris.Donut({
@@ -32,7 +32,7 @@ var Script = function () {
           {label: 'Custard', value: 25 },
           {label: 'Sugar', value: 10 }
         ],
-          colors: ['#3498db', '#2980b9', '#34495e'],
+          colors: ['#5AFF92', '#2980b9', '#34495e'],
         formatter: function (y) { return y + "%" }
       });
 
