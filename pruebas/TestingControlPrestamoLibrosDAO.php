@@ -6,10 +6,10 @@ include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php";
 
 
-$lib = new ControlPrestamoLibrosDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
+$conPL = new ControlPrestamoLibrosDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
 
 //Select todos
-$listado = $lib->seleccionarTodos();
+$listado = $conPL->seleccionarTodos();
 
 echo '<pre>';
 print_r($listado);
@@ -26,7 +26,7 @@ $registro['conPObsEntrada'] = 'Buen Estado';
 $registro['persona_usuario_s_usuId'] = 2;
 $registro['libros_lecto_libLecId'] = 6;
 
-$insert = $lib->insertar($registro);
+$insert = $conPL->insertar($registro);
 
 echo '<pre>';
 print_r($insert);
@@ -35,7 +35,7 @@ echo '</pre>';
 //Select id
 $id=array( 11 );
 
-$isd=$lib->seleccionarId($id);
+$isd=$conPL->seleccionarId($id);
 
 echo "<pre>";
 print_r($isd);
@@ -52,7 +52,7 @@ $registro[0]['persona_usuario_s_usuId'] = 2;
 $registro[0]['libros_lecto_libLecId'] = 6;
 $registro[0]['conPId ']=11;
 
-$up=$lib->actualizar($registro);
+$up=$conPL->actualizar($registro);
 
 echo "<pre>";
 print_r($up);
@@ -61,7 +61,7 @@ echo "</pre>";
 //Delete
 $sid=array(11);
 
-$del=$lib->eliminar($sid);
+$del=$conPL->eliminar($sid);
 
 echo "<pre>";
 print_r($del);
@@ -71,7 +71,7 @@ echo "</pre>";
 $dell=array(10);
 
 
-$deletelog=$lib->eliminarLogico($dell);
+$deletelog=$conPL->eliminarLogico($dell);
 
 echo "<pre>";
 print_r($deletelog);
@@ -80,11 +80,21 @@ echo "</pre>";
 //Delete logico habilitar
 $hab=array(10);
 
-$hablog=$lib->habilitar($hab);
+$hablog=$conPL->habilitar($hab);
 
 echo "<pre>";
 print_r($hablog);
 echo "</pre>";
 
+//Query pag
+$pag=$conPL->consultaPaginada(5,0);
+echo "<pre>";
+print_r($pag);
+echo "</pre>";
 
+//coutn
+$cu=$conPL->totalRegistros();        
+echo "<pre>";
+print_r($cu);
+echo "</pre>";
 ?>

@@ -163,19 +163,20 @@ public function insertar($registro) {
             $this->cierreDB();
         }
     }
-    public function consultaPaginada($limit = NULL, $offset = NULL, $filtrarBuscar = "") {
+    public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
 
-        $planConsulta = "select SQL_CALC_FOUND_ROWS ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
+        $planConsulta = "select SQL_CALC_FOUND_ROWS ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, 
+pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
 ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
 FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
 LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
-LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId); ";
+LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId) ";
 
         $planConsulta .= $filtrarBuscar;
 
-        $planConsulta .= "  order by l.isbn asc";
+        $planConsulta .= "  ORDER BY ce.conEId ASC";
         $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
-     
+
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute();
 
@@ -193,12 +194,12 @@ LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEle
         $this->cantidadTotalRegistros = $totalRegistros;
 
         return array($totalRegistros, $listadoLibros);
-
+        $this->cierreDB();
     }
 
     public function totalRegistros() {
 
-        $planConsulta = "SELECT count(*) as total from libros; ";
+        $planConsulta = "SELECT count(*) as total from contr_elementos; ";
 
         $cantidadLibros = $this->conexion->prepare($planConsulta);
         $cantidadLibros->execute(); //Ejecución de la consulta 
@@ -207,7 +208,7 @@ LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEle
 
         $totalRegistrosLibros = $cantidadLibros->fetch(PDO::FETCH_OBJ);
 
-        $this->cierreBd();
+        $this->cierreDB();
 
         return $totalRegistrosLibros;
     }
