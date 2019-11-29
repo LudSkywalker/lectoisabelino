@@ -87,4 +87,17 @@ $hablog=$conEle->habilitar($hab);
 echo "<pre>";
 print_r($hablog);
 echo "</pre>";
+
+//Query pag
+$pag=$conEle->consultaPaginada(5,0);
+echo "<pre>";
+print_r($pag);
+echo "</pre>";
+
+//coutn
+$cu=$conEle->totalRegistros();        
+echo "<pre>";
+print_r($cu);
+echo "</pre>";
+
 ?>
