@@ -1,7 +1,8 @@
 controladores 
 ejercicios
 modelos
-nbproject
+/nbproject/  
+nbproject/private/private.xml
 plantillas
 pruebas
 controlador.php
