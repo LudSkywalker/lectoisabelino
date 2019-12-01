@@ -1,5 +1,4 @@
 <?php
-
 class ClaseSesion {
 
     function crearSesion($usuario_s) {

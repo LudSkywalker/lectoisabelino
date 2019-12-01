@@ -1,5 +1,4 @@
 <?php
-
 include_once PATH.".../ConexDBMySQL.php";
 
 class CategoriaLibrosLectoDao extends ConexDBMySQL {

@@ -1,5 +1,4 @@
 <?php
-
 require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
 require_once PATH . 'modelos/modeloUsuarios/UsuariosDAO.php';
 require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
@@ -41,17 +40,17 @@ class Usuario_sControlador {
                     $asignarRol = new Usuario_s_rolesDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                     $rolAsignado=$asignarRol->insertar(array($resultadoInsercionUsuario_s,1));//Se envía el id con que quedó el usuario_s y el id del rol 
 
-                    session_start(); //se abre sesión para almacenar en ella el mensaje de inserción
+                     //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Registrado con èxito para ingreso al sistema"; //mensaje de inserción
                     if ($this->datos['ruta'] == 'gestionDeRegistro') {//si el formulario de la inserción es el de registrarse y fue exitoso se devuelve a login.php
                         header("location:login.php");
                     }
                     if ($this->datos['ruta'] == 'insertarUsuario_s') {//si el formulario de la inserción es el de Agregar Usuarios y fue exitoso se devuelve a listarRegistrosUsuario_s.php
 //                        header("location:../principal.php?contenido=vistas/vistasUsuario_s/listarRegistrosUsuario_s.php");
-                        header("location:Controlador.php?ruta=listarPersonas");
+                        header("location:../../Controlador.php?ruta=listarPersonas");
                     }
                 } else {//Si la persona ya existe se abre sesión para almacenar en ella el mensaje de inserción y devolver datos al formulario por medio de la sesión
-                    session_start();
+                    
                     $_SESSION['documento'] = $this->datos['documento'];
                     $_SESSION['nombre'] = $this->datos['nombre'];
                     $_SESSION['apellidos'] = $this->datos['apellidos'];
@@ -61,7 +60,7 @@ class Usuario_sControlador {
                         header("location:registro.php");
                     }
                     if ($this->datos['ruta'] == 'insertarUsuario_s') {//si al insertar un usuario en el formulario de Agregar nuevo usuario y éste ya existe a listarRegistrosUsuario_s.php
-                        header("location:Controlador.php?ruta=mostrarInsertarPersonas");
+                        header("location:../../Controlador.php?ruta=mostrarInsertarPersonas");
                     }
                 }
                 break;
@@ -74,7 +73,7 @@ class Usuario_sControlador {
                 $this->datos["documento"] = ""; //Para logueo crear ésta variable límpia por cuanto se utiliza el mismo método de registrarse a continuación
                 $existeUsuario_s = $gestarUsuario_s->seleccionarId(array($this->datos["documento"], $this->datos['email'], $this->datos["password"])); //Se revisa si existe la persona en la base                
                 if ((0 != $existeUsuario_s['exitoSeleccionId']) && ($existeUsuario_s['registroEncontrado'][0]->usuLogin == $this->datos['email'])) {
-                    session_start(); //se abre sesión para almacenar en ella el mensaje de inserción
+                     //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Bienvenido a nuestra Aplicación."; //mensaje de inserción
                     //Consultamos los roles de la persona logueada
                     $consultaRoles = new RolDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
@@ -90,7 +89,7 @@ class Usuario_sControlador {
 
                     header("location:principal.php");
                 } else {
-                    session_start(); //se abre sesión para almacenar en ella el mensaje de inserción
+                     //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Credenciales de acceso incorrectas"; //mensaje de inserción
                     header("location:login.php");
                 }

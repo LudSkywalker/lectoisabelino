@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -257,10 +267,12 @@
                                 <span>Gestión de Libros</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="Controlador.php?ruta=listarLibros&pag=0">Listar Libros</a></li>
-                                <?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
-                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros">Insertar Nuevo Libro</a></li>
-                                <?php } ?>
+                                <li><a href="../../Controlador.php?ruta=listarLibros&pag=0">Listar Libros</a></li>
+                                <?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
+                                 <li><a href="../../Controlador.php?ruta=mostrarInsertarLibros">Insertar Nuevo Libro</a></li>
+                                <?php
+ } ?>
                             </ul>
                         </li>  
           <li class="sub-menu">

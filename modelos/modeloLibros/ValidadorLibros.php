@@ -1,5 +1,4 @@
 <?php
-
 class ValidadorLibros {
 
     public function validarFormularioLibro($datos) {

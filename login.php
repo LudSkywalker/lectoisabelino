@@ -8,8 +8,18 @@ if (isset($_SESSION['mensaje'])) {
 }
 ?>
 
+<?php
+session_start();
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
+}
+?>
+
 <!DOCTYPE html>
-.php  lang="es" href="qa.php-language-declarations.es">
+<html lang="es" href="qa.php-language-declarations.es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +46,7 @@ if (isset($_SESSION['mensaje'])) {
     <body>
 
         <div class="container">
-            <form class="form-login" role="form" method="POST" action="controlador.php" name="formLogin"">
+            <form class="form-login" role="form" method="POST" action="Controlador.php" name="formLogin"">
                 <h2 class="form-login-heading">Ingresar</h2>
                 <div class="login-wrap">
                     <input  id="InputCorreo" class="form-control" placeholder="Correo institucional" name="email" type="email" autofocus>

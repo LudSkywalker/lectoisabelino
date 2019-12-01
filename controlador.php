@@ -1,5 +1,4 @@
 <?php
-
 /****20190621_1902**/
 
 include_once 'modelos/ConstantesDeConexion.php';

@@ -1,5 +1,4 @@
 <?php
-
 class ValidadorUsuarios_s {
 
     public function validarFormularioUsuarios_s($datos) {

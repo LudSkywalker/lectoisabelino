@@ -1,5 +1,4 @@
 <?php
-
 class ValidadorPersona {
 
     public function validarFormularioRegistrarse($datos) {

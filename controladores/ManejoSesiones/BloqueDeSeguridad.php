@@ -1,12 +1,11 @@
 <?php
-
 class BloqueDeSeguridad {
 
     public function seguridad($ubicacion) {
         
         $estado_session = session_status();
         if ($estado_session == PHP_SESSION_DISABLED) {
-            session_start();
+            
         }
         //Comprobar que el usuario este autenticado
         if ($_SESSION["autenticado"] != "1") {

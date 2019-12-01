@@ -1,5 +1,6 @@
 <?php
 
+
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
@@ -19,6 +20,16 @@ if (isset($_SESSION['totalRegistrosLibros'])) {
 if (isset($_SESSION['registroCategoriasLibros'])) { /* * ************************ */
     $registroCategoriasLibros = $_SESSION['registroCategoriasLibros'];
     $cantCategorias = count($registroCategoriasLibros);
+}
+?>
+
+<?php
+session_start();
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
 }
 ?>
 
@@ -274,25 +285,27 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                         </li>
 
                         <li class="sub-menu">
-                            <a href="javascript:;">
+                            <a class="active" href="javascript:;">
                                 <i class="fa fa-cogs"></i>
                                 <span>Gestión de Libros</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="Controlador.php?ruta=listarLibros&pag=0">Listar Libros</a></li>
-                                <?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
-                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros">Insertar Nuevo Libro</a></li>
-                                <?php } ?>
+                                <li class="active"><a href="../../Controlador.php?ruta=listarLibros&pag=0">Listar Libros</a></li>
+                                <?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
+                                 <li><a href="../../Controlador.php?ruta=mostrarInsertarLibros">Insertar Nuevo Libro</a></li>
+                                <?php
+ } ?>
                             </ul>
-                        </li>  
+                        </li>     
           <li class="sub-menu">
-            <a class="active" href="javascript:;">
+            <a href="javascript:;">
               <i class="fa fa-desktop"></i>
               <span>UI Elements</span>
               </a>
             <ul class="sub">
               <li><a href="general.php">General</a></li>
-              <li class="active"><a href="buttons.php">Buttons</a></li>
+              <li ><a href="buttons.php">Buttons</a></li>
               <li><a href="panels.php">Panels</a></li>
               <li><a href="font_awesome.php">Font Awesome</a></li>
             </ul>
@@ -408,11 +421,12 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
-        <form name="formBuscarLibros" action="Controlador.php" method="POST">
+        <form name="formBuscarLibros" action="../../Controlador.php" method="POST">
             <input type="hidden" name="ruta" value="listarLibros"/>
             <table> 
                 <tr><td>ISBN:</td>
                     <td><input type="number" name="isbn" onclick="" value="<?php
+
                         if (isset($_SESSION['isbnF'])) {
                             echo $_SESSION['isbnF'];
                         } ?>"/>
@@ -420,6 +434,7 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                 </tr> 
                 <tr><td>TITULO:</td>
                     <td><input type="text" name="titulo" onclick="" value="<?php
+
                         if (isset($_SESSION['tituloF'])) {
                             echo $_SESSION['tituloF'];
                         } ?>"/>
@@ -427,6 +442,7 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                 </tr> 
                 <tr><td>AUTOR:</td>
                     <td><input type="text" onclick="" name="autor" value="<?php
+
                         if (isset($_SESSION['autorF'])) {
                             echo $_SESSION['autorF'];
                         } ?>"/>
@@ -435,6 +451,7 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                 </tr> 
                 <tr><td>PRECIO:</td>
                     <td><input type="number" onclick=""  name="precio" value="<?php
+
                         if (isset($_SESSION['precioF'])) {
                             echo $_SESSION['precioF'];
                         } ?>"/>
@@ -447,12 +464,16 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                         <?php
                             for ($j = 0; $j < $cantCategorias; $j++) {
                         ?>
-                                <option value = "<?php echo $registroCategoriasLibros[$j]->catLibId; ?>" <?php
+                                <option value = "<?php
+ echo $registroCategoriasLibros[$j]->catLibId; ?>" <?php
+
                                 if (isset($_SESSION['categoriaLibro_catLibIdF']) && $_SESSION['categoriaLibro_catLibIdF'] == $registroCategoriasLibros[$j]->catLibId) {
                                     echo " selected";
                                 }
-                                ?> > <?php echo $registroCategoriasLibros[$j]->catLibId . " - " . $registroCategoriasLibros[$j]->catLibNombre; ?></option>             
+                                ?> > <?php
+ echo $registroCategoriasLibros[$j]->catLibId . " - " . $registroCategoriasLibros[$j]->catLibNombre; ?></option>             
                                 <?php
+
                                     }
                                 ?>
                         </select> 
@@ -476,6 +497,7 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
                 <div style="width: 800">
                         <!--BOTÓN PARA BUSCAR*************************-->
                             <input type="text" name="buscar" placeholder="Término a Buscar" value="<?php
+
                             if (isset($_SESSION['buscarF'])) {
                                 echo $_SESSION['buscarF'];
                             }
@@ -488,13 +510,14 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
 <br>
 <div style="width: 800">
     <span class="izquierdo">
-        <input type="button" onclick="javascript:location.href = 'Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
+        <input type="button" onclick="javascript:location.href = '../../Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
     </span>
 </div>
 <br>
 <a name="listaDeLibros" id="a"></a>
 <div style="width: 800">
-    <p>Total de Registros: <?php if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
+    <p>Total de Registros: <?php
+ if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
     <table border='1'>
         <thead>
             <tr>
@@ -509,23 +532,38 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
         </thead> 
         <tbody>
             <?php
+
             $i = 0;
             foreach ($listaDeLibros as $key => $value) {
             ?>
             <tr>
-                <td style="width: 100"><?php echo $listaDeLibros[$i]->isbn; ?></td>
-                <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->titulo); ?></td>
-                <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->autor); ?></td>
-                <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->precio); ?></td>
-                <td style="width: 100"><?php echo $listaDeLibros[$i]->catLibId; ?></td>
-                <td style="width: 100"><?php echo $listaDeLibros[$i]->catLibNombre; ?></td>
-                <td style="width: 100"><?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php } ?></td>
-                <td style="width: 100"><?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php } ?>  </td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->isbn; ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->titulo); ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->autor); ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->precio); ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLibId; ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLibNombre; ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="../../Controlador.php?ruta=actualizarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php
+ } ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="../../Controlador.php?ruta=eliminarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php
+ } ?>  </td>
             <?php
+
             $i++;
             ?>
             <tr>
             <?php
+
             }
             ?>
         </tbody>
@@ -533,11 +571,16 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
             <tr>
                 <td colspan="8">
                     <nav aria-label="Page navigation example">
-                        <?php $i = 0; ?>
+                        <?php
+ $i = 0; ?>
                         <ul class="pagination justify-content-center">
-                        <?php foreach ($paginacionVinculos as $key => $value) { ?>    
-                                <li class="page-item"><a class="page-link" href="<?php echo $value; ?>"><?php echo ($key); ?></a></li>
-                            <?php } ?>
+                        <?php
+ foreach ($paginacionVinculos as $key => $value) { ?>    
+                                <li class="page-item"><a class="page-link" href="<?php
+ echo $value; ?>"><?php
+ echo ($key); ?></a></li>
+                            <?php
+ } ?>
                         </ul>
                     </nav>
                 </td>

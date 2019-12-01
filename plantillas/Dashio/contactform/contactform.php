@@ -1,4 +1,5 @@
 <?php
+
   /**
   * Requires the PHP Mail Form library
   * The PHP Mail Form library is available only in the pro version of the template

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once 'modelos/ConstantesDeConexion.php';
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
@@ -11,6 +10,16 @@ if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
     unset($_SESSION['mensaje']);
+}
+?>
+
+<?php
+session_start();
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
 }
 ?>
 
@@ -274,9 +283,11 @@ if (isset($_SESSION['mensaje'])) {
                             </a>
                             <ul class="sub">
                                 <li><a href="Controlador.php?ruta=listarLibros&pag=0">Listar Libros</a></li>
-                                <?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
+                                <?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
                                  <li><a href="Controlador.php?ruta=mostrarInsertarLibros">Insertar Nuevo Libro</a></li>
-                                <?php } ?>
+                                <?php
+ } ?>
                             </ul>
                         </li>  
                         

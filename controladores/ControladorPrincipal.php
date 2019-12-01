@@ -1,5 +1,4 @@
 <?php
-
 include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'modelos/modeloLibros/ValidadorLibros.php';
 include_once PATH . 'controladores/Usuario_sControlador.php';
@@ -35,7 +34,7 @@ class ControladorPrincipal {
                     $erroresValidacion = $validarRegistro->validarFormularioLibro($this->datos);
                 }
                 if (isset($erroresValidacion) && $erroresValidacion != FALSE) {
-                    session_start();
+                    
                     $_SESSION['erroresValidacion'] = $erroresValidacion;
 //                    $erroresValidacion = json_encode($erroresValidacion);
                     if ($this->datos['ruta'] == "insertarLibro") {
@@ -62,7 +61,7 @@ class ControladorPrincipal {
                     $erroresValidacion = $validarRegistro->validarFormularioUsuarios_s($this->datos);
                 }
                 if (isset($erroresValidacion) && $erroresValidacion != FALSE) {
-                    session_start();
+                    
                     $_SESSION['erroresValidacion'] = $erroresValidacion;
 //                    $erroresValidacion = json_encode($erroresValidacion);
                     if ($this->datos['ruta'] == "gestionDeRegistro") {

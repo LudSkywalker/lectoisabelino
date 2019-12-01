@@ -1,5 +1,4 @@
 <?php
-
 define("BASE","lectoisabelino");
 define("SERVIDOR", "localhost");
 define("USUARIO_BD", "root");
