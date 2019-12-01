@@ -1,112 +1,100 @@
+<?php
+session_start();
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+.php  lang="es" href="qa.php-language-declarations.es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Funciones JavaScript propias del sistema -->
+        <script type="text/javascript" src="javascript/funciones.js"></script>
+        <!-- Funciones JavaScript propias del sistema -->
+        <script type="text/javascript" src="javascript/md5.js"></script>     
+        <title>LectoIsabelino</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+        <!-- Favicons -->
+        <link href="plantillas/Dashio/img/favicon.png" rel="icon">
+        <link href="plantillas/Dashio/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Favicons -->
-  <link href="plantillas/Dashio/img/favicon.png" rel="icon">
-  <link href="plantillas/Dashio/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <!-- Bootstrap core CSS -->
+        <link href="plantillas/Dashio/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--external css-->
+        <link href="plantillas/Dashio/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style-responsive.css" rel="stylesheet">
 
-  <!-- Bootstrap core CSS -->
-  <link href="plantillas/Dashio/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="plantillas/Dashio/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="plantillas/Dashio/css/style.css" rel="stylesheet">
-  <link href="plantillas/Dashio/css/style-responsive.css" rel="stylesheet">
-  
-  <!-- =======================================================
-    Template Name: Dashio
-    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
-</head>
+    </head>
 
-<body>
-  <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-  <div id="login-page">
-    <div class="container">
-      <form class="form-login" action="plantillas/Dashio/index.html">
-        <h2 class="form-login-heading">Ingresar</h2>
-        <div class="login-wrap">
-          <input type="text" class="form-control" placeholder="Correo institucional" autofocus>
-        </br>
-          
-          <input type="password" class="form-control" placeholder="Contraseña">
+    <body>
 
-          <label class="checkbox">
-            
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="checkbox" value="remember-me"> Recordarme en este equipo
-          </br>
-          </br>
-            <span class="pull-right">
-            <a data-toggle="modal" href="plantillas/Dashio/login.html#myModal">¿Olvido su contraseña?</a>
-            </span>
-          </br>
+        <div class="container">
+            <form class="form-login" role="form" method="POST" action="controlador.php" name="formLogin"">
+                <h2 class="form-login-heading">Ingresar</h2>
+                <div class="login-wrap">
+                    <input  id="InputCorreo" class="form-control" placeholder="Correo institucional" name="email" type="email" autofocus>
+                    <br>
+                    
+                    <input id="InputPassword" class="form-control" placeholder="Contraseña" name="password" type="password" value="">
+                    
+                    
+                    <input type="hidden" name="ruta" value="gestionDeAcceso">
+                    <label class="checkbox">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="remember" type="checkbox" value="remember-me"> Recordarme en este equipo
+                        <br>
+                        <br>
+                        <span class="pull-right">
+                            <a data-toggle="modal" href="plantillas/Dashio/../../login.php#myModal">¿Olvido su contraseña?</a>
+                        </span>
+                        <br>
 
-          
-          </label>
-          <button class="btn btn-theme btn-block" href="plantillas/Dashio/index.html" type="submit"><i class="fa fa-lock"></i> Ingresar</button>
-          <!-- Modal --
-          <hr>
-          <div class="login-social-link centered">
-            <p>or you can sign in via your social network</p>
-            <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-            <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
-          </div>
-          <div class="registration">
-            Don't have an account yet?<br/>
-            <a class="" href="#">
-              Create an account
-              </a>
-          </div>
+                    </label>
+<!--                    <input type="button" class="btn btn-theme btn-block" onclick="validar_logueo()" value="Ingresar">-->
+                   <button class="btn btn-theme btn-block" onclick="validar_logueo()"><i class="fa fa-lock"></i> Ingresar</button> 
+
+
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">¿Olvido su contraseña?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Ingrese el correo institucional para recuperar su contraseña</p>
+                                    <input type="text" name="Email" placeholder="Correo institucional" autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button class="btn btn-theme" type="button">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+                </div>
+            </form>
         </div>
-        <!-- Modal -->
-        
-        
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">¿Olvido su contraseña?</h4>
-              </div>
-              <div class="modal-body">
-                <p>Ingrese el correo institucional para recuperar su contraseña</p>
-                <input type="text" name="Email" placeholder="Correo institucional" autocomplete="off" class="form-control placeholder-no-fix">
-              </div>
-              <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
-                <button class="btn btn-theme" type="button">Aceptar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- modal -->
-      </form>
-    </div>
-  </div>
-  <!-- js placed at the end of the document so the pages load faster -->
-  <script src="plantillas/Dashio/lib/jquery/jquery.min.js"></script>
-  <script src="plantillas/Dashio/lib/bootstrap/js/bootstrap.min.js"></script>
-  <!--BACKSTRETCH-->
-  <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-  <script type="text/javascript" src="plantillas/Dashio/lib/jquery.backstretch.min.js"></script>
-  <script>
-    $.backstretch("plantillas/Dashio/img/login-bg.jpg", {
-      speed: 500
-    });
-  </script>
-</body>
+
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="plantillas/Dashio/lib/jquery/jquery.min.js"></script>
+        <script src="plantillas/Dashio/lib/bootstrap/js/bootstrap.min.js"></script>
+        <!--BACKSTRETCH-->
+        <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+        <script type="text/javascript" src="plantillas/Dashio/lib/jquery.backstretch.min.js"></script>
+        <script>
+                    $.backstretch("plantillas/Dashio/img/login-bg.jpg", {
+                        speed: 500
+                    });
+        </script>
+    </body>
 
 </html>

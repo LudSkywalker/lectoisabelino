@@ -605,7 +605,7 @@ var i,
 	setDocument,
 	document,
 	docElem,
-	documentIsHTML,
+	documentI.html,
 	rbuggyQSA,
 	rbuggyMatches,
 	matches,
@@ -785,7 +785,7 @@ function Sizzle( selector, context, results, seed ) {
 		return results;
 	}
 
-	// Try to shortcut find operations (as opposed to filters) in HTML documents
+	// Try to shortcut find operations (as opposed to filters) in.html documents
 	if ( !seed ) {
 
 		if ( ( context ? context.ownerDocument || context : preferredDoc ) !== document ) {
@@ -793,7 +793,7 @@ function Sizzle( selector, context, results, seed ) {
 		}
 		context = context || document;
 
-		if ( documentIsHTML ) {
+		if ( documentI.html ) {
 
 			// If the selector is sufficiently simple, try using a "get*By*" DOM method
 			// (excepting DocumentFragment context, where the methods don't exist)
@@ -1055,13 +1055,13 @@ support = Sizzle.support = {};
 /**
  * Detects XML nodes
  * @param {Element|Object} elem An element or a document
- * @returns {Boolean} True iff elem is a non-HTML XML node
+ * @returns {Boolean} True iff elem is a non.html XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
 	// (such as loading iframes in IE - #4833)
 	var documentElement = elem && (elem.ownerDocument || elem).documentElement;
-	return documentElement ? documentElement.nodeName !== "HTML" : false;
+	return documentElement ? documentElement.nodeName !== .html" : false;
 };
 
 /**
@@ -1081,7 +1081,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// Update global variables
 	document = doc;
 	docElem = document.documentElement;
-	documentIsHTML = !isXML( document );
+	documentI.html = !isXML( document );
 
 	// Support: IE 9-11, Edge
 	// Accessing iframe documents after unload throws "permission denied" errors (jQuery #13936)
@@ -1131,7 +1131,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// ID find and filter
 	if ( support.getById ) {
 		Expr.find["ID"] = function( id, context ) {
-			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
+			if ( typeof context.getElementById !== "undefined" && documentI.html ) {
 				var m = context.getElementById( id );
 				return m ? [ m ] : [];
 			}
@@ -1191,7 +1191,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 	// Class
 	Expr.find["CLASS"] = support.getElementsByClassName && function( className, context ) {
-		if ( typeof context.getElementsByClassName !== "undefined" && documentIsHTML ) {
+		if ( typeof context.getElementsByClassName !== "undefined" && documentI.html ) {
 			return context.getElementsByClassName( className );
 		}
 	};
@@ -1220,7 +1220,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// setting a boolean content attribute,
 			// since its presence should be enough
 			// http://bugs.jquery.com/ticket/12359
-			docElem.appendChild( div ).innerHTML = "<a id='" + expando + "'></a>" +
+			docElem.appendChild( div ).inne.html = "<a id='" + expando + "'></a>" +
 				"<select id='" + expando + "-\r\\' msallowcapture=''>" +
 				"<option selected=''></option></select>";
 
@@ -1260,7 +1260,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		assert(function( div ) {
 			// Support: Windows 8 Native Apps
-			// The type and name attributes are restricted during .innerHTML assignment
+			// The type and name attributes are restricted during .inne.html assignment
 			var input = document.createElement("input");
 			input.setAttribute( "type", "hidden" );
 			div.appendChild( input ).setAttribute( "name", "D" );
@@ -1448,7 +1448,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 	// Make sure that attribute selectors are quoted
 	expr = expr.replace( rattributeQuotes, "='$1']" );
 
-	if ( support.matchesSelector && documentIsHTML &&
+	if ( support.matchesSelector && documentI.html &&
 		!compilerCache[ expr + " " ] &&
 		( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
 		( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
@@ -1486,12 +1486,12 @@ Sizzle.attr = function( elem, name ) {
 	var fn = Expr.attrHandle[ name.toLowerCase() ],
 		// Don't get fooled by Object.prototype properties (jQuery #13807)
 		val = fn && hasOwn.call( Expr.attrHandle, name.toLowerCase() ) ?
-			fn( elem, name, !documentIsHTML ) :
+			fn( elem, name, !documentI.html ) :
 			undefined;
 
 	return val !== undefined ?
 		val :
-		support.attributes || !documentIsHTML ?
+		support.attributes || !documentI.html ?
 			elem.getAttribute( name ) :
 			(val = elem.getAttributeNode(name)) && val.specified ?
 				val.value :
@@ -1938,7 +1938,7 @@ Expr = Sizzle.selectors = {
 			return function( elem ) {
 				var elemLang;
 				do {
-					if ( (elemLang = documentIsHTML ?
+					if ( (elemLang = documentI.html ?
 						elem.lang :
 						elem.getAttribute("xml:lang") || elem.getAttribute("lang")) ) {
 
@@ -2028,7 +2028,7 @@ Expr = Sizzle.selectors = {
 				elem.type === "text" &&
 
 				// Support: IE<8
-				// New HTML5 attribute values (e.g., "search") appear with elem.type === "text"
+				// New.html5 attribute values (e.g., "search") appear with elem.type === "text"
 				( (attr = elem.getAttribute("type")) == null || attr.toLowerCase() === "text" );
 		},
 
@@ -2452,7 +2452,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 					j = 0;
 					if ( !context && elem.ownerDocument !== document ) {
 						setDocument( elem );
-						xml = !documentIsHTML;
+						xml = !documentI.html;
 					}
 					while ( (matcher = elementMatchers[j++]) ) {
 						if ( matcher( elem, context || document, xml) ) {
@@ -2588,7 +2588,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 		// Reduce context if the leading compound selector is an ID
 		tokens = match[0] = match[0].slice( 0 );
 		if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
-				support.getById && context.nodeType === 9 && documentIsHTML &&
+				support.getById && context.nodeType === 9 && documentI.html &&
 				Expr.relative[ tokens[1].type ] ) {
 
 			context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
@@ -2638,7 +2638,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 	( compiled || compile( selector, match ) )(
 		seed,
 		context,
-		!documentIsHTML,
+		!documentI.html,
 		results,
 		!context || rsibling.test( selector ) && testContext( context.parentNode ) || context
 	);
@@ -2668,7 +2668,7 @@ support.sortDetached = assert(function( div1 ) {
 // Prevent attribute/property "interpolation"
 // http://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
 if ( !assert(function( div ) {
-	div.innerHTML = "<a href='#'></a>";
+	div.inne.html = "<a href='#'></a>";
 	return div.firstChild.getAttribute("href") === "#" ;
 }) ) {
 	addHandle( "type|href|height|width", function( elem, name, isXML ) {
@@ -2681,7 +2681,7 @@ if ( !assert(function( div ) {
 // Support: IE<9
 // Use defaultValue in place of getAttribute("value")
 if ( !support.attributes || !assert(function( div ) {
-	div.innerHTML = "<input/>";
+	div.inne.html = "<input/>";
 	div.firstChild.setAttribute( "value", "" );
 	return div.firstChild.getAttribute( "value" ) === "";
 }) ) {
@@ -2858,9 +2858,9 @@ jQuery.fn.extend( {
 // A central reference to the root jQuery(document)
 var rootjQuery,
 
-	// A simple way to check for HTML strings
+	// A simple way to check for.html strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
-	// Strict HTML recognition (#11290: must start with <)
+	// Strict.html recognition (#11290: must start with <)
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
 	init = jQuery.fn.init = function( selector, context, root ) {
@@ -2875,35 +2875,35 @@ var rootjQuery,
 		// so migrate can support jQuery.sub (gh-2101)
 		root = root || rootjQuery;
 
-		// Handle HTML strings
+		// Handle.html strings
 		if ( typeof selector === "string" ) {
 			if ( selector.charAt( 0 ) === "<" &&
 				selector.charAt( selector.length - 1 ) === ">" &&
 				selector.length >= 3 ) {
 
-				// Assume that strings that start and end with <> are HTML and skip the regex check
+				// Assume that strings that start and end with <> are.html and skip the regex check
 				match = [ null, selector, null ];
 
 			} else {
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
+			// Match.html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
 
-				// HANDLE: $(html) -> $(array)
+				// HANDLE: $.html) -> $(array)
 				if ( match[ 1 ] ) {
 					context = context instanceof jQuery ? context[ 0 ] : context;
 
 					// scripts is true for back-compat
-					// Intentionally let the error be thrown if parseHTML is not present
-					jQuery.merge( this, jQuery.parseHTML(
+					// Intentionally let the error be thrown if pars.html is not present
+					jQuery.merge( this, jQuery.pars.html(
 						match[ 1 ],
 						context && context.nodeType ? context.ownerDocument || context : document,
 						true
 					) );
 
-					// HANDLE: $(html, props)
+					// HANDLE: $.html, props)
 					if ( rsingleTag.test( match[ 1 ] ) && jQuery.isPlainObject( context ) ) {
 						for ( match in context ) {
 
@@ -3779,7 +3779,7 @@ var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 function dataAttr( elem, key, data ) {
 
 	// If nothing was found internally, try to fetch any
-	// data from the HTML5 data-* attribute
+	// data from the.html5 data-* attribute
 	if ( data === undefined && elem.nodeType === 1 ) {
 
 		var name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase();
@@ -4462,23 +4462,23 @@ function createSafeFragment( document ) {
 		input = document.createElement( "input" );
 
 	// Setup
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
+	div.inne.html = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 
-	// IE strips leading whitespace when .innerHTML is used
+	// IE strips leading whitespace when .inne.html is used
 	support.leadingWhitespace = div.firstChild.nodeType === 3;
 
 	// Make sure that tbody elements aren't automatically inserted
 	// IE will insert them into empty tables
 	support.tbody = !div.getElementsByTagName( "tbody" ).length;
 
-	// Make sure that link elements get serialized correctly by innerHTML
+	// Make sure that link elements get serialized correctly by inne.html
 	// This requires a wrapper element in IE
 	support.htmlSerialize = !!div.getElementsByTagName( "link" ).length;
 
-	// Makes sure cloning an html5 element does not cause problems
-	// Where outerHTML is undefined, this still works
+	// Makes sure cloning an.html5 element does not cause problems
+	// Where oute.html is undefined, this still works
 	support.html5Clone =
-		document.createElement( "nav" ).cloneNode( true ).outerHTML !== "<:nav></:nav>";
+		document.createElement( "nav" ).cloneNode( true ).oute.html !== "<:nav></:nav>";
 
 	// Check if a disconnected checkbox will retain its checked
 	// value of true after appended to the DOM (IE6/7)
@@ -4489,7 +4489,7 @@ function createSafeFragment( document ) {
 
 	// Make sure textarea (and checkbox) defaultValue is properly cloned
 	// Support: IE6-IE11+
-	div.innerHTML = "<textarea>x</textarea>";
+	div.inne.html = "<textarea>x</textarea>";
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 
 	// #11217 - WebKit loses check when the name is after the checked attribute
@@ -4520,7 +4520,7 @@ function createSafeFragment( document ) {
 } )();
 
 
-// We have to close these tags to support XHTML (#13200)
+// We have to close these tags to support .html (#13200)
 var wrapMap = {
 	option: [ 1, "<select multiple='multiple'>", "</select>" ],
 	legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -4533,7 +4533,7 @@ var wrapMap = {
 	col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
 	td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
 
-	// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+	// IE6-8 can't serialize link, script, style, or any.html5 (NoScope) tags,
 	// unless wrapped in a div with non-breaking characters in front of it.
 	_default: support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>" ]
 };
@@ -4587,7 +4587,7 @@ function setGlobalEval( elems, refElements ) {
 }
 
 
-var rhtml = /<|&#?\w+;/,
+var .html = /<|&#?\w+;/,
 	rtbody = /<tbody/i;
 
 function fixDefaultChecked( elem ) {
@@ -4616,11 +4616,11 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 			if ( jQuery.type( elem ) === "object" ) {
 				jQuery.merge( nodes, elem.nodeType ? [ elem ] : elem );
 
-			// Convert non-html into a text node
-			} else if ( !rhtml.test( elem ) ) {
+			// Convert non.html into a text node
+			} else if ( !.html.test( elem ) ) {
 				nodes.push( context.createTextNode( elem ) );
 
-			// Convert html into DOM nodes
+			// Convert.html into DOM nodes
 			} else {
 				tmp = tmp || safe.appendChild( context.createElement( "div" ) );
 
@@ -4628,7 +4628,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 				tag = ( rtagName.exec( elem ) || [ "", "" ] )[ 1 ].toLowerCase();
 				wrap = wrapMap[ tag ] || wrapMap._default;
 
-				tmp.innerHTML = wrap[ 1 ] + jQuery.htmlPrefilter( elem ) + wrap[ 2 ];
+				tmp.inne.html = wrap[ 1 ] + jQuery.htmlPrefilter( elem ) + wrap[ 2 ];
 
 				// Descend through wrappers to the right content
 				j = wrap[ 0 ];
@@ -5871,12 +5871,12 @@ jQuery.fn.extend( {
 
 var rinlinejQuery = / jQuery\d+="(?:null|\d+)"/g,
 	rnoshimcache = new RegExp( "<(?:" + nodeNames + ")[\\s/>]", "i" ),
-	rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:-]+)[^>]*)\/>/gi,
+	r.htmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:-]+)[^>]*)\/>/gi,
 
 	// Support: IE 10-11, Edge 10240+
 	// In IE/Edge using regex groups here causes severe slowdowns.
 	// See https://connect.microsoft.com/IE/feedback/details/1736512/
-	rnoInnerhtml = /<script|<style|<link/i,
+	rnoInne.html = /<script|<style|<link/i,
 
 	// checked="checked" or checked
 	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,
@@ -5969,15 +5969,15 @@ function fixCloneNodeIssues( src, dest ) {
 	// IE10 throws NoModificationAllowedError if parent is null, #12132.
 	} else if ( nodeName === "object" ) {
 		if ( dest.parentNode ) {
-			dest.outerHTML = src.outerHTML;
+			dest.oute.html = src.oute.html;
 		}
 
 		// This path appears unavoidable for IE9. When cloning an object
-		// element in IE9, the outerHTML strategy above is not sufficient.
-		// If the src has innerHTML and the destination does not,
-		// copy the src.innerHTML into the dest.innerHTML. #10324
-		if ( support.html5Clone && ( src.innerHTML && !jQuery.trim( dest.innerHTML ) ) ) {
-			dest.innerHTML = src.innerHTML;
+		// element in IE9, the oute.html strategy above is not sufficient.
+		// If the src has inne.html and the destination does not,
+		// copy the src.inne.html into the dest.inne.html. #10324
+		if ( support.html5Clone && ( src.inne.html && !jQuery.trim( dest.inne.html ) ) ) {
+			dest.inne.html = src.inne.html;
 		}
 
 	} else if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
@@ -6087,7 +6087,7 @@ function domManip( collection, args, callback, ignored ) {
 							}
 						} else {
 							jQuery.globalEval(
-								( node.text || node.textContent || node.innerHTML || "" )
+								( node.text || node.textContent || node.inne.html || "" )
 									.replace( rcleanScript, "" )
 							);
 						}
@@ -6126,8 +6126,8 @@ function remove( elem, selector, keepData ) {
 }
 
 jQuery.extend( {
-	htmlPrefilter: function( html ) {
-		return html.replace( rxhtmlTag, "<$1></$2>" );
+.htmlPrefilter: function(.html ) {
+		return.html.replace( r.htmlTag, "<$1></$2>" );
 	},
 
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
@@ -6141,7 +6141,7 @@ jQuery.extend( {
 
 		// IE<=8 does not properly clone detached, unknown element nodes
 		} else {
-			fragmentDiv.innerHTML = elem.outerHTML;
+			fragmentDiv.inne.html = elem.oute.html;
 			fragmentDiv.removeChild( clone = fragmentDiv.firstChild );
 		}
 
@@ -6334,7 +6334,7 @@ jQuery.fn.extend( {
 		} );
 	},
 
-	html: function( value ) {
+.html: function( value ) {
 		return access( this, function( value ) {
 			var elem = this[ 0 ] || {},
 				i = 0,
@@ -6342,12 +6342,12 @@ jQuery.fn.extend( {
 
 			if ( value === undefined ) {
 				return elem.nodeType === 1 ?
-					elem.innerHTML.replace( rinlinejQuery, "" ) :
+					elem.inne.html.replace( rinlinejQuery, "" ) :
 					undefined;
 			}
 
-			// See if we can take a shortcut and just use innerHTML
-			if ( typeof value === "string" && !rnoInnerhtml.test( value ) &&
+			// See if we can take a shortcut and just use inne.html
+			if ( typeof value === "string" && !rnoInne.html.test( value ) &&
 				( support.htmlSerialize || !rnoshimcache.test( value )  ) &&
 				( support.leadingWhitespace || !rleadingWhitespace.test( value ) ) &&
 				!wrapMap[ ( rtagName.exec( value ) || [ "", "" ] )[ 1 ].toLowerCase() ] ) {
@@ -6361,13 +6361,13 @@ jQuery.fn.extend( {
 						elem = this[ i ] || {};
 						if ( elem.nodeType === 1 ) {
 							jQuery.cleanData( getAll( elem, false ) );
-							elem.innerHTML = value;
+							elem.inne.html = value;
 						}
 					}
 
 					elem = 0;
 
-				// If using innerHTML throws an exception, use the fallback method
+				// If using inne.html throws an exception, use the fallback method
 				} catch ( e ) {}
 			}
 
@@ -6428,7 +6428,7 @@ var iframe,
 
 		// Support: Firefox
 		// We have to pre-define these values for FF (#10227)
-		HTML: "block",
+	.html: "block",
 		BODY: "block"
 	};
 
@@ -6469,7 +6469,7 @@ function defaultDisplay( nodeName ) {
 			iframe = ( iframe || jQuery( "<iframe frameborder='0' width='0' height='0'/>" ) )
 				.appendTo( doc.documentElement );
 
-			// Always write a new HTML skeleton so Webkit and Firefox don't choke on reuse
+			// Always write a new.html skeleton so Webkit and Firefox don't choke on reuse
 			doc = ( iframe[ 0 ].contentWindow || iframe[ 0 ].contentDocument ).document;
 
 			// Support: IE
@@ -6543,7 +6543,7 @@ var documentElement = document.documentElement;
 	container = document.createElement( "div" );
 	container.style.cssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
 		"padding:0;margin-top:1px;position:absolute";
-	div.innerHTML = "";
+	div.inne.html = "";
 	container.appendChild( div );
 
 	// Support: Firefox<29, Android 2.3
@@ -6671,7 +6671,7 @@ var documentElement = document.documentElement;
 		reliableHiddenOffsetsVal = div.getClientRects().length === 0;
 		if ( reliableHiddenOffsetsVal ) {
 			div.style.display = "";
-			div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
+			div.inne.html = "<table><tr><td></td><td>t</td></tr></table>";
 			div.childNodes[ 0 ].style.borderCollapse = "separate";
 			contents = div.getElementsByTagName( "td" );
 			contents[ 0 ].style.cssText = "margin:0;border:0;padding:0;display:none";
@@ -6997,7 +6997,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		isBorderBox = support.boxSizing &&
 			jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-	// some non-html elements return undefined for offsetWidth, so check for null/undefined
+	// some non.html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
 	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?id=491668
 	if ( val <= 0 || val == null ) {
@@ -8109,7 +8109,7 @@ jQuery.fx.speeds = {
 
 
 // Based off of the plugin by Clint Helfers, with permission.
-// http://web.archive.org/web/20100324014747/http://blindsignals.com/index.php/2009/07/jquery-delay/
+// http://web.archive.org/web/20100324014747/http://blindsignals.com/index.html/2009/07/jquery-delay/
 jQuery.fn.delay = function( time, type ) {
 	time = jQuery.fx ? jQuery.fx.speeds[ time ] || time : time;
 	type = type || "fx";
@@ -8133,7 +8133,7 @@ jQuery.fn.delay = function( time, type ) {
 	// Setup
 	div = document.createElement( "div" );
 	div.setAttribute( "className", "t" );
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
+	div.inne.html = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 	a = div.getElementsByTagName( "a" )[ 0 ];
 
 	// Support: Windows Web Apps (WWA)
@@ -8268,7 +8268,7 @@ jQuery.extend( {
 					// Support: IE10-11+
 					// option.text throws exceptions (#14686, #14858)
 					// Strip and collapse whitespace
-					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+					// https:/.html.spec.whatwg.org/#strip-and-collapse-whitespace
 					jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
 			}
 		},
@@ -8722,7 +8722,7 @@ jQuery.extend( {
 	},
 
 	propFix: {
-		"for": "htmlFor",
+		"for": .htmlFor",
 		"class": "className"
 	}
 } );
@@ -9380,14 +9380,14 @@ jQuery.extend( {
 		accepts: {
 			"*": allTypes,
 			text: "text/plain",
-			html: "text/html",
+		.html: "text.html",
 			xml: "application/xml, text/xml",
 			json: "application/json, text/javascript"
 		},
 
 		contents: {
 			xml: /\bxml\b/,
-			html: /\bhtml/,
+		.html: /\.html/,
 			json: /\bjson\b/
 		},
 
@@ -9404,8 +9404,8 @@ jQuery.extend( {
 			// Convert anything to text
 			"* text": String,
 
-			// Text to html (true = no transformation)
-			"text html": true,
+			// Text to.html (true = no transformation)
+			"text.html": true,
 
 			// Evaluate text as a json expression
 			"text json": jQuery.parseJSON,
@@ -9914,17 +9914,17 @@ jQuery._evalUrl = function( url ) {
 
 
 jQuery.fn.extend( {
-	wrapAll: function( html ) {
-		if ( jQuery.isFunction( html ) ) {
+	wrapAll: function(.html ) {
+		if ( jQuery.isFunction(.html ) ) {
 			return this.each( function( i ) {
-				jQuery( this ).wrapAll( html.call( this, i ) );
+				jQuery( this ).wrapAll(.html.call( this, i ) );
 			} );
 		}
 
 		if ( this[ 0 ] ) {
 
 			// The elements to wrap the target around
-			var wrap = jQuery( html, this[ 0 ].ownerDocument ).eq( 0 ).clone( true );
+			var wrap = jQuery(.html, this[ 0 ].ownerDocument ).eq( 0 ).clone( true );
 
 			if ( this[ 0 ].parentNode ) {
 				wrap.insertBefore( this[ 0 ] );
@@ -9944,10 +9944,10 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	wrapInner: function( html ) {
-		if ( jQuery.isFunction( html ) ) {
+	wrapInner: function(.html ) {
+		if ( jQuery.isFunction(.html ) ) {
 			return this.each( function( i ) {
-				jQuery( this ).wrapInner( html.call( this, i ) );
+				jQuery( this ).wrapInner(.html.call( this, i ) );
 			} );
 		}
 
@@ -9956,19 +9956,19 @@ jQuery.fn.extend( {
 				contents = self.contents();
 
 			if ( contents.length ) {
-				contents.wrapAll( html );
+				contents.wrapAll(.html );
 
 			} else {
-				self.append( html );
+				self.append(.html );
 			}
 		} );
 	},
 
-	wrap: function( html ) {
-		var isFunction = jQuery.isFunction( html );
+	wrap: function(.html ) {
+		var isFunction = jQuery.isFunction(.html );
 
 		return this.each( function( i ) {
-			jQuery( this ).wrapAll( isFunction ? html.call( this, i ) : html );
+			jQuery( this ).wrapAll( isFunction ?.html.call( this, i ) :.html );
 		} );
 	},
 
@@ -10544,11 +10544,11 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 
 
-// data: string of html
+// data: string of.html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
-// keepScripts (optional): If true, will include scripts passed in the html string
-jQuery.parseHTML = function( data, context, keepScripts ) {
+// keepScripts (optional): If true, will include scripts passed in the.html string
+jQuery.pars.html = function( data, context, keepScripts ) {
 	if ( !data || typeof data !== "string" ) {
 		return null;
 	}
@@ -10617,7 +10617,7 @@ jQuery.fn.load = function( url, params, callback ) {
 			// Make value of this field explicit since
 			// user can override it through ajaxSetup method
 			type: type || "GET",
-			dataType: "html",
+			dataType: .html",
 			data: params
 		} ).done( function( responseText ) {
 
@@ -10628,7 +10628,7 @@ jQuery.fn.load = function( url, params, callback ) {
 
 				// If a selector was specified, locate the right elements in a dummy div
 				// Exclude scripts to avoid IE 'Permission Denied' errors
-				jQuery( "<div>" ).append( jQuery.parseHTML( responseText ) ).find( selector ) :
+				jQuery( "<div>" ).append( jQuery.pars.html( responseText ) ).find( selector ) :
 
 				// Otherwise use the full result
 				responseText );
@@ -10797,7 +10797,7 @@ jQuery.fn.extend( {
 
 			// Get correct offsets
 			offset = this.offset();
-			if ( !jQuery.nodeName( offsetParent[ 0 ], "html" ) ) {
+			if ( !jQuery.nodeName( offsetParent[ 0 ], .html" ) ) {
 				parentOffset = offsetParent.offset();
 			}
 
@@ -10819,7 +10819,7 @@ jQuery.fn.extend( {
 		return this.map( function() {
 			var offsetParent = this.offsetParent;
 
-			while ( offsetParent && ( !jQuery.nodeName( offsetParent, "html" ) &&
+			while ( offsetParent && ( !jQuery.nodeName( offsetParent, .html" ) &&
 				jQuery.css( offsetParent, "position" ) === "static" ) ) {
 				offsetParent = offsetParent.offsetParent;
 			}

@@ -161,21 +161,21 @@
 		
 		fillDow: function(){
 			var dowCnt = this.weekStart;
-			var html = '<tr>';
+			var.html = '<tr>';
 			while (dowCnt < this.weekStart + 7) {
-				html += '<th class="dow">'+DPGlobal.dates.daysMin[(dowCnt++)%7]+'</th>';
+			.html += '<th class="dow">'+DPGlobal.dates.daysMin[(dowCnt++)%7]+'</th>';
 			}
-			html += '</tr>';
-			this.picker.find('.datepicker-days thead').append(html);
+		.html += '</tr>';
+			this.picker.find('.datepicker-days thead').append.html);
 		},
 		
 		fillMonths: function(){
-			var html = '';
+			var.html = '';
 			var i = 0
 			while (i < 12) {
-				html += '<span class="month">'+DPGlobal.dates.monthsShort[i++]+'</span>';
+			.html += '<span class="month">'+DPGlobal.dates.monthsShort[i++]+'</span>';
 			}
-			this.picker.find('.datepicker-months td').append(html);
+			this.picker.find('.datepicker-months td').append.html);
 		},
 		
 		fill: function() {
@@ -192,11 +192,11 @@
 			var nextMonth = new Date(prevMonth);
 			nextMonth.setDate(nextMonth.getDate() + 42);
 			nextMonth = nextMonth.valueOf();
-			html = [];
+		.html = [];
 			var clsName;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getDay() === this.weekStart) {
-					html.push('<tr>');
+				.html.push('<tr>');
 				}
 				clsName = '';
 				if (prevMonth.getMonth() < month) {
@@ -207,13 +207,13 @@
 				if (prevMonth.valueOf() === currentDate) {
 					clsName += ' active';
 				}
-				html.push('<td class="day'+clsName+'">'+prevMonth.getDate() + '</td>');
+			.html.push('<td class="day'+clsName+'">'+prevMonth.getDate() + '</td>');
 				if (prevMonth.getDay() === this.weekEnd) {
-					html.push('</tr>');
+				.html.push('</tr>');
 				}
 				prevMonth.setDate(prevMonth.getDate()+1);
 			}
-			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
+			this.picker.find('.datepicker-days tbody').empty().append.html.join(''));
 			var currentYear = this.date.getFullYear();
 			
 			var months = this.picker.find('.datepicker-months')
@@ -225,7 +225,7 @@
 				months.eq(this.date.getMonth()).addClass('active');
 			}
 			
-			html = '';
+		.html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datepicker-years')
 								.find('th:eq(1)')
@@ -234,10 +234,10 @@
 								.find('td');
 			year -= 1;
 			for (var i = -1; i < 11; i++) {
-				html += '<span class="year'+(i === -1 || i === 10 ? ' old' : '')+(currentYear === year ? ' active' : '')+'">'+year+'</span>';
+			.html += '<span class="year'+(i === -1 || i === 10 ? ' old' : '')+(currentYear === year ? ' active' : '')+'">'+year+'</span>';
 				year += 1;
 			}
-			yearCont.html(html);
+			yearCont.html.html);
 		},
 		
 		click: function(e) {

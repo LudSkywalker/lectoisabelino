@@ -1308,7 +1308,7 @@
         _initDataAttributes: function () {
             var that = this,
                 options = this.options;
-            // Initialize options set via HTML5 data-attributes:
+            // Initialize options set via.html5 data-attributes:
             $.each(
                 $(this.element[0].cloneNode(false)).data(),
                 function (key, value) {

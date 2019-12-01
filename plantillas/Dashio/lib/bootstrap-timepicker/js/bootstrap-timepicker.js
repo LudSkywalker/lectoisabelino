@@ -119,7 +119,7 @@
 
             this.updateFromElementVal();
 
-            $('html')
+            $(.html')
                 .trigger('click.timepicker.data-api')
                 .one('click.timepicker.data-api', $.proxy(this.hideWidget, this));
 

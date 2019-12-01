@@ -3,7 +3,7 @@
  * Copyright (c) 2011 Design Chemical
  *
  * Dual licensed under the MIT and GPL licenses:
- * 	http://www.opensource.org/licenses/mit-license.php
+ * 	http://www.opensource.org/licenses/mit-license.html
  * 	http://www.gnu.org/licenses/gpl.html
  *
  */

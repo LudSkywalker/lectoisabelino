@@ -8,7 +8,7 @@
 * http://omnipotent.net/jquery.sparkline/
 *
 * Generates inline sparkline charts from data supplied either to the method
-* or inline in HTML
+* or inline in.html
 *
 * Compatible with Internet Explorer 6.0+ and modern browsers equipped with the canvas tag
 * (Firefox 2.0+, Safari, Opera, etc)
@@ -44,7 +44,7 @@
 * Usage:
 *  $(selector).sparkline(values, options)
 *
-* If values is undefined or set to 'html' then the data values are read from the specified tag:
+* If values is undefined or set to .html' then the data values are read from the specified tag:
 *   <p>Sparkline: <span class="sparkline">1,4,6,6,8,5,3,5</span></p>
 *   $('.sparkline').sparkline();
 * There must be no spaces in the enclosed data set
@@ -54,7 +54,7 @@
 *    $('#sparkline1').sparkline([1,4,6,6,8,5,3,5])
 *    $('#sparkline2').sparkline([1,4,6,null,null,5,3,5])
 *
-* Values can also be specified in an HTML comment, or as a values attribute:
+* Values can also be specified in an.html comment, or as a values attribute:
 *    <p>Sparkline: <span class="sparkline"><!--1,4,6,6,8,5,3,5 --></span></p>
 *    <p>Sparkline: <span class="sparkline" values="1,4,6,6,8,5,3,5"></span></p>
 *    $('.sparkline').sparkline();
@@ -100,7 +100,7 @@
 *   tooltipClassname - Optional CSS classname to apply to tooltips - If not specified then a default style will be applied
 *   tooltipOffsetX - How many pixels away from the mouse pointer to render the tooltip on the X axis
 *   tooltipOffsetY - How many pixels away from the mouse pointer to render the tooltip on the r axis
-*   tooltipFormatter  - Optional callback that allows you to override the HTML displayed in the tooltip
+*   tooltipFormatter  - Optional callback that allows you to override the.html displayed in the tooltip
 *       callback is given arguments of (sparkline, options, fields)
 *   tooltipChartTitle - If specified then the tooltip uses the string specified by this setting as a title
 *   tooltipFormat - A format string or SPFormat object  (or an array thereof for multiple entries)
@@ -193,7 +193,7 @@
 *
 *   Examples:
 *   $('#sparkline1').sparkline(myvalues, { lineColor: '#f00', fillColor: false });
-*   $('.barsparks').sparkline('html', { type:'bar', height:'40px', barWidth:5 });
+*   $('.barsparks').sparkline(.html', { type:'bar', height:'40px', barWidth:5 });
 *   $('#tristate').sparkline([1,1,-1,1,0,0,-1], { type:'tristate' }):
 *   $('#discrete').sparkline([1,3,4,5,5,3,4,5], { type:'discrete' });
 *   $('#bullet').sparkline([10,12,12,9,7], { type:'bullet' });
@@ -590,7 +590,7 @@
             tag = document.createElement('style');
             tag.type = 'text/css';
             document.getElementsByTagName('head')[0].appendChild(tag);
-            tag[(typeof document.body.style.WebkitAppearance == 'string') /* webkit only */ ? 'innerText' : 'innerHTML'] = css;
+            tag[(typeof document.body.style.WebkitAppearance == 'string') /* webkit only */ ? 'innerText' : 'inne.html'] = css;
         }
     };
 
@@ -791,7 +791,7 @@
                  offset = this.$canvas.offset(),
                  localX = this.currentPageX - offset.left,
                  localY = this.currentPageY - offset.top,
-                 tooltiphtml, sp, i, result, changeEvent;
+                 toolti.html, sp, i, result, changeEvent;
             if (!this.over) {
                 return;
             }
@@ -807,12 +807,12 @@
                 changeEvent.sparklines = this.splist;
                 this.$el.trigger(changeEvent);
                 if (this.tooltip) {
-                    tooltiphtml = '';
+                    toolti.html = '';
                     for (i = 0; i < spcount; i++) {
                         sp = splist[i];
-                        tooltiphtml += sp.getCurrentRegionTooltip();
+                        toolti.html += sp.getCurrentRegionTooltip();
                     }
-                    this.tooltip.setContent(tooltiphtml);
+                    this.tooltip.setContent(toolti.html);
                 }
                 if (!this.disableHighlight) {
                     this.canvas.render();
@@ -949,7 +949,7 @@
                  render, i;
             render = function () {
                 var values, width, height, tmp, mhandler, sp, vals;
-                if (userValues === 'html' || userValues === undefined) {
+                if (userValues === .html' || userValues === undefined) {
                     vals = this.getAttribute(options.get('tagValuesAttribute'));
                     if (vals === undefined || vals === null) {
                         vals = $this.html();
@@ -964,7 +964,7 @@
                     if (!options.get('composite') || !$.data(this, '_jqs_vcanvas')) {
                         // must be a better way to get the line height
                         tmp = document.createElement('span');
-                        tmp.innerHTML = 'a';
+                        tmp.inne.html = 'a';
                         $this.html(tmp);
                         height = $(tmp).innerHeight() || $(tmp).height();
                         $(tmp).remove();
@@ -1031,7 +1031,7 @@
                 pending[i][1].call(el);
                 $.data(pending[i][0], '_jqs_pending', false);
                 done.push(i);
-            } else if (!$(el).closest('html').length && !$.data(el, '_jqs_pending')) {
+            } else if (!$(el).closest(.html').length && !$.data(el, '_jqs_pending')) {
                 // element has been inserted and removed from the DOM
                 // If it was not yet inserted into the dom then the .data request
                 // will return true.
@@ -1143,7 +1143,7 @@
          */
         render: function () {
             if (this.disabled) {
-                this.el.innerHTML = '';
+                this.el.inne.html = '';
                 return false;
             }
             return true;
@@ -1202,7 +1202,7 @@
         changeHighlight: function (highlight)  {},
 
         /**
-         * Fetch the HTML to display as a tooltip
+         * Fetch the.html to display as a tooltip
          */
         getCurrentRegionTooltip: function () {
             var options = this.options,
@@ -2905,7 +2905,7 @@
             this.canvas.height = this.pixelHeight;
             groupel = '<v:group coordorigin="0 0" coordsize="' + this.pixelWidth + ' ' + this.pixelHeight + '"' +
                     ' style="position:absolute;top:0;left:0;width:' + this.pixelWidth + 'px;height=' + this.pixelHeight + 'px;"></v:group>';
-            this.canvas.insertAdjacentHTML('beforeEnd', groupel);
+            this.canvas.insertAdjacen.html('beforeEnd', groupel);
             this.group = $(this.canvas).children()[0];
             this.rendered = false;
             this.prerender = '';
@@ -2994,13 +2994,13 @@
         },
 
         reset: function () {
-            this.group.innerHTML = '';
+            this.group.inne.html = '';
         },
 
         appendShape: function (shape) {
             var vel = this['_draw' + shape.type].apply(this, shape.args);
             if (this.rendered) {
-                this.group.insertAdjacentHTML('beforeEnd', vel);
+                this.group.insertAdjacen.html('beforeEnd', vel);
             } else {
                 this.prerender += vel;
             }
@@ -3011,7 +3011,7 @@
         replaceWithShape: function (shapeid, shape) {
             var existing = $('#jqsshape' + shapeid),
                 vel = this['_draw' + shape.type].apply(this, shape.args);
-            existing[0].outerHTML = vel;
+            existing[0].oute.html = vel;
         },
 
         replaceWithShapes: function (shapeids, shapes) {
@@ -3023,7 +3023,7 @@
             for (i = 0; i < slen; i++) {
                 replace += this['_draw' + shapes[i].type].apply(this, shapes[i].args);
             }
-            existing[0].outerHTML = replace;
+            existing[0].oute.html = replace;
             for (i = 1; i < shapeids.length; i++) {
                 $('#jqsshape' + shapeids[i]).remove();
             }
@@ -3032,7 +3032,7 @@
         insertAfterShape: function (shapeid, shape) {
             var existing = $('#jqsshape' + shapeid),
                  vel = this['_draw' + shape.type].apply(this, shape.args);
-            existing[0].insertAdjacentHTML('afterEnd', vel);
+            existing[0].insertAdjacen.html('afterEnd', vel);
         },
 
         removeShapeId: function (shapeid) {
@@ -3048,7 +3048,7 @@
         render: function () {
             if (!this.rendered) {
                 // batch the intial render into a single repaint
-                this.group.innerHTML = this.prerender;
+                this.group.inne.html = this.prerender;
                 this.rendered = true;
             }
         }

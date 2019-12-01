@@ -8,7 +8,7 @@
 	http://xoxco.com/clickable/jquery-tags-input
 	
 	Licensed under the MIT license:
-	http://www.opensource.org/licenses/mit-license.php
+	http://www.opensource.org/licenses/mit-license.html
 
 	ben@xoxco.com
 

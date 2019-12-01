@@ -49,18 +49,18 @@ $.fn.zabuto_calendar = function (options) {
             var dateInitObj = new Date(dateInitYear, dateInitMonth, 1, 0, 0, 0, 0);
             $calendarElement.data('initDate', dateInitObj);
 
-            var tableClassHtml = ($calendarElement.data('cellBorder') === true) ? ' table-bordered' : '';
+            var tableClas.html = ($calendarElement.data('cellBorder') === true) ? ' table-bordered' : '';
 
-            $tableObj = $('<table class="table' + tableClassHtml + '"></table>');
+            $tableObj = $('<table class="table' + tableClas.html + '"></table>');
             $tableObj = drawTable($calendarElement, $tableObj, dateInitObj.getFullYear(), dateInitObj.getMonth());
 
             $legendObj = drawLegend($calendarElement);
 
-            var $containerHtml = $('<div class="zabuto_calendar" id="' + $calendarElement.attr('id') + '"></div>');
-            $containerHtml.append($tableObj);
-            $containerHtml.append($legendObj);
+            var $containe.html = $('<div class="zabuto_calendar" id="' + $calendarElement.attr('id') + '"></div>');
+            $containe.html.append($tableObj);
+            $containe.html.append($legendObj);
 
-            $calendarElement.append($containerHtml);
+            $calendarElement.append($containe.html);
         }
 
         function drawTable($calendarElement, $tableObj, year, month) {

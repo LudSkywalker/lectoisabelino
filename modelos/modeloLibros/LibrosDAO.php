@@ -154,6 +154,37 @@ class LibrosDao extends ConexDBMySQL {
         }
     }
 
+    public function consultaPaginada($limit = NULL, $offset = NULL, $filtrarBuscar = "") {
+
+        $planConsulta = "select SQL_CALC_FOUND_ROWS l.isbn,l.titulo,l.autor,l.precio,cl.catLibId,cl.catLibNombre ";
+        $planConsulta .= " from libros l ";
+        $planConsulta .= " join categorialibro cl ";
+        $planConsulta .= " ON  l.categoriaLibro_catLibId=cl.catLibId  ";
+
+        $planConsulta .= $filtrarBuscar;
+
+        $planConsulta .= "  order by l.isbn asc";
+        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
+
+        $listar = $this->conexion->prepare($planConsulta);
+        $listar->execute();
+
+        $listadoLibros = array();
+
+        while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
+            $listadoLibros[] = $registro;
+        }
+
+        $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
+        $listar2->execute();
+        while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
+            $totalRegistros = $registro->total;
+        }
+        $this->cantidadTotalRegistros = $totalRegistros;
+
+        return array($totalRegistros, $listadoLibros);
+    }
+
 }
 
 ?>
