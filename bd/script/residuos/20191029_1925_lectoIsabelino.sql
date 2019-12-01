@@ -79,7 +79,7 @@ CREATE UNIQUE INDEX `uniq_login` ON `lectoisabelino`.`usuario_s` (`usuLogin` ASC
 -- Table `lectoisabelino`.`persona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `lectoisabelino`.`persona` (
-  `perId` INT(11) NOT NULL COMMENT 'Nos muetsra el Id de la tabla persona',
+  `usuario_s_usuId` INT(11) NOT NULL COMMENT 'Nos muetsra el Id de la tabla persona',
   `perDocumento` VARCHAR(20) NOT NULL COMMENT 'Nos muestra el documento de la persona',
   `perNombre` VARCHAR(100) NOT NULL COMMENT 'Nos muestra el nombre de la persona',
   `perApellido` VARCHAR(255) NOT NULL COMMENT 'Nos muestra el apellido de la persona',
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`persona` (
   `per_created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `per_updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `usuario_s_usuId` INT(11) NOT NULL,
-  PRIMARY KEY (`perId`, `usuario_s_usuId`),
+  PRIMARY KEY (`usuario_s_usuId`, `usuario_s_usuId`),
   CONSTRAINT `fk_persona_usuario_s1`
     FOREIGN KEY (`usuario_s_usuId`)
     REFERENCES `lectoisabelino`.`usuario_s` (`usuId`)
@@ -242,12 +242,12 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_prestamos_libros` (
   `conP_created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `conP_updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `conPEstado` TINYINT(1) NOT NULL DEFAULT 1,
-  `persona_perId` INT(11) NOT NULL,
+  `persona_usuario_s_usuId` INT(11) NOT NULL,
   `libros_lecto_libLecId` INT NOT NULL,
-  PRIMARY KEY (`conPId`, `persona_perId`, `libros_lecto_libLecId`),
+  PRIMARY KEY (`conPId`, `persona_usuario_s_usuId`, `libros_lecto_libLecId`),
   CONSTRAINT `fk_contr_prestamos_libros_persona1`
-    FOREIGN KEY (`persona_perId`)
-    REFERENCES `lectoisabelino`.`persona` (`perId`)
+    FOREIGN KEY (`persona_usuario_s_usuId`)
+    REFERENCES `lectoisabelino`.`persona` (`usuario_s_usuId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contr_prestamos_libros_libros_lecto1`
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_prestamos_libros` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_contr_prestamos_libros_persona1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`persona_perId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_prestamos_libros_persona1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`persona_usuario_s_usuId` ASC) VISIBLE;
 
 CREATE INDEX `fk_contr_prestamos_libros_libros_lecto1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`libros_lecto_libLecId` ASC) VISIBLE;
 
@@ -322,12 +322,12 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_elementos` (
   `conE_created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `conE_updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `conEEstado` TINYINT(1) NOT NULL DEFAULT 1,
-  `persona_perId` INT(11) NOT NULL,
+  `persona_usuario_s_usuId` INT(11) NOT NULL,
   `elementos_lecto_eleLecId` INT NOT NULL,
-  PRIMARY KEY (`conEId`, `persona_perId`, `elementos_lecto_eleLecId`),
+  PRIMARY KEY (`conEId`, `persona_usuario_s_usuId`, `elementos_lecto_eleLecId`),
   CONSTRAINT `fk_contr_elementos_persona1`
-    FOREIGN KEY (`persona_perId`)
-    REFERENCES `lectoisabelino`.`persona` (`perId`)
+    FOREIGN KEY (`persona_usuario_s_usuId`)
+    REFERENCES `lectoisabelino`.`persona` (`usuario_s_usuId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contr_elementos_elementos_lecto1`
@@ -337,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_elementos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_contr_elementos_persona1_idx` ON `lectoisabelino`.`contr_elementos` (`persona_perId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_elementos_persona1_idx` ON `lectoisabelino`.`contr_elementos` (`persona_usuario_s_usuId` ASC) VISIBLE;
 
 CREATE INDEX `fk_contr_elementos_elementos_lecto1_idx` ON `lectoisabelino`.`contr_elementos` (`elementos_lecto_eleLecId` ASC) VISIBLE;
 

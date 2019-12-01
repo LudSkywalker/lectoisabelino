@@ -1,5 +1,4 @@
 <?php
-
 include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH . "modelos/ConexDBMySQL.php";
 include_once PATH . "modelos/modeloLibros/LibrosDAO.php";
