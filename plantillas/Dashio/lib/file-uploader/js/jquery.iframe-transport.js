@@ -64,7 +64,7 @@
                     }
                     // IE versions below IE8 cannot set the name property of
                     // elements that have already been added to the DOM,
-                    // so we set the name along with the iframe.html markup:
+                    // so we set the name along with the iframe HTML markup:
                     counter += 1;
                     iframe = $(
                         '<iframe src="' + initialIframeSrc +
@@ -142,7 +142,7 @@
                                 .prop('enctype', 'multipart/form-data')
                                 // enctype must be set as encoding for IE:
                                 .prop('encoding', 'multipart/form-data');
-                            // Remove the.html5 form attribute from the input(s):
+                            // Remove the HTML5 form attribute from the input(s):
                             options.fileInput.removeAttr('form');
                         }
                         form.submit();
@@ -179,10 +179,10 @@
     });
 
     // The iframe transport returns the iframe content document as response.
-    // The following adds converters from iframe to text, json,.html, xml
+    // The following adds converters from iframe to text, json, html, xml
     // and script.
     // Please note that the Content-Type for JSON responses has to be text/plain
-    // or text.html, if the browser doesn't include application/json in the
+    // or text/html, if the browser doesn't include application/json in the
     // Accept header, else IE will show a download dialog.
     // The Content-Type for XML responses on the other hand has to be always
     // application/xml or text/xml, so IE properly parses the XML response.
@@ -196,7 +196,7 @@
             'iframe json': function (iframe) {
                 return iframe && $.parseJSON($(iframe[0].body).text());
             },
-            'iframe.html': function (iframe) {
+            'iframe html': function (iframe) {
                 return iframe && $(iframe[0].body).html();
             },
             'iframe xml': function (iframe) {

@@ -73,7 +73,7 @@ var Script = function() {
   // custom scrollbar
   $("#sidebar").niceScroll({
     styler: "fb",
-    cursorcolor: "#5AFF92",
+    cursorcolor: "#4ECDC4",
     cursorwidth: '3',
     cursorborderradius: '10px',
     background: '#404040',
@@ -81,7 +81,7 @@ var Script = function() {
     cursorborder: ''
   });
 
-  //  $(.html").niceScroll({styler:"fb",cursorcolor:"#5AFF92", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+  //  $("html").niceScroll({styler:"fb",cursorcolor:"#4ECDC4", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
 
   // widget tools
 
@@ -130,6 +130,6 @@ jQuery(document).ready(function( $ ) {
   // Go to top
   $('.go-top').on('click', function(e) {
     e.preventDefault();
-    $(.html, body').animate({scrollTop : 0},500);
+    $('html, body').animate({scrollTop : 0},500);
   });
 });

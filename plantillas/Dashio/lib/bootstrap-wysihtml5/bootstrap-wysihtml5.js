@@ -9,13 +9,13 @@
               "<i class='fa fa-font'></i>&nbsp;<span class='current-font'>" + locale.font_styles.normal + "</span>&nbsp;<i class='fa fa-angle-down'></i>" +
               "</a>" +
               "<ul class='dropdown-menu'>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='div' tabindex='-1'>" + locale.font_styles.normal + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h1' tabindex='-1'>" + locale.font_styles.h1 + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h2' tabindex='-1'>" + locale.font_styles.h2 + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h3' tabindex='-1'>" + locale.font_styles.h3 + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h4'>" + locale.font_styles.h4 + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h5'>" + locale.font_styles.h5 + "</a></li>" +
-                "<li><a data-wys.html5-command='formatBlock' data-wys.html5-command-value='h6'>" + locale.font_styles.h6 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='div' tabindex='-1'>" + locale.font_styles.normal + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h1' tabindex='-1'>" + locale.font_styles.h1 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h2' tabindex='-1'>" + locale.font_styles.h2 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h3' tabindex='-1'>" + locale.font_styles.h3 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h4'>" + locale.font_styles.h4 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h5'>" + locale.font_styles.h5 + "</a></li>" +
+                "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h6'>" + locale.font_styles.h6 + "</a></li>" +
               "</ul>" +
             "</li>";
         },
@@ -24,9 +24,9 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='bold' title='CTRL+B' tabindex='-1'>" + locale.emphasis.bold + "</a>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='italic' title='CTRL+I' tabindex='-1'>" + locale.emphasis.italic + "</a>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='underline' title='CTRL+U' tabindex='-1'>" + locale.emphasis.underline + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='bold' title='CTRL+B' tabindex='-1'>" + locale.emphasis.bold + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='italic' title='CTRL+I' tabindex='-1'>" + locale.emphasis.italic + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='underline' title='CTRL+U' tabindex='-1'>" + locale.emphasis.underline + "</a>" +
               "</div>" +
             "</li>";
         },
@@ -35,10 +35,10 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><i class='fa fa-list-ul'></i></a>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><i class='fa fa-list-ol'></i></a>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='fa fa-indent'></i></a>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='fa fa-dedent'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><i class='fa fa-list-ul'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><i class='fa fa-list-ol'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='fa fa-indent'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='fa fa-dedent'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -46,7 +46,7 @@
         "link": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
-              "<div class='bootstrap-wys.html5-insert-link-modal modal fade'>" +
+              "<div class='bootstrap-wysihtml5-insert-link-modal modal fade'>" +
               " <div class='modal-dialog'>" +
               " <div class='modal-content'>" +
                 "<div class='modal-header'>" +
@@ -54,8 +54,8 @@
                   "<h4 class='modal-title'>" + locale.link.insert + "</h4>" +
                 "</div>" +
                 "<div class='modal-body'>" +
-                  "<input type='text' value='http://' class='bootstrap-wys.html5-insert-link-url1 form-control large'>" +
-                  "<label style='margin-top:5px;'> <input type='checkbox' class='bootstrap-wys.html5-insert-link-target' checked>" + locale.link.target + "</label>" +
+                  "<input type='text' value='http://' class='bootstrap-wysihtml5-insert-link-url1 form-control large'>" +
+                  "<label style='margin-top:5px;'> <input type='checkbox' class='bootstrap-wysihtml5-insert-link-target' checked>" + locale.link.target + "</label>" +
                 "</div>" +
                 "<div class='modal-footer'>" +
                   "<a href='#' class='btn btn-default' data-dismiss='modal'>" + locale.link.cancel + "</a>" +
@@ -64,14 +64,14 @@
               "</div>" +
               "</div>" +
               "</div>" +
-              "<a class='btn btn-default" + size + "' data-wys.html5-command='createLink' title='" + locale.link.insert + "' tabindex='-1'><i class='fa fa-share-square-o'></i></a>" +
+              "<a class='btn btn-default" + size + "' data-wysihtml5-command='createLink' title='" + locale.link.insert + "' tabindex='-1'><i class='fa fa-share-square-o'></i></a>" +
             "</li>";
         },
 
         "image": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
-              "<div class='bootstrap-wys.html5-insert-image-modal modal fade'>" +
+              "<div class='bootstrap-wysihtml5-insert-image-modal modal fade'>" +
               " <div class='modal-dialog'>" +
               " <div class='modal-content'>" +
                 "<div class='modal-header'>" +
@@ -79,7 +79,7 @@
                   "<h4 class='modal-title'>" + locale.image.insert + "</h4>" +
                 "</div>" +
                 "<div class='modal-body'>" +
-                  "<input type='text' value='http://' class='bootstrap-wys.html5-insert-image-url form-control large'>" +
+                  "<input type='text' value='http://' class='bootstrap-wysihtml5-insert-image-url form-control large'>" +
                 "</div>" +
                 "<div class='modal-footer'>" +
                   "<a href='#' class='btn btn-default' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
@@ -88,15 +88,15 @@
               "</div>" +
               "</div>" +
               "</div>" +
-              "<a class='btn btn-default" + size + "' data-wys.html5-command='insertImage' title='" + locale.image.insert + "' tabindex='-1'><i class='fa fa-picture-o'></i></a>" +
+              "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "' tabindex='-1'><i class='fa fa-picture-o'></i></a>" +
             "</li>";
         },
 
-        .html": function(locale, options) {
+        "html": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn btn-default" + size + "' data-wys.html5-action='change_view' title='" + locale.html.edit + "' tabindex='-1'><i class='fa fa-pencil'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-action='change_view' title='" + locale.html.edit + "' tabindex='-1'><i class='fa fa-pencil'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -108,17 +108,17 @@
                 "<span class='current-color'>" + locale.colours.black + "</span>&nbsp;<i class='fa fa-angle-down'></i>" +
               "</a>" +
               "<ul class='dropdown-menu'>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='black'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='black'>" + locale.colours.black + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='silver'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='silver'>" + locale.colours.silver + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='gray'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='gray'>" + locale.colours.gray + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='maroon'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='maroon'>" + locale.colours.maroon + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='red'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='red'>" + locale.colours.red + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='purple'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='purple'>" + locale.colours.purple + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='green'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='green'>" + locale.colours.green + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='olive'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='olive'>" + locale.colours.olive + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='navy'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='navy'>" + locale.colours.navy + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='blue'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='blue'>" + locale.colours.blue + "</a></li>" +
-                "<li><div class='wys.html5-colors' data-wys.html5-command-value='orange'></div><a class='wys.html5-colors-title' data-wys.html5-command='foreColor' data-wys.html5-command-value='orange'>" + locale.colours.orange + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='black'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='black'>" + locale.colours.black + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='silver'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='silver'>" + locale.colours.silver + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='gray'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='gray'>" + locale.colours.gray + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='maroon'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='maroon'>" + locale.colours.maroon + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='red'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='red'>" + locale.colours.red + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='purple'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='purple'>" + locale.colours.purple + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='green'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='green'>" + locale.colours.green + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='olive'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='olive'>" + locale.colours.olive + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='navy'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='navy'>" + locale.colours.navy + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='blue'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='blue'>" + locale.colours.blue + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='orange'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='orange'>" + locale.colours.orange + "</a></li>" +
               "</ul>" +
             "</li>";
         }
@@ -129,7 +129,7 @@
     };
 
 
-    var Wys.html5 = function(el, options) {
+    var Wysihtml5 = function(el, options) {
         this.el = el;
         var toolbarOpts = options || defaultOptions;
         for(var t in toolbarOpts.customTemplates) {
@@ -140,18 +140,18 @@
 
         window.editor = this.editor;
 
-        $('iframe.wys.html5-sandbox').each(function(i, el){
-            $(el.contentWindow).off('focus.wys.html5').on({
-                'focus.wys.html5' : function(){
+        $('iframe.wysihtml5-sandbox').each(function(i, el){
+            $(el.contentWindow).off('focus.wysihtml5').on({
+                'focus.wysihtml5' : function(){
                     $('li.dropdown').removeClass('open');
                 }
             });
         });
     };
 
-    Wys.html5.prototype = {
+    Wysihtml5.prototype = {
 
-        constructor: Wys.html5,
+        constructor: Wysihtml5,
 
         createEditor: function(options) {
             options = options || {};
@@ -174,7 +174,7 @@
         createToolbar: function(el, options) {
             var self = this;
             var toolbar = $("<ul/>", {
-                'class' : "wys.html5-toolbar",
+                'class' : "wysihtml5-toolbar",
                 'style': "display:none"
             });
             var culture = options.locale || defaultOptions.locale || "en";
@@ -192,8 +192,8 @@
                 if(value === true) {
                     toolbar.append(templates(key, locale[culture], options));
 
-                    if(key === .html") {
-                        this.ini.html(toolbar);
+                    if(key === "html") {
+                        this.initHtml(toolbar);
                     }
 
                     if(key === "link") {
@@ -212,13 +212,13 @@
                 }
             }
 
-            toolbar.find("a[data-wys.html5-command='formatBlock']").click(function(e) {
+            toolbar.find("a[data-wysihtml5-command='formatBlock']").click(function(e) {
                 var target = e.target || e.srcElement;
                 var el = $(target);
                 self.toolbar.find('.current-font').text(el.html());
             });
 
-            toolbar.find("a[data-wys.html5-command='foreColor']").click(function(e) {
+            toolbar.find("a[data-wysihtml5-command='foreColor']").click(function(e) {
                 var target = e.target || e.srcElement;
                 var el = $(target);
                 self.toolbar.find('.current-color').text(el.html());
@@ -229,8 +229,8 @@
             return toolbar;
         },
 
-        ini.html: function(toolbar) {
-            var changeViewSelector = "a[data-wys.html5-action='change_view']";
+        initHtml: function(toolbar) {
+            var changeViewSelector = "a[data-wysihtml5-action='change_view']";
             toolbar.find(changeViewSelector).click(function(e) {
                 toolbar.find('a.btn').not(changeViewSelector).toggleClass('disabled');
             });
@@ -238,8 +238,8 @@
 
         initInsertImage: function(toolbar) {
             var self = this;
-            var insertImageModal = toolbar.find('.bootstrap-wys.html5-insert-image-modal');
-            var urlInput = insertImageModal.find('.bootstrap-wys.html5-insert-image-url');
+            var insertImageModal = toolbar.find('.bootstrap-wysihtml5-insert-image-modal');
+            var urlInput = insertImageModal.find('.bootstrap-wysihtml5-insert-image-url');
             var insertButton = insertImageModal.find('a.btn-primary');
             var initialValue = urlInput.val();
             var caretBookmark;
@@ -272,8 +272,8 @@
                 self.editor.currentView.element.focus();
             });
 
-            toolbar.find('a[data-wys.html5-command=insertImage]').click(function() {
-                var activeButton = $(this).hasClass("wys.html5-command-active");
+            toolbar.find('a[data-wysihtml5-command=insertImage]').click(function() {
+                var activeButton = $(this).hasClass("wysihtml5-command-active");
 
                 if (!activeButton) {
                     self.editor.currentView.element.focus(false);
@@ -292,9 +292,9 @@
 
         initInsertLink: function(toolbar) {
             var self = this;
-            var insertLinkModal = toolbar.find('.bootstrap-wys.html5-insert-link-modal');
-            var urlInput = insertLinkModal.find('.bootstrap-wys.html5-insert-link-url');
-            var targetInput = insertLinkModal.find('.bootstrap-wys.html5-insert-link-target');
+            var insertLinkModal = toolbar.find('.bootstrap-wysihtml5-insert-link-modal');
+            var urlInput = insertLinkModal.find('.bootstrap-wysihtml5-insert-link-url');
+            var targetInput = insertLinkModal.find('.bootstrap-wysihtml5-insert-link-target');
             var insertButton = insertLinkModal.find('a.btn-primary');
             var initialValue = urlInput.val();
             var caretBookmark;
@@ -334,8 +334,8 @@
                 self.editor.currentView.element.focus();
             });
 
-            toolbar.find('a[data-wys.html5-command=createLink]').click(function() {
-                var activeButton = $(this).hasClass("wys.html5-command-active");
+            toolbar.find('a[data-wysihtml5-command=createLink]').click(function() {
+                var activeButton = $(this).hasClass("wysihtml5-command-active");
 
                 if (!activeButton) {
                     self.editor.currentView.element.focus(false);
@@ -357,21 +357,21 @@
     // these define our public api
     var methods = {
         resetDefaults: function() {
-            $.fn.wys.html5.defaultOptions = $.extend(true, {}, $.fn.wys.html5.defaultOptionsCache);
+            $.fn.wysihtml5.defaultOptions = $.extend(true, {}, $.fn.wysihtml5.defaultOptionsCache);
         },
         bypassDefaults: function(options) {
             return this.each(function () {
                 var $this = $(this);
-                $this.data('wys.html5', new Wys.html5($this, options));
+                $this.data('wysihtml5', new Wysihtml5($this, options));
             });
         },
         shallowExtend: function (options) {
-            var settings = $.extend({}, $.fn.wys.html5.defaultOptions, options || {}, $(this).data());
+            var settings = $.extend({}, $.fn.wysihtml5.defaultOptions, options || {}, $(this).data());
             var that = this;
             return methods.bypassDefaults.apply(that, [settings]);
         },
         deepExtend: function(options) {
-            var settings = $.extend(true, {}, $.fn.wys.html5.defaultOptions, options || {});
+            var settings = $.extend(true, {}, $.fn.wysihtml5.defaultOptions, options || {});
             var that = this;
             return methods.bypassDefaults.apply(that, [settings]);
         },
@@ -381,24 +381,24 @@
         }
     };
 
-    $.fn.wys.html5 = function ( method ) {
+    $.fn.wysihtml5 = function ( method ) {
         if ( methods[method] ) {
             return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.wys.html5' );
+            $.error( 'Method ' +  method + ' does not exist on jQuery.wysihtml5' );
         }    
     };
 
-    $.fn.wys.html5.Constructor = Wys.html5;
+    $.fn.wysihtml5.Constructor = Wysihtml5;
 
-    var defaultOptions = $.fn.wys.html5.defaultOptions = {
+    var defaultOptions = $.fn.wysihtml5.defaultOptions = {
         "font-styles": true,
         "color": false,
         "emphasis": true,
         "lists": true,
-        .html": false,
+        "html": false,
         "link": true,
         "image": true,
         events: {},
@@ -463,11 +463,11 @@
         locale: "en"
     };
 
-    if (typeof $.fn.wys.html5.defaultOptionsCache === 'undefined') {
-        $.fn.wys.html5.defaultOptionsCache = $.extend(true, {}, $.fn.wys.html5.defaultOptions);
+    if (typeof $.fn.wysihtml5.defaultOptionsCache === 'undefined') {
+        $.fn.wysihtml5.defaultOptionsCache = $.extend(true, {}, $.fn.wysihtml5.defaultOptions);
     }
 
-    var locale = $.fn.wys.html5.locale = {
+    var locale = $.fn.wysihtml5.locale = {
         en: {
             font_styles: {
                 normal: "Normal text",
@@ -498,8 +498,8 @@
                 insert: "Insert image",
                 cancel: "Cancel"
             },
-           .html: {
-                edit: "Edit.html"
+            html: {
+                edit: "Edit HTML"
             },
             colours: {
                 black: "Black",
@@ -517,4 +517,4 @@
         }
     };
 
-}(window.jQuery, window.wys.html5);
+}(window.jQuery, window.wysihtml5);

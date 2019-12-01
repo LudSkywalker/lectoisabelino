@@ -301,7 +301,7 @@
 		/**
 		* If the item is fading out and we hover over it, restore it!
 		* @private
-		* @param {Object} e The.html element to remove
+		* @param {Object} e The HTML element to remove
 		* @param {Integer} unique_id The ID of the element
 		*/
 		_restoreItemIfFading: function(e, unique_id){
@@ -327,7 +327,7 @@
 		/**
 		* Set the notification to fade out after a certain amount of time
 		* @private
-		* @param {Object} item The.html element we're dealing with
+		* @param {Object} item The HTML element we're dealing with
 		* @param {Integer} unique_id The ID of the element
 		*/
 		_setFadeTimer: function(e, unique_id){

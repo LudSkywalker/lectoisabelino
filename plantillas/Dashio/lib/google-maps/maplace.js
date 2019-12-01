@@ -13,38 +13,38 @@
 	*/
 
 
-	var.html_dropdown,
-	.html_ullist,
+	var html_dropdown,
+		html_ullist,
 		Maplace;
 
 
 	//dropdown menu type
-.html_dropdown = {
+	html_dropdown = {
 		activateCurrent: function (index) {
 			this.html_element.find('select').val(index);
 		},
 
-		ge.html: function () {
+		getHtml: function () {
 			var self = this,
-			.html = '',
+				html = '',
 				title,
 				a;
 
 			if (this.ln > 1) {
-			.html += '<select class="dropdown controls ' + this.o.controls_cssclass + '">';
+				html += '<select class="dropdown controls ' + this.o.controls_cssclass + '">';
 
 				if (this.ShowOnMenu(this.view_all_key)) {
-				.html += '<option value="' + this.view_all_key + '">' + this.o.view_all_text + '</option>';
+					html += '<option value="' + this.view_all_key + '">' + this.o.view_all_text + '</option>';
 				}
 
 				for (a = 0; a < this.ln; a += 1) {
 					if (this.ShowOnMenu(a)) {
-					.html += '<option value="' + (a + 1) + '">' + (this.o.locations[a].title || ('#' + (a + 1))) + '</option>';
+						html += '<option value="' + (a + 1) + '">' + (this.o.locations[a].title || ('#' + (a + 1))) + '</option>';
 					}
 				}
-			.html += '</select>';
+				html += '</select>';
 
-			.html = $.html).bind('change', function () {
+				html = $(html).bind('change', function () {
 					self.ViewOnMap(this.value);
 				});
 			}
@@ -58,7 +58,7 @@
 				} : {}).append(this.o.controls_title);
 			}
 
-			this.html_element = $('<div class="wrap_controls"></div>').append(title).append.html);
+			this.html_element = $('<div class="wrap_controls"></div>').append(title).append(html);
 
 			return this.html_element;
 		}
@@ -66,8 +66,8 @@
 
 
 	//ul list menu type
-.html_ullist = {
-	.html_a: function (i, hash, ttl) {
+	html_ullist = {
+		html_a: function (i, hash, ttl) {
 			var self = this,
 				index = hash || (i + 1),
 				title = ttl || this.o.locations[i].title,
@@ -95,8 +95,8 @@
 			this.html_element.find('#ullist_a_' + index).parent().addClass('active');
 		},
 
-		ge.html: function () {
-			var.html = $("<ul class='ullist controls " + this.o.controls_cssclass + "'></ul>").css(this.o.controls_applycss ? {
+		getHtml: function () {
+			var html = $("<ul class='ullist controls " + this.o.controls_cssclass + "'></ul>").css(this.o.controls_applycss ? {
 				margin: 0,
 				padding: 0,
 				listStyleType: 'none'
@@ -104,12 +104,12 @@
 				title, a;
 
 			if (this.ShowOnMenu(this.view_all_key)) {
-			.html.append($('<li></li>').append.html_ullist.html_a.call(this, false, this.view_all_key, this.o.view_all_text)));
+				html.append($('<li></li>').append(html_ullist.html_a.call(this, false, this.view_all_key, this.o.view_all_text)));
 			}
 
 			for (a = 0; a < this.ln; a++) {
 				if (this.ShowOnMenu(a)) {
-				.html.append($('<li></li>').append.html_ullist.html_a.call(this, a)));
+					html.append($('<li></li>').append(html_ullist.html_a.call(this, a)));
 				}
 			}
 
@@ -122,7 +122,7 @@
 				} : {}).append(this.o.controls_title);
 			}
 
-			this.html_element = $('<div class="wrap_controls"></div>').append(title).append.html);
+			this.html_element = $('<div class="wrap_controls"></div>').append(title).append(html);
 
 			return this.html_element;
 		}
@@ -220,8 +220,8 @@
 			};
 
 			//default menu types
-			this.AddControl('dropdown',.html_dropdown);
-			this.AddControl('list',.html_ullist);
+			this.AddControl('dropdown', html_dropdown);
+			this.AddControl('list', html_ullist);
 
 			//init
 			$.extend(true, this.o, args);
@@ -311,7 +311,7 @@
 			marker: function (index) {
 				var self = this,
 					point = this.o.locations[index],
-				.html = point.html || '',
+					html = point.html || '',
 					marker, a,
 					point_infow,
 					image_w,
@@ -544,12 +544,12 @@
 			}
 		};
 
-		//gets the.html for the menu
-		Maplace.prototype.get.html_controls = function () {
-			if (this.controls[this.o.controls_type] && this.controls[this.o.controls_type].ge.html) {
+		//gets the html for the menu
+		Maplace.prototype.get_html_controls = function () {
+			if (this.controls[this.o.controls_type] && this.controls[this.o.controls_type].getHtml) {
 				this.current_control = this.controls[this.o.controls_type];
 
-				return this.current_control.ge.html.apply(this);
+				return this.current_control.getHtml.apply(this);
 			}
 			return '';
 		};
@@ -559,7 +559,7 @@
 			//append menu on the div container
 			if (!this.o.controls_on_map) {
 				this.controls_wrapper.empty();
-				this.controls_wrapper.append(this.get.html_controls());
+				this.controls_wrapper.append(this.get_html_controls());
 				return;
 			}
 
@@ -568,7 +568,7 @@
 			var cntr = $('<div class="on_gmap ' + this.o.controls_type + ' gmap_controls"></div>').css(this.o.controls_applycss ? {
 				margin: '5px'
 			} : {}),
-				inner = $(this.get.html_controls()).css(this.o.controls_applycss ? {
+				inner = $(this.get_html_controls()).css(this.o.controls_applycss ? {
 					background: '#fff',
 					padding: '5px',
 					border: '1px solid rgb(113,123,135)',

@@ -13,7 +13,7 @@
 (function (window, document, $, undefined) {
 	"use strict";
 
-	var H = $(.html"),
+	var H = $("html"),
 		W = $(window),
 		D = $(document),
 		F = $.fancybox = function () {
@@ -90,7 +90,7 @@
 			loop       : true,
 
 			ajax  : {
-				dataType : .html',
+				dataType : 'html',
 				headers  : { 'X-fancyBox': true }
 			},
 			iframe : {
@@ -135,7 +135,7 @@
 			content : null,
 			title   : null,
 
-			//.html templates
+			// HTML templates
 			tpl: {
 				wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
 				image    : '<img class="fancybox-image" src="{href}" alt="" />',
@@ -279,7 +279,7 @@
 				title = opts.title !== undefined ? opts.title : obj.title || '';
 
 				content = opts.content || obj.content;
-				type    = content ? .html' : (opts.type  || obj.type);
+				type    = content ? 'html' : (opts.type  || obj.type);
 
 				if (!type && obj.isDom) {
 					type = element.data('fancybox-type');
@@ -303,7 +303,7 @@
 							type = 'inline';
 
 						} else if (isString(element)) {
-							type    = .html';
+							type    = 'html';
 							content = element;
 						}
 					}
@@ -326,7 +326,7 @@
 							content = element;
 						}
 
-					} else if (type === .html') {
+					} else if (type === 'html') {
 						content = href;
 
 					} else if (!type && !href && obj.isDom) {
@@ -896,8 +896,8 @@
 
 			F.trigger('onReady');
 
-			// Check before try to load; 'inline' and .html' types need content, others - href
-			if (type === 'inline' || type === .html') {
+			// Check before try to load; 'inline' and 'html' types need content, others - href
+			if (type === 'inline' || type === 'html') {
 				if (!coming.content || !coming.content.length) {
 					return F._error( 'content' );
 				}
@@ -922,7 +922,7 @@
 
 		_error: function ( type ) {
 			$.extend(F.coming, {
-				type       : .html',
+				type       : 'html',
 				autoWidth  : true,
 				autoHeight : true,
 				minWidth   : 0,
@@ -1097,7 +1097,7 @@
 			switch (type) {
 				case 'inline':
 				case 'ajax':
-				case .html':
+				case 'html':
 					if (current.selector) {
 						content = $('<div>').html(content).find(current.selector);
 
@@ -1699,7 +1699,7 @@
 
 		overlay : null,      // current handle
 		fixed   : false,     // indicates if the overlay has position "fixed"
-		el      : $(.html'), // element that contains "the lock"
+		el      : $('html'), // element that contains "the lock"
 
 		// Public methods
 		create : function(opts) {
@@ -1813,7 +1813,7 @@
 
 			if (opts.locked && this.fixed && obj.fixed) {
 				if (!overlay) {
-					this.margin = D.height() > W.height() ? $(.html').css('margin-right').replace("px", "") : false;
+					this.margin = D.height() > W.height() ? $('html').css('margin-right').replace("px", "") : false;
 				}
 
 				obj.locked = this.overlay.append( obj.wrap );

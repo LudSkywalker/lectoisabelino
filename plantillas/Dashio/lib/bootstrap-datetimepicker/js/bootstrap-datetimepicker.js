@@ -462,21 +462,21 @@
 
 		fillDow: function(){
 			var dowCnt = this.weekStart,
-		.html = '<tr>';
+			html = '<tr>';
 			while (dowCnt < this.weekStart + 7) {
-			.html += '<th class="dow">'+dates[this.language].daysMin[(dowCnt++)%7]+'</th>';
+				html += '<th class="dow">'+dates[this.language].daysMin[(dowCnt++)%7]+'</th>';
 			}
-		.html += '</tr>';
-			this.picker.find('.datetimepicker-days thead').append.html);
+			html += '</tr>';
+			this.picker.find('.datetimepicker-days thead').append(html);
 		},
 
 		fillMonths: function(){
-			var.html = '',
+			var html = '',
 			i = 0;
 			while (i < 12) {
-			.html += '<span class="month">'+dates[this.language].monthsShort[i++]+'</span>';
+				html += '<span class="month">'+dates[this.language].monthsShort[i++]+'</span>';
 			}
-			this.picker.find('.datetimepicker-months td').html.html);
+			this.picker.find('.datetimepicker-months td').html(html);
 		},
 
 		fill: function() {
@@ -526,11 +526,11 @@
 			var nextMonth = new Date(prevMonth);
 			nextMonth.setUTCDate(nextMonth.getUTCDate() + 42);
 			nextMonth = nextMonth.valueOf();
-			var.html = [];
+			var html = [];
 			var clsName;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getUTCDay() == this.weekStart) {
-				.html.push('<tr>');
+					html.push('<tr>');
 				}
 				clsName = '';
 				if (prevMonth.getUTCFullYear() < year || (prevMonth.getUTCFullYear() == year && prevMonth.getUTCMonth() < month)) {
@@ -552,15 +552,15 @@
 					$.inArray(prevMonth.getUTCDay(), this.daysOfWeekDisabled) !== -1) {
 					clsName += ' disabled';
 				}
-			.html.push('<td class="day'+clsName+'">'+prevMonth.getUTCDate() + '</td>');
+				html.push('<td class="day'+clsName+'">'+prevMonth.getUTCDate() + '</td>');
 				if (prevMonth.getUTCDay() == this.weekEnd) {
-				.html.push('</tr>');
+					html.push('</tr>');
 				}
 				prevMonth.setUTCDate(prevMonth.getUTCDate()+1);
 			}
-			this.picker.find('.datetimepicker-days tbody').empty().append.html.join(''));
+			this.picker.find('.datetimepicker-days tbody').empty().append(html.join(''));
 
-		.html = [];
+			html = [];
 						var txt = '', meridian = '', meridianOld = '';
 			for (var i=0;i<24;i++) {
 				var actual = UTCDate(year, month, dayMonth, i);
@@ -575,24 +575,24 @@
 										meridian = (i<12?dates[this.language].meridiem[0]:dates[this.language].meridiem[1]);
 										if (meridian != meridianOld) {
 												if (meridianOld != '') {
-													.html.push('</fieldset>');
+														html.push('</fieldset>');
 												}
-											.html.push('<fieldset class="hour"><legend>'+meridian.toUpperCase()+'</legend>');
+												html.push('<fieldset class="hour"><legend>'+meridian.toUpperCase()+'</legend>');
 										}
 										meridianOld = meridian;
 										txt = (i%12?i%12:12);
-									.html.push('<span class="hour'+clsName+' hour_'+(i<12?'am':'pm')+'">'+txt+'</span>');
+										html.push('<span class="hour'+clsName+' hour_'+(i<12?'am':'pm')+'">'+txt+'</span>');
 										if (i == 23) {
-											.html.push('</fieldset>');
+												html.push('</fieldset>');
 										}
 								} else {
 										txt = i+':00';
-									.html.push('<span class="hour'+clsName+'">'+txt+'</span>');
+										html.push('<span class="hour'+clsName+'">'+txt+'</span>');
 								}
 			}
-			this.picker.find('.datetimepicker-hours td').html.html.join(''));
+			this.picker.find('.datetimepicker-hours td').html(html.join(''));
 
-		.html = [];
+			html = [];
 						txt = '', meridian = '', meridianOld = '';
 			for(var i=0;i<60;i+=this.minuteStep) {
 				var actual = UTCDate(year, month, dayMonth, hours, i, 0);
@@ -606,24 +606,24 @@
 										meridian = (hours<12?dates[this.language].meridiem[0]:dates[this.language].meridiem[1]);
 										if (meridian != meridianOld) {
 												if (meridianOld != '') {
-													.html.push('</fieldset>');
+														html.push('</fieldset>');
 												}
-											.html.push('<fieldset class="minute"><legend>'+meridian.toUpperCase()+'</legend>');
+												html.push('<fieldset class="minute"><legend>'+meridian.toUpperCase()+'</legend>');
 										}
 										meridianOld = meridian;
 										txt = (hours%12?hours%12:12);
-										/.html.push('<span class="minute'+clsName+' minute_'+(hours<12?'am':'pm')+'">'+txt+'</span>');
-									.html.push('<span class="minute'+clsName+'">'+txt+':'+(i<10?'0'+i:i)+'</span>');
+										//html.push('<span class="minute'+clsName+' minute_'+(hours<12?'am':'pm')+'">'+txt+'</span>');
+										html.push('<span class="minute'+clsName+'">'+txt+':'+(i<10?'0'+i:i)+'</span>');
 										if (i == 59) {
-											.html.push('</fieldset>');
+												html.push('</fieldset>');
 										}
 								} else {
 										txt = i+':00';
-										/.html.push('<span class="hour'+clsName+'">'+txt+'</span>');
-									.html.push('<span class="minute'+clsName+'">'+hours+':'+(i<10?'0'+i:i)+'</span>');
+										//html.push('<span class="hour'+clsName+'">'+txt+'</span>');
+										html.push('<span class="minute'+clsName+'">'+hours+':'+(i<10?'0'+i:i)+'</span>');
 								}
 			}
-			this.picker.find('.datetimepicker-minutes td').html.html.join(''));
+			this.picker.find('.datetimepicker-minutes td').html(html.join(''));
 
 			var currentYear = this.date.getUTCFullYear();
 			var months = this.picker.find('.datetimepicker-months')
@@ -644,7 +644,7 @@
 				months.slice(endMonth+1).addClass('disabled');
 			}
 
-		.html = '';
+			html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datetimepicker-years')
 								.find('th:eq(1)')
@@ -653,10 +653,10 @@
 								.find('td');
 			year -= 1;
 			for (var i = -1; i < 11; i++) {
-			.html += '<span class="year'+(i == -1 || i == 10 ? ' old' : '')+(currentYear == year ? ' active' : '')+(year < startYear || year > endYear ? ' disabled' : '')+'">'+year+'</span>';
+				html += '<span class="year'+(i == -1 || i == 10 ? ' old' : '')+(currentYear == year ? ' active' : '')+(year < startYear || year > endYear ? ' disabled' : '')+'">'+year+'</span>';
 				year += 1;
 			}
-			yearCont.html.html);
+			yearCont.html(html);
 			this.place();
 		},
 

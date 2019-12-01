@@ -48,7 +48,7 @@
             calendar: Array()
         };
 
-        // by default, the daterangepicker element is placed at the bottom of.html body
+        // by default, the daterangepicker element is placed at the bottom of HTML body
         this.parentEl = 'body';
 
         //element that triggered the date range picker
@@ -337,7 +337,7 @@
         },
 
         enterRange: function (e) {
-            var label = e.target.inne.html;
+            var label = e.target.innerHTML;
             if (label == this.locale.customRangeLabel) {
                 this.updateView();
             } else {
@@ -348,7 +348,7 @@
         },
 
         clickRange: function (e) {
-            var label = e.target.inne.html;
+            var label = e.target.innerHTML;
             if (label == this.locale.customRangeLabel) {
                 this.container.find('.calendar').show();
             } else {
@@ -482,53 +482,53 @@
         },
 
         renderCalendar: function (calendar, selected, minDate, maxDate) {
-            var.html = '<table class="table-condensed">';
-           .html += '<thead>';
-           .html += '<tr>';
+            var html = '<table class="table-condensed">';
+            html += '<thead>';
+            html += '<tr>';
             
             // add empty cell for week number
             if (this.showWeekNumbers)
-               .html += '<th></th>';
+                html += '<th></th>';
             
             if (!minDate || minDate < calendar[1][1])
             {
-               .html += '<th class="prev available"><i class="icon-arrow-left"></i></th>';
+                html += '<th class="prev available"><i class="icon-arrow-left"></i></th>';
             }
             else
             {
-                .html += '<th></th>';
+                 html += '<th></th>';
             }
-           .html += '<th colspan="5" style="width: auto">' + this.locale.monthNames[calendar[1][1].getMonth()] + calendar[1][1].toString(" yyyy") + '</th>';
+            html += '<th colspan="5" style="width: auto">' + this.locale.monthNames[calendar[1][1].getMonth()] + calendar[1][1].toString(" yyyy") + '</th>';
             if (!maxDate || maxDate > calendar[1][1])
             {
-               .html += '<th class="next available"><i class="icon-arrow-right"></i></th>';
+                html += '<th class="next available"><i class="icon-arrow-right"></i></th>';
             }
             else
             {
-                .html += '<th></th>';
+                 html += '<th></th>';
             }
 
-           .html += '</tr>';
-           .html += '<tr>';
+            html += '</tr>';
+            html += '<tr>';
             
             // add week number label
             if (this.showWeekNumbers)
-               .html += '<th class="week">' + this.locale.weekLabel + '</th>';
+                html += '<th class="week">' + this.locale.weekLabel + '</th>';
 
             $.each(this.locale.daysOfWeek, function (index, dayOfWeek) {
-               .html += '<th>' + dayOfWeek + '</th>';
+                html += '<th>' + dayOfWeek + '</th>';
             });
 
-           .html += '</tr>';
-           .html += '</thead>';
-           .html += '<tbody>';
+            html += '</tr>';
+            html += '</thead>';
+            html += '<tbody>';
 
             for (var row = 0; row < 6; row++) {
-               .html += '<tr>';
+                html += '<tr>';
                 
                 // add week number
                 if (this.showWeekNumbers)
-                   .html += '<td class="week">' + calendar[row][0].getWeek() + '</td>';
+                    html += '<td class="week">' + calendar[row][0].getWeek() + '</td>';
                 
                 for (var col = 0; col < 7; col++) {
                     var cname = 'available ';
@@ -547,15 +547,15 @@
                     }
                     
                     var title = 'r' + row + 'c' + col;
-                   .html += '<td class="' + cname + '" title="' + title + '">' + calendar[row][col].getDate() + '</td>';
+                    html += '<td class="' + cname + '" title="' + title + '">' + calendar[row][col].getDate() + '</td>';
                 }
-               .html += '</tr>';
+                html += '</tr>';
             }
 
-           .html += '</tbody>';
-           .html += '</table>';
+            html += '</tbody>';
+            html += '</table>';
 
-            return.html;
+            return html;
 
         }
 

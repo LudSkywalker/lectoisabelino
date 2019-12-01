@@ -12,7 +12,7 @@ var Script = function () {
         },
         {
             value : 100,
-            color : "#5AFF92"
+            color : "#3498db"
         },
         {
             value : 40,
