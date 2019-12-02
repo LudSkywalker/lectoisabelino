@@ -1,5 +1,6 @@
 <?php
 
+
 include_once PATH . "modelos/ConexDBMySQL.php";
 
 class ElementosDao extends ConexDBMySQL {

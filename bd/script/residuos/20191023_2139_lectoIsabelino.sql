@@ -108,7 +108,7 @@ COLLATE = utf8_unicode_ci;
 -- Table `lectoisabelino`.`persona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `lectoisabelino`.`persona` (
-  `perId` INT(11) NOT NULL COMMENT 'Nos muetsra el Id de la tabla persona',
+  `usuario_s_usuId` INT(11) NOT NULL COMMENT 'Nos muetsra el Id de la tabla persona',
   `perDocumento` VARCHAR(20) NOT NULL COMMENT 'Nos muestra el documento de la persona',
   `perNombre` VARCHAR(100) NOT NULL COMMENT 'Nos muestra el nombre de la persona',
   `perApellido` VARCHAR(255) NOT NULL COMMENT 'Nos muestra el apellido de la persona',
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`persona` (
   `per_created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `per_updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `usuario_s_usuId` INT(11) NOT NULL,
-  PRIMARY KEY (`perId`, `usuario_s_usuId`),
+  PRIMARY KEY (`usuario_s_usuId`, `usuario_s_usuId`),
   UNIQUE INDEX `uniq_documento` (`perDocumento` ASC) VISIBLE,
   INDEX `fk_persona_usuario_s1_idx` (`usuario_s_usuId` ASC) VISIBLE,
   CONSTRAINT `fk_persona_usuario_s1`
@@ -223,16 +223,16 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contrPrestamos` (
   `conPPrestado` TINYINT NULL DEFAULT 0,
   `conPObsSalida` TEXT NULL DEFAULT NULL,
   `conPObsEntrada` TEXT NULL DEFAULT NULL,
-  `persona_perId` INT(11) NOT NULL,
+  `persona_usuario_s_usuId` INT(11) NOT NULL,
   `persona_usuario_s_usuId` INT(11) NOT NULL,
   `libros_libIsbn` INT(5) NOT NULL,
   `libros_categoriaLibro_catLibId` INT(11) NOT NULL,
-  PRIMARY KEY (`conPId`, `persona_perId`, `persona_usuario_s_usuId`, `libros_libIsbn`, `libros_categoriaLibro_catLibId`),
-  INDEX `fk_contrPrestamos_persona1_idx` (`persona_perId` ASC, `persona_usuario_s_usuId` ASC) VISIBLE,
+  PRIMARY KEY (`conPId`, `persona_usuario_s_usuId`, `persona_usuario_s_usuId`, `libros_libIsbn`, `libros_categoriaLibro_catLibId`),
+  INDEX `fk_contrPrestamos_persona1_idx` (`persona_usuario_s_usuId` ASC, `persona_usuario_s_usuId` ASC) VISIBLE,
   INDEX `fk_contrPrestamos_libros1_idx` (`libros_libIsbn` ASC, `libros_categoriaLibro_catLibId` ASC) VISIBLE,
   CONSTRAINT `fk_contrPrestamos_persona1`
-    FOREIGN KEY (`persona_perId` , `persona_usuario_s_usuId`)
-    REFERENCES `lectoisabelino`.`persona` (`perId` , `usuario_s_usuId`)
+    FOREIGN KEY (`persona_usuario_s_usuId` , `persona_usuario_s_usuId`)
+    REFERENCES `lectoisabelino`.`persona` (`usuario_s_usuId` , `usuario_s_usuId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contrPrestamos_libros1`
@@ -252,16 +252,16 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contrElementos` (
   `conEPrestado` TINYINT NULL DEFAULT 0,
   `conEObsSalida` TEXT NULL DEFAULT NULL,
   `conEObsEntrada` TEXT NULL DEFAULT NULL,
-  `persona_perId` INT(11) NOT NULL,
+  `persona_usuario_s_usuId` INT(11) NOT NULL,
   `persona_usuario_s_usuId` INT(11) NOT NULL,
   `elementos_eleId` INT(5) NOT NULL,
   `elementos_categoriaelementos_catEleId` INT(11) NOT NULL,
-  PRIMARY KEY (`conEId`, `persona_perId`, `persona_usuario_s_usuId`, `elementos_eleId`, `elementos_categoriaelementos_catEleId`),
-  INDEX `fk_contrElementos_persona1_idx` (`persona_perId` ASC, `persona_usuario_s_usuId` ASC) VISIBLE,
+  PRIMARY KEY (`conEId`, `persona_usuario_s_usuId`, `persona_usuario_s_usuId`, `elementos_eleId`, `elementos_categoriaelementos_catEleId`),
+  INDEX `fk_contrElementos_persona1_idx` (`persona_usuario_s_usuId` ASC, `persona_usuario_s_usuId` ASC) VISIBLE,
   INDEX `fk_contrElementos_elementos1_idx` (`elementos_eleId` ASC, `elementos_categoriaelementos_catEleId` ASC) VISIBLE,
   CONSTRAINT `fk_contrElementos_persona1`
-    FOREIGN KEY (`persona_perId` , `persona_usuario_s_usuId`)
-    REFERENCES `lectoisabelino`.`persona` (`perId` , `usuario_s_usuId`)
+    FOREIGN KEY (`persona_usuario_s_usuId` , `persona_usuario_s_usuId`)
+    REFERENCES `lectoisabelino`.`persona` (`usuario_s_usuId` , `usuario_s_usuId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contrElementos_elementos1`

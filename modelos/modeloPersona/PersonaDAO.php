@@ -1,5 +1,4 @@
 <?php
-
 include_once PATH . "modelos/ConexDBMySQL.php";
 
 class PersonaDao extends ConexDBMySQL {
@@ -141,6 +140,55 @@ class PersonaDao extends ConexDBMySQL {
         }
     }
 
+        public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
+
+        $planConsulta = "select SQL_CALC_FOUND_ROWS  pe.usuario_s_usuId,pe.perDocumento,pe.perNombre,pe.perApellido,u.usuId,u.usuLogin 
+                                  FROM (persona pe LEFT JOIN usuario_s u ON pe.usuario_s_usuId=u.usuId)";
+
+        $planConsulta .= $filtrarBuscar;
+
+        $planConsulta .= "ORDER BY pe.usuario_s_usuId ASC";
+        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
+
+        $listar = $this->conexion->prepare($planConsulta);
+        $listar->execute();
+
+        $listadoLibros = array();
+
+        while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
+            $listadoLibros[] = $registro;
+        }
+
+        $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
+        $listar2->execute();
+        while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
+            $totalRegistros = $registro->total;
+        }
+        $this->cantidadTotalRegistros = $totalRegistros;
+
+        return array($totalRegistros, $listadoLibros);
+        $this->cierreDB();
+    }
+
+    public function totalRegistros() {
+
+        $planConsulta = "SELECT count(*) as total from persona; ";
+
+        $cantidadLibros = $this->conexion->prepare($planConsulta);
+        $cantidadLibros->execute(); //Ejecución de la consulta 
+
+        $totalRegistrosLibros = "";
+
+        $totalRegistrosLibros = $cantidadLibros->fetch(PDO::FETCH_OBJ);
+
+        $this->cierreDB();
+
+        return $totalRegistrosLibros;
+    }
+
 }
+
+    
+
 
 ?>

@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> cebc5904b4eb6cbc6fda8ed2cf16bda8f9509eaa
 include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";

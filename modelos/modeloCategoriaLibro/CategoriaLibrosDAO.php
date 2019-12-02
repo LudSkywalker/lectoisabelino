@@ -1,8 +1,7 @@
 <?php
-
 include_once PATH."modelos/ConexDBMySQL.php";
 
-class CategoriaLibroDAO extends ConexDBMySQL {
+class CategoriaLibrosDao extends ConexDBMySQL {
     
     public function __construct($servidor, $base, $loginDB, $passwordDB) {
         
