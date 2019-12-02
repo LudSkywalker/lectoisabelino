@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
@@ -24,7 +24,7 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
 ?>
 
 <?php
-session_start();
+
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
@@ -53,8 +53,8 @@ if (isset($_SESSION['mensaje'])) {
   <!--external css-->
   <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="../../css/style.css" rel="stylesheet">
-  <link href="../../css/style-responsive.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
 
   <!-- =======================================================
     Template Name: Dashio

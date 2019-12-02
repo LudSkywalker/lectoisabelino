@@ -7,8 +7,7 @@ class ClaseSesion {
 
         $estado_session = session_status();
         if ($estado_session == PHP_SESSION_DISABLED) {
-            session_start();
-        }
+                    }
 
         list($datosUsuario, $rolesUsuario, $rolesEnSesion) = $usuario_s;
 
@@ -18,8 +17,7 @@ class ClaseSesion {
     }
 
     function cerrarSesion() {
-        session_start();
-        session_destroy();
+                session_destroy();
         header("Location: login.php");
     }
 
