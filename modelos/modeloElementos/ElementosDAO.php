@@ -124,7 +124,7 @@ class ElementosDao extends ConexDBMySQL {
                                   LEFT JOIN estado_elementos ee ON el.estado_elementos_estEleId=ee.estEleId); ";
 
 
-        $planConsulta .= $filtrarBuscar;
+        $planConsulta = $filtrarBuscar;
 
         $planConsulta .= "  ORDER BY el.eleLecId ASC";
         $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
