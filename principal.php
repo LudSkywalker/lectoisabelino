@@ -6,6 +6,7 @@ include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 //$seguridad = new BloqueDeSeguridad();
 //$seguridad->seguridad("login.php");
 
+session_start();
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
@@ -14,7 +15,6 @@ if (isset($_SESSION['mensaje'])) {
 ?>
 
 <?php
-session_start();
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
