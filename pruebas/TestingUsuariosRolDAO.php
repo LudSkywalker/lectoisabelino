@@ -1,17 +1,10 @@
 <?php
-
-<<<<<<< HEAD
-
-//---> Seleccionar todo
-$usuRol=new UsuariosRolDao(SERVIDOR,BASE,USUARIO_BD,CONTRASEÑA);
-=======
 include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloUsuariosRol/UsuariosRolDAO.php";
 
 echo "    ";
 $usuRol=new UsuariosRolDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
->>>>>>> cebc5904b4eb6cbc6fda8ed2cf16bda8f9509eaa
 $listado=$usuRol->seleccionarTodos();
 echo '<pre>';
 //print_r($listado);
