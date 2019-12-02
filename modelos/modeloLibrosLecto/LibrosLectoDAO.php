@@ -116,27 +116,16 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
     }
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
 
+
         $planConsulta = "select SQL_CALC_FOUND_ROWS ll.libLecId, ll.libLecCodigo, ll.libLecTitulo, ll.libLecAutor,
                          cll.catLecId, cll.catLecNombre, el.estLibId, el.estLibNombre
                          FROM ((libros_lecto ll LEFT JOIN  categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId= cll.catLecId)
                          LEFT JOIN  estado_libros el ON ll.categoria_libro_lecto_catLecId = el.estLibId)";
-echo "listado libro";
 
+        $planConsulta.= $filtrarBuscar;
 
-        $planConsulta .= $filtrarBuscar;
-
-        $planConsulta .= "  ORDER BY ll.libLecId ASC";
-        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
-
-        $listar = $this->conexion->prepare($planConsulta);
-        $listar->execute();
-
-
-
-        $planConsulta .= $filtrarBuscar;
-        $planConsulta .= " ORDER BY ll.libLecId ASC";
-        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
-
+        $planConsulta.= "  ORDER BY ll.libLecId ASC";
+        $planConsulta .= " LIMIT ".$limit." OFFSET ".$offset." ; ";
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute();
 
