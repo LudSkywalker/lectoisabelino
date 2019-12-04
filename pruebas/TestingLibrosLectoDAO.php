@@ -9,7 +9,7 @@ echo "Seleccionar todo";
 $libLec=new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$libLec->seleccionarTodos();
 echo '<pre>';
-print_r($listado);
+//print_r($listado);
 echo '</pre>';
 //-- IMPRIMIR.
 $registro['conEFechaSal'] = '2019-06-06 15:02:04';
@@ -72,7 +72,6 @@ echo"</pre>";
 //coutn
 $cu=$libLec->totalRegistros();        
 echo "<pre>";
-print_r($cu);
+//print_r($cu);
 echo "</pre>";
-
 ?>

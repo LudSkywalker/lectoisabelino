@@ -121,23 +121,22 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
                          cll.catLecId, cll.catLecNombre, el.estLibId, el.estLibNombre
                          FROM ((libros_lecto ll LEFT JOIN  categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId= cll.catLecId)
                          LEFT JOIN  estado_libros el ON ll.categoria_libro_lecto_catLecId = el.estLibId)";
-
         $planConsulta.= $filtrarBuscar;
 
         $planConsulta.= "  ORDER BY ll.libLecId ASC";
         $planConsulta .= " LIMIT ".$limit." OFFSET ".$offset." ; ";
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute();
-
         $listadoLibros = array();
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $listadoLibros[] = $registro;
         }
 
-        $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
+         $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
         $listar2->execute();
         while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
             $totalRegistros = $registro->total;
+       
         }
          $this->cantidadTotalRegistros = $totalRegistros;
 
