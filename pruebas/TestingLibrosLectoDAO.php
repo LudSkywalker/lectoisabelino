@@ -8,6 +8,7 @@ include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";
 echo "Seleccionar todo";
 $libLec=new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$libLec->seleccionarTodos();
+
 echo '<pre>';
 print_r($listado);
 echo '</pre>';

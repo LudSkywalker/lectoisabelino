@@ -3,23 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloLibrosLecto/LibrosLectoDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/pruebas/TestingLibrosLectoDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/pruebas/TestingUsuariosRolDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloUsuariosRol/UsuariosRolDAO.php</file>
-=======
+
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/listarRegistrosLibros.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosControlador.php</file>
->>>>>>> cebc5904b4eb6cbc6fda8ed2cf16bda8f9509eaa
-=======
+
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/librosPrestados.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosControlador.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosLectoControlador.php</file>
->>>>>>> master
+
         </group>
     </open-files>
 </project-private>
