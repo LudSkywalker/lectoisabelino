@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 include_once PATH . 'modelos/modeloLibros/LibrosDAO.php';
 include_once PATH . 'modelos/modeloCategoriaLibro/CategoriaLibrosDAO.php';
 
@@ -56,7 +58,7 @@ class LibrosControlador {
             case "listarLibros":
 
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
-                $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 6;
+                $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 4;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
                 $offset = ($offset < 0 || !isset($_GET['pag'])) ? 0 : $_GET['pag'];
 
@@ -72,8 +74,9 @@ class LibrosControlador {
 
                 $totalRegistrosLibros = $resultadoConsultaPaginada[0];
                 $listaDeLibros = $resultadoConsultaPaginada[1];
+                $paginasExtra = $totalRegistrosLibros%4;
                 //SE CONSTRUYEN LOS ENLACES PARA LA PAGINACIÓN QUE SE MOSTRARÀ EN LA VISTA//
-                $totalEnlacesPaginacion = (isset($_GET['limit'])) ? $_GET['limit'] : 2;
+                $totalEnlacesPaginacion = (isset($_GET['limit'])) ? $_GET['limit'] : $paginasExtra;
                 $paginacionVinculos = $this->enlacesPaginacion($totalRegistrosLibros, $limit, $offset, $totalEnlacesPaginacion); //Se obtienen los enlaces de paginación
                 //SE ALISTA LA CONSULTA DE CATEGORIAS DE LIBROS PARA FUTURO FORMULARIO DE FILTRAR//
                 $gestarCategoriasLibros = new CategoriaLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
@@ -85,6 +88,7 @@ class LibrosControlador {
                 $_SESSION['totalRegistrosLibros'] = $totalRegistrosLibros;
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                 $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 header("location:plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
