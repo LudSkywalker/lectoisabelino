@@ -3,7 +3,7 @@
 require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
 require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
 require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
-require_once PATH . 'modelos/modeloPersona/PersonaDAO';
+require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
 require_once PATH . 'modelos/modeloUsuariosRol/UsuariosRolDAO.php';
 
 class LibrosLectoControlador{
