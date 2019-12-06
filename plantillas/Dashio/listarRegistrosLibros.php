@@ -1,5 +1,12 @@
 <?php
+
 session_start();
+
+include_once '../../modelos/ConstantesDeConexion.php';
+include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
+
+$seguridad = new BloqueDeSeguridad();
+$seguridad->seguridad("../../login.php");
 
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
@@ -21,9 +28,6 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
     $registroCategoriasLibros = $_SESSION['registroCategoriasLibros'];
     $cantCategorias = count($registroCategoriasLibros);
 }
-?>
-
-<?php
 
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
@@ -411,13 +415,7 @@ if (isset($_SESSION['mensaje'])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Gestión de Libros.</h1>
-        </div>                        
-    </div>
-</div>
+            <h3><i class="fa fa-angle-right"></i> Gestión de Libros</h3>
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
@@ -479,9 +477,9 @@ if (isset($_SESSION['mensaje'])) {
                         </select> 
                     </td>
                     <td></td>                          
-                </tr>               
-                <tr><td><input type="submit" value="Filtrar" name="enviar" title="Si es necesario limpie 'Buscar'"/></td>
-                    <td><input type="reset" value="limpiar" onclick="
+                </tr>
+                <tr><td><input type="submit" class="btn btn-theme btn-block" value="Filtrar" name="enviar" title="Si es necesario limpie 'Buscar'"/></td>
+                    <td><input type="reset"  class="btn btn-theme btn-block" value="limpiar" onclick="
                             javascript:document.formBuscarLibros.isbn.value = '';
                             javascript:document.formBuscarLibros.titulo.value = '';
                             javascript:document.formBuscarLibros.autor.value = '';
@@ -518,7 +516,7 @@ if (isset($_SESSION['mensaje'])) {
 <div style="width: 800">
     <p>Total de Registros: <?php
  if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
-    <table border='1'>
+    <table border='1' class="display table table-bordered">
         <thead>
             <tr>
                 <td style="width: 100">ISBN</td>

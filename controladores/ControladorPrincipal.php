@@ -1,7 +1,9 @@
 <?php
+
 include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'modelos/modeloLibros/ValidadorLibros.php';
 include_once PATH . 'controladores/Usuario_sControlador.php';
+include_once PATH . 'controladores/LibrosLectoControlador.php';
 include_once PATH . 'modelos/modeloUsuarios/ValidadorUsuarios.php';
 
 class ControladorPrincipal {
@@ -81,6 +83,15 @@ class ControladorPrincipal {
                 }
 
                 break;
+//Gestion libros lecto                
+            case "verLibrosPrestados":
+            case"verInventarioLibros":
+                     $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
+            break;
+        
+                
+                
+                
         }
     }
 
