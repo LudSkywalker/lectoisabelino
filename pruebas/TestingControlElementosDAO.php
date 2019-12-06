@@ -88,7 +88,8 @@ print_r($hablog);
 echo "</pre>";
 
 //Query pag
-$pag=$conEle->consultaPaginada(5,0);
+$holi=array(5,0);
+$pag=$conEle->consultaPaginada($holi [0],$holi[1]);
 echo "<pre>";
 print_r($pag);
 echo "</pre>";

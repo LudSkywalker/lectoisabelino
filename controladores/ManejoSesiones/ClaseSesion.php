@@ -9,16 +9,16 @@ class ClaseSesion {
         if ($estado_session == PHP_SESSION_DISABLED) {
                     }
 
-        list($datosUsuario, $rolesUsuario, $rolesEnSesion) = $usuario_s;
-
+        list($datosUsuario, $rolesUsuario, $rolesEnSesion,$remember) = $usuario_s;
+        $_SESSION['remember'] = $remember;
         $_SESSION['datosUsuario'] = $datosUsuario;
         $_SESSION['rolesUsuario'] = $rolesUsuario;
         $_SESSION['rolesEnSesion'] = $rolesEnSesion;
     }
 
-    function cerrarSesion() {
+    function cerrarSesion($login) {
                 session_destroy();
-        header("Location: login.php");
+        header("Location: ".$login);
     }
 
 }
