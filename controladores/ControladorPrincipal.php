@@ -82,7 +82,8 @@ class ControladorPrincipal {
                     $usuario_sControlador = new Usuario_sControlador($this->datos);
                 }
 
-                break;
+             break;
+             break;
 //Gestion libros lecto                
             case "verLibrosPrestados":
             case"verInventarioLibros":
