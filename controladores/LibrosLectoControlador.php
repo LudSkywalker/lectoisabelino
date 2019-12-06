@@ -1,21 +1,21 @@
 <?php
 
 require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
-require_once PATH . 'modelos/modeloUsuarios/UsuariosDAO.php';
-require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
-require_once PATH . 'modelos/modeloRol/RolDAO.php';
+require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
+require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
+require_once PATH . 'modelos/modeloPersona/PersonaDAO';
 require_once PATH . 'modelos/modeloUsuariosRol/UsuariosRolDAO.php';
 
-class Usuario_sControlador {
+class LibrosLectoControlador{
 
     private $datos = array();
 
     public function __construct($datos) {
         $this->datos = $datos;
-        $this->usuario_sControlador();
+        $this->librosLectoControlador();
     }
 
-    public function usuario_sControlador() {
+    public function librosLectoControlador() {
         switch ($this->datos["ruta"]) {
             case "gestionDeRegistro":
             case "insertarUsuario_s":

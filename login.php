@@ -1,6 +1,6 @@
-
 <?php
 session_start();
+
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
@@ -49,11 +49,11 @@ if (isset($_SESSION['mensaje'])) {
                     <input type="hidden" name="ruta" value="gestionDeAcceso">
                     <label class="checkbox">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input id="remember" type="checkbox" value="remember-me"> Recordarme en este equipo
+                        <input id="remember" type="checkbox" name="remember" value="false"> Recordarme en este equipo
                         <br>
                         <br>
                         <span class="pull-right">
-                            <a data-toggle="modal" href="plantillas/Dashio/../../login.php#myModal">¿Olvido su contraseña?</a>
+                            <a data-toggle="modal" href="/../../login.php#myModal">¿Olvido su contraseña?</a>
                         </span>
                         <br>
 

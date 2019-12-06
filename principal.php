@@ -1,20 +1,13 @@
 <?php
+session_start();
 
 include_once 'modelos/ConstantesDeConexion.php';
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 
-//$seguridad = new BloqueDeSeguridad();
-//$seguridad->seguridad("login.php");
+$seguridad = new BloqueDeSeguridad();
+$seguridad->seguridad("login.php");
 
-session_start();
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-}
-?>
 
-<?php
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
@@ -252,7 +245,7 @@ if (isset($_SESSION['mensaje'])) {
                 </div>-->
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li><a class="logout" href="login.php">Salir</a></li>
+                        <li><a class="logout" href="Controlador.php?ruta=cerrarSesion">Salir</a></li>
                     </ul>
                 </div>
             </header>
