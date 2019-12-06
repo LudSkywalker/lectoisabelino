@@ -165,11 +165,11 @@ public function insertar($registro) {
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
 
         $planConsulta = "select SQL_CALC_FOUND_ROWS ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, 
-pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
-ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
-FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
-LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
-LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId) ";
+        pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
+        ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
+        FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
+        LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
+        LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId) ";
 
         $planConsulta .= $filtrarBuscar;
 
@@ -190,7 +190,7 @@ LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEle
         while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
             $totalRegistros = $registro->total;
         }
-        $this->cantidadTotalRegistros = $totalRegistros;
+         $this->cantidadTotalRegistros = $totalRegistros;
 
         return array($totalRegistros, $listadoLibros);
         $this->cierreDB();
