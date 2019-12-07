@@ -10,7 +10,7 @@ class LibrosLectoControlador{
 
     private $datos = array();
 
-    public function __construct($datos) {
+    public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
         $this->datos = $datos;
         $this->librosLectoControlador();
     }
