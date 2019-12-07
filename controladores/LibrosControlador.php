@@ -25,7 +25,7 @@ class LibrosControlador {
                                         $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                     $gestarCategoriasLibros = null;
 
-                    header("location:vistas/vistasLibros/vistaInsertarLibro.php");
+                    header("location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php");
 
                 break;
             case 'insertarLibro':
@@ -51,7 +51,7 @@ class LibrosControlador {
                     $_SESSION['categoriaLibro_catLibId'] = $this->datos['categoriaLibro_catLibId'];
                     $_SESSION['mensaje'] = "   El código " . $this->datos['isbn'] . " ya existe en el sistema.";
 
-                    header("location:../../Controlador.php?ruta=mostrarInsertarLibros");
+                    header("location:principal.php?contenido=vistas/vistasLibros/mostrarInsertarLibros.php");
                 }
 
                 break;
@@ -89,7 +89,7 @@ class LibrosControlador {
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                 $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:plantillas/Dashio/listarRegistrosLibros.php");
+                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
@@ -103,7 +103,7 @@ class LibrosControlador {
 
                                 $_SESSION['actualizarDatosLibro'] = $actualizarDatosLibro;
 
-                header("location:vistas/vistasLibros/vistaActualizarLibro.php");
+                header("location:principal.php?contenido=vistas/vistasLibros/vistaActualizarLibro.php");
                 break;
             case "confirmaActualizarLibro":
                 $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);

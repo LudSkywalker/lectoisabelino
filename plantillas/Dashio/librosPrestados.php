@@ -265,7 +265,7 @@ if (isset($_SESSION['mensaje'])) {
                 </div>
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li><a class="logout" href="../../login.php">Salir</a></li>
+                        <li><a class="logout" href="../../Controlador.php?ruta=cerrarSesion" >Salir</a></li>
                     </ul>
                 </div>
             </header>

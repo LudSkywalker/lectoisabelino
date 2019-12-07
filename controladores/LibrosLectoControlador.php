@@ -3,14 +3,14 @@
 require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
 require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
 require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
-require_once PATH . 'modelos/modeloPersona/PersonaDAO';
+require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
 require_once PATH . 'modelos/modeloUsuariosRol/UsuariosRolDAO.php';
 
 class LibrosLectoControlador{
 
     private $datos = array();
 
-    public function __construct($datos) {
+    public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
         $this->datos = $datos;
         $this->librosLectoControlador();
     }

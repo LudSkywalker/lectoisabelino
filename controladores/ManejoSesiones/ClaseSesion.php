@@ -16,9 +16,9 @@ class ClaseSesion {
         $_SESSION['rolesEnSesion'] = $rolesEnSesion;
     }
 
-    function cerrarSesion($login) {
+    function cerrarSesion() {
                 session_destroy();
-        header("Location: ".$login);
+        header("Location: login.php");
     }
 
 }
