@@ -103,7 +103,7 @@ class LibrosControlador {
 
                                 $_SESSION['actualizarDatosLibro'] = $actualizarDatosLibro;
 
-                header("location:vistas/vistasLibros/vistaActualizarLibro.php");
+                header("location:principal.php?contenido=vistas/vistasLibros/vistaActualizarLibro.php");
                 break;
             case "confirmaActualizarLibro":
                 $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
