@@ -22,7 +22,23 @@ class EstadoElementosDao extends ConexDBMySQL {
         
         $this->cierreDB();
         return $listado;
-        
+        public function insertar($registro) {
+        try {
+            $query = "INSERT INTO estado_elementos";
+            $query .= "(libLecId, libLecCodigo, libLecTitulo, libLecAutor,estado_libros_estLibId) ";
+            $query .= " VALUES";
+            $query .= "(:libLecId , :libLecCodigo , :libLecTitulo , :libLecAutor , :estado_libros_estLibId ); ";
+            $inserta = $this->conexion->prepare($query);
+            $inserta->bindParam(":libLecId", $registro['libLecId']);
+            $inserta->bindParam(":libLecCodigo", $registro['libLecCodigo']);
+            $inserta->bindParam(":libLecTitulo", $registro['libLecTitulo']);
+            $inserta->bindParam(":libLecAutor", $registro['libLecAutor']);
+            $inserta->bindParam(":estado_libros_estLibId", $registro['estado_libros_estLibId']);
+            $insercion = $inserta->execute();
+            $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
+            return ['inserto' => 1, 'resultado' => $clavePrimariaConQueInserto];
+        } catch (PDOException $pdoExc) {
+            return ['inserto' => 0, 'resultado' => $pdoExc];}}
         
     }
     
