@@ -23,10 +23,9 @@ if (isset($_SESSION['mensaje'])) {
 }
 ?>
 
-
- <section id="main-content">
+    <section id="main-content">
       <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Libros</h3>
+            <h3><i class="fa fa-angle-right"></i> Gestión de Libros</h3>
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
@@ -107,6 +106,13 @@ if (isset($_SESSION['mensaje'])) {
         </form>
     </fieldset>
 </div>
+            
+<br>
+<div style="width: 800">
+    <span class="izquierdo">
+        <input type="button" onclick="javascript:location.href = 'Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
+    </span>
+</div>
 <br>
 <a name="listaDeLibros" id="a"></a>
 <div style="width: 800">
@@ -114,7 +120,7 @@ if (isset($_SESSION['mensaje'])) {
  if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
     <table border='1' class="display table table-bordered">
         <thead>
-            <tr>
+           <tr>
                 <td style="width: 100">Codigo</td>
                 <td style="width: 100">Titulo</td>
                 <td style="width: 100">Autor</td>
@@ -125,7 +131,7 @@ if (isset($_SESSION['mensaje'])) {
             </tr>
         </thead> 
         <tbody>
-            <?php
+ <?php
 
             $i = 0;
             foreach ($listaDeLibros as $key => $value) {
@@ -185,4 +191,3 @@ if (isset($_SESSION['mensaje'])) {
       </section>
       <!-- /wrapper -->
     </section>
-  
