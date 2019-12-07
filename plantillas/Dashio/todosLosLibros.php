@@ -25,7 +25,78 @@ if (isset($_SESSION['mensaje'])) {
 
     <section id="main-content">
       <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Gestión de Libros</h3>
+            <h3><i class="fa fa-angle-right"></i>Libros</h3>
+<div style="width: 800">
+    <p>Total de Registros: <?php
+ if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
+    <table border='1' class="display table table-bordered">
+        <thead>
+           <tr>
+                <td style="width: 100">Codigo</td>
+                <td style="width: 100">Titulo</td>
+                <td style="width: 100">Autor</td>
+                <td style="width: 100">Precio</td>
+                <td style="width: 100">Id categoria</td>
+                <td style="width: 100">Categoria</td>
+                <td style="width: 100"  colspan="2"> Acciones </td>
+            </tr>
+        </thead> 
+        <tbody>
+ <?php
+
+            $i = 0;
+            foreach ($listaDeLibros as $key => $value) {
+            ?>
+            <tr>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->libLecCodigo; ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->libLecTitulo); ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->libLecAutor); ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLecId; ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLecNombre; ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->libLecId; ?>" >Actualizar</a><?php
+ } ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->libLecId; ?>">Eliminar</a><?php
+ } ?>  </td>
+            <?php
+
+            $i++;
+            ?>
+            <tr>
+            <?php
+
+            }
+            ?>
+        </tbody>
+        <tfoot> 
+            <tr>
+                <td colspan="8">
+                    <nav aria-label="Page navigation example">
+                        <?php
+ $i = 0; ?>
+                        <ul class="pagination justify-content-center">
+                        <?php
+ foreach ($paginacionVinculos as $key => $value) { ?>    
+                                <li class="page-item"><a class="page-link" href="<?php
+ echo $value; ?>"><?php
+ echo ($key); ?></a></li>
+                            <?php
+ } ?>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
@@ -115,77 +186,6 @@ if (isset($_SESSION['mensaje'])) {
 </div>
 <br>
 <a name="listaDeLibros" id="a"></a>
-<div style="width: 800">
-    <p>Total de Registros: <?php
- if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
-    <table border='1' class="display table table-bordered">
-        <thead>
-           <tr>
-                <td style="width: 100">Codigo</td>
-                <td style="width: 100">Titulo</td>
-                <td style="width: 100">Autor</td>
-                <td style="width: 100">Precio</td>
-                <td style="width: 100">Id categoria</td>
-                <td style="width: 100">Categoria</td>
-                <td style="width: 100"  colspan="2"> Acciones </td>
-            </tr>
-        </thead> 
-        <tbody>
- <?php
-
-            $i = 0;
-            foreach ($listaDeLibros as $key => $value) {
-            ?>
-            <tr>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->libLecCodigo; ?></td>
-                <td style="width: 100"><?php
- echo strtoupper($listaDeLibros[$i]->libLecTitulo); ?></td>
-                <td style="width: 100"><?php
- echo strtoupper($listaDeLibros[$i]->libLecAutor); ?></td>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->catLecId; ?></td>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->catLecNombre; ?></td>
-                <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php
- echo $listaDeLibros[$i]->libLecId; ?>" >Actualizar</a><?php
- } ?></td>
-                <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php
- echo $listaDeLibros[$i]->libLecId; ?>">Eliminar</a><?php
- } ?>  </td>
-            <?php
-
-            $i++;
-            ?>
-            <tr>
-            <?php
-
-            }
-            ?>
-        </tbody>
-        <tfoot> 
-            <tr>
-                <td colspan="8">
-                    <nav aria-label="Page navigation example">
-                        <?php
- $i = 0; ?>
-                        <ul class="pagination justify-content-center">
-                        <?php
- foreach ($paginacionVinculos as $key => $value) { ?>    
-                                <li class="page-item"><a class="page-link" href="<?php
- echo $value; ?>"><?php
- echo ($key); ?></a></li>
-                            <?php
- } ?>
-                        </ul>
-                    </nav>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
 
         <!--/ row -->
       </section>
