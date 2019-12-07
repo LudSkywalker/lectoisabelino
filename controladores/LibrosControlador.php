@@ -51,7 +51,7 @@ class LibrosControlador {
                     $_SESSION['categoriaLibro_catLibId'] = $this->datos['categoriaLibro_catLibId'];
                     $_SESSION['mensaje'] = "   El código " . $this->datos['isbn'] . " ya existe en el sistema.";
 
-                    header("location:../../Controlador.php?ruta=mostrarInsertarLibros");
+                    header("location:principal.php?contenido=vistas/vistasLibros/mostrarInsertarLibros.php");
                 }
 
                 break;
