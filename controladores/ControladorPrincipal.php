@@ -83,7 +83,6 @@ class ControladorPrincipal {
                 }
 
              break;
-             break;
 //Gestion la tabal libros lecto                
             case "verLibrosPrestados":
             case"verInventarioLibros":

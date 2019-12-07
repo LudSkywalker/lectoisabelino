@@ -25,7 +25,7 @@ class LibrosControlador {
                                         $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                     $gestarCategoriasLibros = null;
 
-                    header("location:vistas/vistasLibros/vistaInsertarLibro.php");
+                    header("location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php");
 
                 break;
             case 'insertarLibro':
@@ -89,7 +89,7 @@ class LibrosControlador {
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                 $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:plantillas/Dashio/listarRegistrosLibros.php");
+                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
