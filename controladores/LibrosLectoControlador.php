@@ -8,8 +8,11 @@ require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
 class LibrosLectoControlador{
 
     private $datos = array();
+    private $limite;
+    
 
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
+        $this->limite=4;
         $this->datos = $datos;
         $this->librosLectoControlador();
     }
@@ -18,7 +21,7 @@ class LibrosLectoControlador{
         switch ($this->datos["ruta"]) {
             case "verInventarioLibros":
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
-                $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 4;
+                $limit = (isset($_GET['limit'])) ? $_GET['limit'] :$this->limite;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
                 $offset = ($offset < 0 || !isset($_GET['pag'])) ? 0 : $_GET['pag'];
 
@@ -29,63 +32,30 @@ class LibrosLectoControlador{
                 $filtrarBuscar = $this->armarFiltradoYBusqueda();
 
                 // SE HACE LA CONSULTA A LA BASE PARA TRAER LA CANTIDAD DE REGISTROS SOLICITADOS Y EL TOTAL PARA PAGINARLOS//
-                $gestarLibros = new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $resultadoConsultaPaginada = $gestarLibros->consultaPaginada($limit, $offset, $filtrarBuscar);
+                $gestarLibrosLecto = new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $resultadoConsultaPaginada = $gestarLibrosLecto->consultaPaginada($limit, $offset, $filtrarBuscar);
 
                 $totalRegistrosLibros = $resultadoConsultaPaginada[0];
                 $listaDeLibros = $resultadoConsultaPaginada[1];
-                $paginasExtra = $totalRegistrosLibros%4;
+                $paginasExtra = $totalRegistrosLibros%$this->limite;
                 //SE CONSTRUYEN LOS ENLACES PARA LA PAGINACIÓN QUE SE MOSTRARÀ EN LA VISTA//
                 $totalEnlacesPaginacion = (isset($_GET['limit'])) ? $_GET['limit'] : $paginasExtra;
                 $paginacionVinculos = $this->enlacesPaginacion($totalRegistrosLibros, $limit, $offset, $totalEnlacesPaginacion); //Se obtienen los enlaces de paginación
                 //SE ALISTA LA CONSULTA DE CATEGORIAS DE LIBROS PARA FUTURO FORMULARIO DE FILTRAR//
-                $gestarCategoriasLibros = new CategoriaLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $registroCategoriasLibros = $gestarCategoriasLibros->seleccionarTodos();
+                $gestarCategoriasLibrosLecto = new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $registroCategoriasLibros = $gestarCategoriasLibrosLecto->seleccionarTodos();
 
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
                 $_SESSION['listaDeLibros'] = $listaDeLibros;
                 $_SESSION['paginacionVinculos'] = $paginacionVinculos;
                 $_SESSION['totalRegistrosLibros'] = $totalRegistrosLibros;
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
-                $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:plantillas/Dashio/listarRegistrosLibros.php");
+                $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
-            case "gestionDeAcceso":
 
-                $gestarLibrosLecto  = new UsuariosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-
-                $this->datos["password"] = md5($this->datos["password"]); //Encriptamos password para que coincida con la base de datos
-                $this->datos["documento"] = ""; //Para logueo crear ésta variable límpia por cuanto se utiliza el mismo método de registrarse a continuación
-                $existeUsuario_s = $gestarLibrosLecto ->seleccionarId(array($this->datos["documento"], $this->datos['email'], $this->datos["password"])); //Se revisa si existe la persona en la base                
-                if ((0 != $existeUsuario_s['exitoSeleccionId']) && ($existeUsuario_s['registroEncontrado'][0]->usuLogin == $this->datos['email'])) {
-                     //se abre sesión para almacenar en ella el mensaje de inserción
-                    $_SESSION['mensaje'] = "Bienvenido a nuestra Aplicación."; //mensaje de inserción
-                    //Consultamos los roles de la persona logueada
-                    $consultaRoles = new RolDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                    $rolesUsuario = $consultaRoles->seleccionarRolPorPersona(array($existeUsuario_s['registroEncontrado'][0]->perDocumento));
-                    $cantidadRoles = count($rolesUsuario['registroEncontrado']);
-                    $rolesEnSesion = array();
-                    for ($i = 0; $i < $cantidadRoles; $i++) {
-                        $rolesEnSesion[] = $rolesUsuario['registroEncontrado'][$i]->rolId;
-                    }
-                    //ABRIR SESION ******************************************
-                    $sesionPermitida = new ClaseSesion(); //Se abre sesiòn
-                    $sesionPermitida->crearSesion(array($existeUsuario_s['registroEncontrado'][0], $rolesUsuario, $rolesEnSesion)); //Se envìa a la sesiòn los datos del usuario logeado
-                    header("location:principal.php");
-                } else {
-                     //se abre sesión para almacenar en ella el mensaje de inserción
-                    $_SESSION['mensaje'] = "Credenciales de acceso incorrectas"; //mensaje de inserción
-                    header("location:login.php");
-                }
-
-                break;
-            case "cerrarSesion":
-                $cerrarSesion = new ClaseSesion();
-                $cerrarSesion->cerrarSesion(); //Se cierra sesión
-
-                break;
         }
     }
   public function enlacesPaginacion($totalRegistros = NULL, $limit = 4, $offset = 0, $totalEnlacesPaginacion = 2) {
@@ -177,7 +147,7 @@ class LibrosLectoControlador{
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
         }
-        if (!empty($_SESSION['buscarF'])) {
+        if (!empty($_SESSION['buscarLibLecF'])) {
             $where = TRUE;
             $condicionBuscar = (($where && !$filtros == 0) ? " or " : " where ");
             $filtros++;
