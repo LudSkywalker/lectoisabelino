@@ -1,5 +1,4 @@
 <?php
-
 include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";
@@ -66,7 +65,7 @@ echo"</pres>";
 $id=[6,0];
 $isd=$libLec->consultaPaginada($id[0],$id[1]);
 echo"<pre>";
-print_r($isd);
+//print_r($isd);
 echo"</pre>";
 
 //coutn

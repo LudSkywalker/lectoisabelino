@@ -118,11 +118,9 @@ class ElementosDao extends ConexDBMySQL {
             $this->cierreDB(); } }
  
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar ="") {
-        
-        
         $planConsulta = "SELECT SQL_CALC_FOUND_ROWS el.eleLecId, el.eleLecCodigo, ce.catEleId, ce.catEleNombre, ee.estEleId, ee.estEleNombre 
-                         FROM ((elementos_lecto el Left JOIN categoria_elementos ce ON  el.categoria_elementos_catEleId= ce.catEleId)
-                         LEFT JOIN estado_elementos ee ON el.estado_elementos_estEleId=ee.estEleId)";
+                                FROM ((elementos_lecto el Left JOIN categoria_elementos ce ON  el.categoria_elementos_catEleId= ce.catEleId)
+                                LEFT JOIN estado_elementos ee ON el.estado_elementos_estEleId=ee.estEleId)";
 
         $planConsulta .= $filtrarBuscar;
 
@@ -130,7 +128,6 @@ class ElementosDao extends ConexDBMySQL {
         $planConsulta .= " LIMIT ".$limit." OFFSET ".$offset." ; ";
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute();
-        
         
         $listadoLibros = array();
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
