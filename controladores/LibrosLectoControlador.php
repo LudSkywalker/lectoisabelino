@@ -1,10 +1,9 @@
 <?php
 
-require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
+include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
+require_once PATH . 'modelos/modeloCategoriaLibrosLecto/CategoriaLibrosLectoDAO.php';
 require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
-require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
-require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
-require_once PATH . 'modelos/modeloUsuariosRol/UsuariosRolDAO.php';
+
 
 class LibrosLectoControlador{
 
@@ -30,7 +29,7 @@ class LibrosLectoControlador{
                 $filtrarBuscar = $this->armarFiltradoYBusqueda();
 
                 // SE HACE LA CONSULTA A LA BASE PARA TRAER LA CANTIDAD DE REGISTROS SOLICITADOS Y EL TOTAL PARA PAGINARLOS//
-                $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $gestarLibros = new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                 $resultadoConsultaPaginada = $gestarLibros->consultaPaginada($limit, $offset, $filtrarBuscar);
 
                 $totalRegistrosLibros = $resultadoConsultaPaginada[0];
@@ -106,12 +105,12 @@ class LibrosLectoControlador{
         $enlacesProvisional = array();
         $conteoEnlaces = 0;
 
-        $mostrar['inicio'] = "../../Controlador.php?ruta=" . $ruta . "&pag=0"; //Enlace a enviar para páginas Iniciales
-        $mostrar['anterior'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . (($anterior)); //Enlace a enviar para páginas anteriores
+        $mostrar['inicio'] = "Controlador.php?ruta=" . $ruta . "&pag=0"; //Enlace a enviar para páginas Iniciales
+        $mostrar['anterior'] = "Controlador.php?ruta=" . $ruta . "&pag=" . (($anterior)); //Enlace a enviar para páginas anteriores
 
         for ($i = $offset; $i < ($offset + $limit) && $i < $totalRegistros && $conteoEnlaces < $totalEnlacesPaginacion; $i++) {
 
-            $mostrar[$i + 1] = "../../Controlador.php?ruta=" . $ruta . "&pag=$i";
+            $mostrar[$i + 1] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
             $enlacesProvisional[$i] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
             $conteoEnlaces++;
             $siguiente = $i;
@@ -120,17 +119,17 @@ class LibrosLectoControlador{
         $cantidadProvisional = count($enlacesProvisional);
 
         if ($offset < $totalRegistros) {
-            $mostrar['siguiente'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
 //            $mostrar.="<a href='controladores/ControladorPrincipal.php?ruta=listarLibros&pag=" . ($totalPag - $totalEnlacesPaginacion) . "'>..::BLOQUE FINAL::..</a><br></center>";
-            $mostrar ['final'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
+            $mostrar ['final'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
         }
 
         if ($offset >= $totalRegistros) {
-            $mostrar[$siguiente + 1] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            $mostrar[$siguiente + 1] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
             for ($j = 0; $j < $cantidadProvisional; $j++) {
                 $mostrar [] = $enlacesProvisional[$j];
             }
-            $mostrar [$totalRegistros - $offset] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $offset);
+            $mostrar [$totalRegistros - $offset] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $offset);
         }
 
         return $mostrar;
@@ -169,12 +168,12 @@ class LibrosLectoControlador{
             
             if (!empty($_SESSION['estado_libros_estLibIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.categoria_libro_lecto_catLecId like ('%" . $_SESSION['estado_libros_estLibIdF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.estado_libros_estLibId like ('%" . $_SESSION['estado_libros_estLibIdF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
-            if (!empty($_SESSION['catLecNombreF'])) {
+            if (!empty($_SESSION['estLibNombreF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cll.catLecNombre like upper('%" . $_SESSION['catLecNombreF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.estLibNombre like upper('%" . $_SESSION['estLibNombreF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
         }
@@ -183,12 +182,13 @@ class LibrosLectoControlador{
             $condicionBuscar = (($where && !$filtros == 0) ? " or " : " where ");
             $filtros++;
             $planConsulta .= $condicionBuscar;
-            $planConsulta .= "( isbn like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or titulo like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or autor like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or precio like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or catLibId like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or catLibNombre like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= "( ll.libLecCodigo like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or ll.libLecTitulo like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or ll.libLecAutor like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or cll.catLecId like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or cll.catLecNombre like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or el.estLibId like '%" . $_SESSION['buscarF'] . "%'";
+            $planConsulta .= " or el.estLibNombre like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " ) ";
         }
         return $planConsulta;
