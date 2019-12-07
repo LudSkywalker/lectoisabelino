@@ -161,9 +161,20 @@ class LibrosLectoControlador{
                 $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.categoria_libro_lecto_catLecId like ('%" . $_SESSION['categoria_libro_lecto_catLecIdF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
-            if (!empty($_SESSION['catLibNombreF'])) {
+            if (!empty($_SESSION['catLecNombreF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cll.catLecNombre like upper('%" . $_SESSION['catLibNombreF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cll.catLecNombre like upper('%" . $_SESSION['catLecNombreF'] . "%')";
+                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
+            }
+            
+            if (!empty($_SESSION['estado_libros_estLibIdF'])) {
+                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.categoria_libro_lecto_catLecId like ('%" . $_SESSION['estado_libros_estLibIdF'] . "%')";
+                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
+            }
+            if (!empty($_SESSION['catLecNombreF'])) {
+                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cll.catLecNombre like upper('%" . $_SESSION['catLecNombreF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
         }
