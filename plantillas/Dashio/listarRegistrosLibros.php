@@ -41,7 +41,7 @@ if (isset($_SESSION['mensaje'])) {
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
-        <form name="formBuscarLibros" action="../../Controlador.php" method="POST">
+        <form name="formBuscarLibros" action="Controlador.php" method="POST">
             <input type="hidden" name="ruta" value="listarLibros"/>
             <table> 
                 <tr><td>ISBN:</td>
@@ -130,7 +130,7 @@ if (isset($_SESSION['mensaje'])) {
 <br>
 <div style="width: 800">
     <span class="izquierdo">
-        <input type="button" onclick="javascript:location.href = '../../Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
+        <input type="button" onclick="javascript:location.href = 'Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
     </span>
 </div>
 <br>
@@ -170,11 +170,11 @@ if (isset($_SESSION['mensaje'])) {
                 <td style="width: 100"><?php
  echo $listaDeLibros[$i]->catLibNombre; ?></td>
                 <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="../../Controlador.php?ruta=actualizarLibro&idAct=<?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php
  echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php
  } ?></td>
                 <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="../../Controlador.php?ruta=eliminarLibro&idAct=<?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php
  echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php
  } ?>  </td>
             <?php
