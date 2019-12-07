@@ -74,10 +74,10 @@ class EstadoLibrosDao extends ConexDBMySQL {
         }  finally {
             $this-> cierreDB();        }}
             public function eliminar($id = array()) {//Recibe llave primaria a eliminar
-        $planConsulta = "DELETE from estado_elementos  
-                                           WHERE estEleId=:estEleId ";
+        $planConsulta = "DELETE from estado_libros  
+                                           WHERE estLibId=:estLibId ";
         $eliminar = $this->conexion->prepare($planConsulta);
-        $eliminar->bindParam(':estEleId', $id[0], PDO::PARAM_INT);
+        $eliminar->bindParam(':estLibId', $id[0], PDO::PARAM_INT);
         $resultado = $eliminar->execute();
         $this->cierreDB();
         if (!empty($resultado)) {
@@ -88,7 +88,7 @@ class EstadoLibrosDao extends ConexDBMySQL {
         try {
             $cambiarEstado = 0;
             if (isset($sId[0])) {
-                $actualizar = "UPDATE estado_elementos SET estEleNombre = ? WHERE estEleId= ?;";
+                $actualizar = "UPDATE estado_libros SET estLibNombre = ? WHERE estLibId= ?;";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $sId[0]));
                 return ['actualizacion' => $actualizacion, 'mensaje' => "Registro Inactivado."];
@@ -101,7 +101,7 @@ class EstadoLibrosDao extends ConexDBMySQL {
         try {
             $cambiarEstado = 1;
             if (isset($id[0])) {
-                $actualizar = "UPDATE estado_elementos SET estEleNombre = ? WHERE estEleId= ?;";
+                $actualizar = "UPDATE estado_libros SET estLibNombre = ? WHERE estLibId= ?;";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $id[0]));
                 return ['actualizacion' => $actualizacion, 'mensaje' => "Registro habilitado."];           }
