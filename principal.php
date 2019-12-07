@@ -98,7 +98,20 @@ if (isset($_SESSION['mensaje'])) {
  } ?>
                             </ul>
                         </li>  
-                        
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-cogs"></i>
+                                <span>LibrosLecto</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Listar Libros Lecto</a></li>
+                                <?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
+                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros#cont">Insertar Nuevo Libro</a></li>
+                                <?php
+ } ?>
+                            </ul>
+                        </li>  
 
                     </ul>
                     <!-- sidebar menu end-->

@@ -46,13 +46,13 @@ class LibrosLectoControlador{
                 $registroCategoriasLibros = $gestarCategoriasLibrosLecto->seleccionarTodos();
 
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
-                $_SESSION['listaDeLibros'] = $listaDeLibros;
-                $_SESSION['paginacionVinculos'] = $paginacionVinculos;
-                $_SESSION['totalRegistrosLibros'] = $totalRegistrosLibros;
-                $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
+                $_SESSION['listaDeLibrosLecto'] = $listaDeLibros;
+                $_SESSION['paginacionVinculosLecto'] = $paginacionVinculos;
+                $_SESSION['totalRegistrosLibrosLecto'] = $totalRegistrosLibros;
+                $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriasLibros;
                 $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
+                header("location:principal.php?contenido=plantillas/Dashio/todosLosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
@@ -60,7 +60,7 @@ class LibrosLectoControlador{
     }
   public function enlacesPaginacion($totalRegistros = NULL, $limit = 4, $offset = 0, $totalEnlacesPaginacion = 2) {
 
-        $ruta = "listarLibros";
+        $ruta = "verInventarioLibros";
 
         if (isset($offset) && (int) $offset <= 0) {
             $offset = 0;
