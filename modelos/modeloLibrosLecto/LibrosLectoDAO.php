@@ -1,8 +1,6 @@
 <?php
-
-//include_once "../ConstantesDeConexion.php";
-include_once PATH ."modelos/ConexDBMySQL.php";
-class CategoriaLibrosLectoDao extends ConexDBMySQL {
+include_once PATH . "modelos/ConexDBMySQL.php";
+class LibrosLectoDao extends ConexDBMySQL {
     public function __construct($servidor, $base, $loginDB, $passwordDB) {
         parent::__construct($servidor, $base, $loginDB, $passwordDB);}
     public function seleccionarTodos() {
@@ -120,7 +118,9 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
         $planConsulta = "select SQL_CALC_FOUND_ROWS ll.libLecId, ll.libLecCodigo, ll.libLecTitulo, ll.libLecAutor,
                          cll.catLecId, cll.catLecNombre, el.estLibId, el.estLibNombre
                          FROM ((libros_lecto ll LEFT JOIN  categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId= cll.catLecId)
-                         LEFT JOIN  estado_libros el ON ll.categoria_libro_lecto_catLecId = el.estLibId)";
+
+                       LEFT JOIN  estado_libros el ON ll.estado_libros_estLibId = el.estLibId)";
+
         $planConsulta.= $filtrarBuscar;
 
         $planConsulta.= "  ORDER BY ll.libLecId ASC";

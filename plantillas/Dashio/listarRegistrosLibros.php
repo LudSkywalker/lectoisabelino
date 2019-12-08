@@ -1,12 +1,6 @@
 <?php
 
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-}
-
 if (isset($_SESSION['listaDeLibros'])) {
     $listaDeLibros = $_SESSION['listaDeLibros'];
 }
@@ -38,11 +32,84 @@ if (isset($_SESSION['mensaje'])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
+<div style="width: 800">
+    <p>Total de Registros: <?php
+ if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
+    <table border='1' class="display table table-bordered">
+        <thead>
+            <tr>
+                <td style="width: 100">ISBN</td>
+                <td style="width: 100">TITULO</td>
+                <td style="width: 100">AUTOR</td>
+                <td style="width: 100">PRECIO</td>
+                <td style="width: 100">ID CATEGORIA</td>
+                <td style="width: 100">NOMBRE CATEGORIA</td>
+                <td style="width: 100"  colspan="2"> ACCIONES </td>
+            </tr>
+        </thead> 
+        <tbody>
+            <?php
+
+            $i = 0;
+            foreach ($listaDeLibros as $key => $value) {
+            ?>
+            <tr>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->isbn; ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->titulo); ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->autor); ?></td>
+                <td style="width: 100"><?php
+ echo strtoupper($listaDeLibros[$i]->precio); ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLibId; ?></td>
+                <td style="width: 100"><?php
+ echo $listaDeLibros[$i]->catLibNombre; ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php
+ } ?></td>
+                <td style="width: 100"><?php
+ if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php
+ echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php
+ } ?>  </td>
+            <?php
+
+            $i++;
+            ?>
+            <tr>
+            <?php
+
+            }
+            ?>
+        </tbody>
+        <tfoot> 
+            <tr>
+                <td colspan="8">
+                    <nav aria-label="Page navigation example">
+                        <?php
+ $i = 0; ?>
+                        <ul class="pagination justify-content-center">
+                        <?php
+ foreach ($paginacionVinculos as $key => $value) { ?>    
+                                <li class="page-item"><a class="page-link" href="<?php
+ echo $value; ?>"><?php
+ echo ($key); ?></a></li>
+                            <?php
+ } ?>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
             <h3><i class="fa fa-angle-right"></i> Gestión de Libros</h3>
 <div>
     <fieldset class="scheduler-border"><legend class="scheduler-border">FILTRO</legend>
 
-        <form name="formBuscarLibros" action="../../Controlador.php" method="POST">
+        <form name="formBuscarLibros" action="Controlador.php" method="POST">
             <input type="hidden" name="ruta" value="listarLibros"/>
             <table> 
                 <tr><td>ISBN:</td>
@@ -131,84 +198,11 @@ if (isset($_SESSION['mensaje'])) {
 <br>
 <div style="width: 800">
     <span class="izquierdo">
-        <input type="button" onclick="javascript:location.href = '../../Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
+        <input type="button" onclick="javascript:location.href = 'Controlador.php?ruta=mostrarInsertarLibros'" value="Nuevo Libro">
     </span>
 </div>
 <br>
 <a name="listaDeLibros" id="a"></a>
-<div style="width: 800">
-    <p>Total de Registros: <?php
- if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
-    <table border='1' class="display table table-bordered">
-        <thead>
-            <tr>
-                <td style="width: 100">ISBN</td>
-                <td style="width: 100">TITULO</td>
-                <td style="width: 100">AUTOR</td>
-                <td style="width: 100">PRECIO</td>
-                <td style="width: 100">ID CATEGORIA</td>
-                <td style="width: 100">NOMBRE CATEGORIA</td>
-                <td style="width: 100"  colspan="2"> ACCIONES </td>
-            </tr>
-        </thead> 
-        <tbody>
-            <?php
-
-            $i = 0;
-            foreach ($listaDeLibros as $key => $value) {
-            ?>
-            <tr>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->isbn; ?></td>
-                <td style="width: 100"><?php
- echo strtoupper($listaDeLibros[$i]->titulo); ?></td>
-                <td style="width: 100"><?php
- echo strtoupper($listaDeLibros[$i]->autor); ?></td>
-                <td style="width: 100"><?php
- echo strtoupper($listaDeLibros[$i]->precio); ?></td>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->catLibId; ?></td>
-                <td style="width: 100"><?php
- echo $listaDeLibros[$i]->catLibNombre; ?></td>
-                <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="../../Controlador.php?ruta=actualizarLibro&idAct=<?php
- echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php
- } ?></td>
-                <td style="width: 100"><?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="../../Controlador.php?ruta=eliminarLibro&idAct=<?php
- echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php
- } ?>  </td>
-            <?php
-
-            $i++;
-            ?>
-            <tr>
-            <?php
-
-            }
-            ?>
-        </tbody>
-        <tfoot> 
-            <tr>
-                <td colspan="8">
-                    <nav aria-label="Page navigation example">
-                        <?php
- $i = 0; ?>
-                        <ul class="pagination justify-content-center">
-                        <?php
- foreach ($paginacionVinculos as $key => $value) { ?>    
-                                <li class="page-item"><a class="page-link" href="<?php
- echo $value; ?>"><?php
- echo ($key); ?></a></li>
-                            <?php
- } ?>
-                        </ul>
-                    </nav>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
 
         <!--/ row -->
       </section>
