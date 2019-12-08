@@ -1,62 +1,23 @@
 <?php
-session_start();
 
-include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
-include_once PATH . 'modelos/modeloLibros/LibrosDAO.php';
-include_once PATH . 'modelos/modeloCategoriaLibro/CategoriaLibrosDAO.php';
+require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
+require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
+require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
+require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
+require_once PATH . 'modelos/modeloUsuariosRol/UsuariosRolDAO.php';
 
-class LibrosControlador {
+class LibrosLectoControlador{
 
-    private $datos;
+    private $datos = array();
 
-    public function __construct($datos) {
+    public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
         $this->datos = $datos;
-        $this->librosControlador();
+        $this->librosLectoControlador();
     }
 
-    public function librosControlador() {
-
-        switch ($this->datos['ruta']) {
-            case 'mostrarInsertarLibros':
-                    //Se alistan datos a desplegar en los campos select con relación a otras tablas
-                    $gestarCategoriasLibros = new CategoriaLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                    $registroCategoriasLibros = $gestarCategoriasLibros->seleccionarTodos(); /*                     * *********** */
-
-                                        $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
-                    $gestarCategoriasLibros = null;
-
-                    header("location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php");
-
-                break;
-            case 'insertarLibro':
-
-                $buscarLibro = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA); //Se instancia LibrosDao para insertar
-                $libroHallado = $buscarLibro->seleccionarId(array($this->datos['isbn'])); //Se consulta si existe ya el registro
-                echo "<pre>";
-                print_r($libroHallado);
-                echo "</pre>";
-                if (!$libroHallado['exitoSeleccionId']) {//Si no existe el libro en la base se procede a insertar
-                    $insertarLibro = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                    $insertoLibro = $insertarLibro->insertar($this->datos); //inserción de los campos en la tabla libros    
-                    $exitoInsercionLibro = $insertoLibro['inserto']; //indica si se logró inserción de los campos en la tabla libros
-                    $resultadoInsercionLibro = $insertoLibro['resultado']; //Traer el id con que quedó el libro de lo contrario la excepción o fallo
-                                        $_SESSION['mensaje'] = "Registrado " . $this->datos['isbn'] . " con èxito. Agregado Nuevo Libro: " . $resultadoInsercionLibro . " "; //mensaje de inserción 
-
-                    header("location:../../Controlador.php?ruta=listarLibros");
-                } else {
-                                        $_SESSION['isbn'] = $this->datos['isbn'];
-                    $_SESSION['titulo'] = $this->datos['titulo'];
-                    $_SESSION['autor'] = $this->datos['autor'];
-                    $_SESSION['precio'] = $this->datos['precio'];
-                    $_SESSION['categoriaLibro_catLibId'] = $this->datos['categoriaLibro_catLibId'];
-                    $_SESSION['mensaje'] = "   El código " . $this->datos['isbn'] . " ya existe en el sistema.";
-
-                    header("location:principal.php?contenido=vistas/vistasLibros/mostrarInsertarLibros.php");
-                }
-
-                break;
-            case "listarLibros":
-
+    public function librosLectoControlador() {
+        switch ($this->datos["ruta"]) {
+            case "verInventarioLibros":
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
                 $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 4;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
@@ -89,36 +50,46 @@ class LibrosControlador {
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                 $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
+                header("location:plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
+            case "gestionDeAcceso":
 
-            case "actualizarLibro":
+                $gestarLibrosLecto  = new UsuariosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 
-                $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-//                $consultaLibro = new LibroVO();
-                $consultaDeLibro = $gestarLibros->seleccionarId(array($this->datos["idAct"])); //Se consulta el libro para traer los datos.
+                $this->datos["password"] = md5($this->datos["password"]); //Encriptamos password para que coincida con la base de datos
+                $this->datos["documento"] = ""; //Para logueo crear ésta variable límpia por cuanto se utiliza el mismo método de registrarse a continuación
+                $existeUsuario_s = $gestarLibrosLecto ->seleccionarId(array($this->datos["documento"], $this->datos['email'], $this->datos["password"])); //Se revisa si existe la persona en la base                
+                if ((0 != $existeUsuario_s['exitoSeleccionId']) && ($existeUsuario_s['registroEncontrado'][0]->usuLogin == $this->datos['email'])) {
+                     //se abre sesión para almacenar en ella el mensaje de inserción
+                    $_SESSION['mensaje'] = "Bienvenido a nuestra Aplicación."; //mensaje de inserción
+                    //Consultamos los roles de la persona logueada
+                    $consultaRoles = new RolDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                    $rolesUsuario = $consultaRoles->seleccionarRolPorPersona(array($existeUsuario_s['registroEncontrado'][0]->perDocumento));
+                    $cantidadRoles = count($rolesUsuario['registroEncontrado']);
+                    $rolesEnSesion = array();
+                    for ($i = 0; $i < $cantidadRoles; $i++) {
+                        $rolesEnSesion[] = $rolesUsuario['registroEncontrado'][$i]->rolId;
+                    }
+                    //ABRIR SESION ******************************************
+                    $sesionPermitida = new ClaseSesion(); //Se abre sesiòn
+                    $sesionPermitida->crearSesion(array($existeUsuario_s['registroEncontrado'][0], $rolesUsuario, $rolesEnSesion)); //Se envìa a la sesiòn los datos del usuario logeado
+                    header("location:principal.php");
+                } else {
+                     //se abre sesión para almacenar en ella el mensaje de inserción
+                    $_SESSION['mensaje'] = "Credenciales de acceso incorrectas"; //mensaje de inserción
+                    header("location:login.php");
+                }
 
-                $actualizarDatosLibro = $consultaDeLibro['registroEncontrado'][0];
-
-                                $_SESSION['actualizarDatosLibro'] = $actualizarDatosLibro;
-
-                header("location:principal.php?contenido=vistas/vistasLibros/vistaActualizarLibro.php");
                 break;
-            case "confirmaActualizarLibro":
-                $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-//                $consultaLibro = new LibroVO();
-                $actualizarLibro = $gestarLibros->actualizar(array($this->datos)); //Se envía datos del libro para actualizar.
+            case "cerrarSesion":
+                $cerrarSesion = new ClaseSesion();
+                $cerrarSesion->cerrarSesion(); //Se cierra sesión
 
-                $actualizarLibro = $consultaDeLibro['registroEncontrado'][0];
-
-                                $_SESSION['mensaje'] = "Actualización realizada.";
-                header("location:../../Controlador.php?ruta=listarLibros");
                 break;
         }
     }
-
-    public function enlacesPaginacion($totalRegistros = NULL, $limit = 2, $offset = 0, $totalEnlacesPaginacion = 2) {
+  public function enlacesPaginacion($totalRegistros = NULL, $limit = 4, $offset = 0, $totalEnlacesPaginacion = 2) {
 
         $ruta = "listarLibros";
 

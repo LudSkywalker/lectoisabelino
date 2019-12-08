@@ -1,4 +1,5 @@
 <?php
+
 require_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
 require_once PATH . 'modelos/modeloUsuarios/UsuariosDAO.php';
 require_once PATH . 'modelos/modeloPersona/PersonaDAO.php';
@@ -43,7 +44,7 @@ class Usuario_sControlador {
                      //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Registrado con èxito para ingreso al sistema"; //mensaje de inserción
                     if ($this->datos['ruta'] == 'gestionDeRegistro') {//si el formulario de la inserción es el de registrarse y fue exitoso se devuelve a login.php
-                        header("location:login.php");
+                        header("location:../../login.php");
                     }
                     if ($this->datos['ruta'] == 'insertarUsuario_s') {//si el formulario de la inserción es el de Agregar Usuarios y fue exitoso se devuelve a listarRegistrosUsuario_s.php
 //                        header("location:../principal.php?contenido=vistas/vistasUsuario_s/listarRegistrosUsuario_s.php");
@@ -86,7 +87,6 @@ class Usuario_sControlador {
                     //ABRIR SESION ******************************************
                     $sesionPermitida = new ClaseSesion(); //Se abre sesiòn
                     $sesionPermitida->crearSesion(array($existeUsuario_s['registroEncontrado'][0], $rolesUsuario, $rolesEnSesion)); //Se envìa a la sesiòn los datos del usuario logeado
-
                     header("location:principal.php");
                 } else {
                      //se abre sesión para almacenar en ella el mensaje de inserción
