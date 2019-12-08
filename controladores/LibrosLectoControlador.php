@@ -3,6 +3,7 @@
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 require_once PATH . 'modelos/modeloCategoriaLibrosLecto/CategoriaLibrosLectoDAO.php';
 require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
+require_once PATH . 'modelos/modeloEstadoLibros/EstadoLibrosDAO.php';
 
 
 class LibrosLectoControlador{
@@ -12,7 +13,7 @@ class LibrosLectoControlador{
     
 
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
-        $this->limite=4;
+        $this->limite=6;
         $this->datos = $datos;
         $this->librosLectoControlador();
     }
@@ -37,28 +38,33 @@ class LibrosLectoControlador{
 
                 $totalRegistrosLibros = $resultadoConsultaPaginada[0];
                 $listaDeLibros = $resultadoConsultaPaginada[1];
-                $paginasExtra = $totalRegistrosLibros%$this->limite;
+                $paginasExtra = $this->limite;
                 //SE CONSTRUYEN LOS ENLACES PARA LA PAGINACIÓN QUE SE MOSTRARÀ EN LA VISTA//
                 $totalEnlacesPaginacion = (isset($_GET['limit'])) ? $_GET['limit'] : $paginasExtra;
                 $paginacionVinculos = $this->enlacesPaginacion($totalRegistrosLibros, $limit, $offset, $totalEnlacesPaginacion); //Se obtienen los enlaces de paginación
                 //SE ALISTA LA CONSULTA DE CATEGORIAS DE LIBROS PARA FUTURO FORMULARIO DE FILTRAR//
                 $gestarCategoriasLibrosLecto = new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                 $registroCategoriasLibros = $gestarCategoriasLibrosLecto->seleccionarTodos();
+                
+                $gestarEstadosLibrosLecto = new EstadoLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $registroEstadosLibros =$gestarEstadosLibrosLecto->seleccionarTodos();
 
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
                 $_SESSION['listaDeLibrosLecto'] = $listaDeLibros;
                 $_SESSION['paginacionVinculosLecto'] = $paginacionVinculos;
                 $_SESSION['totalRegistrosLibrosLecto'] = $totalRegistrosLibros;
                 $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriasLibros;
+                $_SESSION['registroEstadosLibrosLecto'] = $registroEstadosLibros;
                 $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarEstadosLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 header("location:principal.php?contenido=plantillas/Dashio/todosLosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
         }
     }
-  public function enlacesPaginacion($totalRegistros = NULL, $limit = 4, $offset = 0, $totalEnlacesPaginacion = 2) {
+  public function enlacesPaginacion($totalRegistros = NULL, $limit = 5, $offset = 0, $totalEnlacesPaginacion = 6) {
 
         $ruta = "verInventarioLibros";
 
@@ -66,7 +72,7 @@ class LibrosLectoControlador{
             $offset = 0;
         }
         if (isset($offset) && ((int) $offset > ($totalRegistros - $limit))) {
-            $offset = ($totalRegistros - $limit) + 1;
+            $offset = ($totalRegistros - $limit) -($totalRegistros%$limit);
         }
         $anterior = $offset - $totalEnlacesPaginacion; /*         * **** */
         $siguiente = $offset + $totalEnlacesPaginacion; /*         * **** */
@@ -80,8 +86,8 @@ class LibrosLectoControlador{
 
         for ($i = $offset; $i < ($offset + $limit) && $i < $totalRegistros && $conteoEnlaces < $totalEnlacesPaginacion; $i++) {
 
-            $mostrar[$i + 1] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
-            $enlacesProvisional[$i] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
+            $mostrar[$i + 1] = "Controlador.php?ruta=" . $ruta . "&pag=".$i;
+            $enlacesProvisional[$i] = "Controlador.php?ruta=" . $ruta ."&pag=".$i;
             $conteoEnlaces++;
             $siguiente = $i;
         }
@@ -89,13 +95,18 @@ class LibrosLectoControlador{
         $cantidadProvisional = count($enlacesProvisional);
 
         if ($offset < $totalRegistros) {
-            $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            if($siguiente < ($totalRegistros-$limit)){
+            $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente+1);
+            } else {
+            $siguiente=$totalRegistros -$totalEnlacesPaginacion;
+            $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente);    
+            }
 //            $mostrar.="<a href='controladores/ControladorPrincipal.php?ruta=listarLibros&pag=" . ($totalPag - $totalEnlacesPaginacion) . "'>..::BLOQUE FINAL::..</a><br></center>";
             $mostrar ['final'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
         }
 
         if ($offset >= $totalRegistros) {
-            $mostrar[$siguiente + 1] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            $mostrar[$siguiente + 1] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente );
             for ($j = 0; $j < $cantidadProvisional; $j++) {
                 $mostrar [] = $enlacesProvisional[$j];
             }
@@ -155,9 +166,7 @@ class LibrosLectoControlador{
             $planConsulta .= "( ll.libLecCodigo like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " or ll.libLecTitulo like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " or ll.libLecAutor like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or cll.catLecId like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " or cll.catLecNombre like '%" . $_SESSION['buscarF'] . "%'";
-            $planConsulta .= " or el.estLibId like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " or el.estLibNombre like '%" . $_SESSION['buscarF'] . "%'";
             $planConsulta .= " ) ";
         }

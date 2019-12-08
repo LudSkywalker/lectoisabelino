@@ -78,40 +78,41 @@ if (isset($_SESSION['mensaje'])) {
 
                         
                         <li class="mt">
-                            <a class="active" href="principal.php">
+                            <a  <?php
+                            if (!isset($_GET["contenido"])){
+                                echo 'class="active"';
+                            }
+                            ?> href="principal.php">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                    
+                        
+                                <?php
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))||(in_array(3, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
                         <li class="sub-menu">
-                            <a href="javascript:;">
+                            <a <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))){
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
                                 <i class="fa fa-cogs"></i>
-                                <span>Gestión de Libros</span>
+                                <span>Miembro </span>
                             </a>
                             <ul class="sub">
-                                <li><a href="Controlador.php?ruta=listarLibros&pag=0&#cont">Listar Libros</a></li>
-                                <?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
-                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros#cont">Insertar Nuevo Libro</a></li>
-                                <?php
- } ?>
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Ver Libros </a></li>
+
                             </ul>
                         </li>  
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-cogs"></i>
-                                <span>LibrosLecto</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Listar Libros Lecto</a></li>
-                                <?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
-                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros#cont">Insertar Nuevo Libro</a></li>
-                                <?php
- } ?>
-                            </ul>
-                        </li>  
+                        <?php
+     }
+?>
 
                     </ul>
                     <!-- sidebar menu end-->
@@ -123,7 +124,6 @@ if (isset($_SESSION['mensaje'])) {
                 *********************************************************************************************************************************************************** -->
           
 
-                            </div>
                             <section id="cont">
                             <br/>
                             <?php
@@ -149,26 +149,7 @@ if (isset($_SESSION['mensaje'])) {
         <!--script for this page-->
         <script src="plantillas/Dashio/lib/sparkline-chart.js"></script>
         <script src="plantillas/Dashio/lib/zabuto_calendar.js"></script>
-        <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        var unique_id = $.gritter.add({
-                                            // (string | mandatory) the heading of the notification
-                                            title: 'Welcome to Dashio!',
-                                            // (string | mandatory) the text inside the notification
-                                            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
-                                            // (string | optional) the image to display on the left
-                                            image: 'plantillas/Dashio/img/ui-sam.jpg',
-                                            // (bool | optional) if you want it to fade out on its own or just sit there
-                                            sticky: false,
-                                            // (int | optional) the time you want it to be alive for before fading out
-                                            time: 8000,
-                                            // (string | optional) the class name you want to apply to that specific message
-                                            class_name: 'my-sticky-class'
-                                        });
-
-                                        return false;
-                                    });
-        </script>
+                                   
         <script type="application/javascript">
             $(document).ready(function() {
             $("#date-popover").popover({
