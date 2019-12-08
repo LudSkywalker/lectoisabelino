@@ -109,12 +109,4 @@ class EstadoElementosDao extends ConexDBMySQL {
         } finally {
             $this->cierreDB(); } }
     }
-    
-    
-    
-
-
-
-
-
 ?>
