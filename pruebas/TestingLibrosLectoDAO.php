@@ -5,7 +5,7 @@ include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";
 
 //-- SELECCIONAR TODOS.
 echo "Seleccionar todo";
-$libLec=new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+$libLec=new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$libLec->seleccionarTodos();
 
 echo '<pre>';
@@ -24,7 +24,7 @@ $registro['elementos_lecto_eleLecId'] = 6;
 $insert = $libLec->insertar($registro);
 
 echo '<pre>';
-//print_r($insert);
+print_r($insert);
 echo '</pre>';
 
 //--> SELECCIONAR ID
