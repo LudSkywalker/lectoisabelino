@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloEstadoElementos/EstadoElementosDAO.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloRol/RolDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/pruebas/TestingEstadoLibrosDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloEstadoLibros/EstadoLibrosDAO.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/pruebas/TestingEstadoElementos.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/pruebas/TestingRolDAO.php</file>
         </group>
     </open-files>
 </project-private>

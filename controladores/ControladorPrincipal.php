@@ -1,3 +1,4 @@
+
 <?php
 
 include_once PATH . 'controladores/LibrosControlador.php';
@@ -83,10 +84,8 @@ class ControladorPrincipal {
                 }
 
              break;
-             break;
-//Gestion libros lecto                
-            case "verLibrosPrestados":
-            case"verInventarioLibros":
+//Gestion la tabal libros lecto                
+            case "verInventarioLibros":
                      $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
             break;
         

@@ -25,7 +25,7 @@ class LibrosControlador {
                                         $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                     $gestarCategoriasLibros = null;
 
-                    header("location:vistas/vistasLibros/vistaInsertarLibro.php");
+                    header("location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php");
 
                 break;
             case 'insertarLibro':
@@ -42,7 +42,7 @@ class LibrosControlador {
                     $resultadoInsercionLibro = $insertoLibro['resultado']; //Traer el id con que quedó el libro de lo contrario la excepción o fallo
                                         $_SESSION['mensaje'] = "Registrado " . $this->datos['isbn'] . " con èxito. Agregado Nuevo Libro: " . $resultadoInsercionLibro . " "; //mensaje de inserción 
 
-                    header("location:../../Controlador.php?ruta=listarLibros");
+                    header("location:Controlador.php?ruta=listarLibros");
                 } else {
                                         $_SESSION['isbn'] = $this->datos['isbn'];
                     $_SESSION['titulo'] = $this->datos['titulo'];
@@ -51,7 +51,7 @@ class LibrosControlador {
                     $_SESSION['categoriaLibro_catLibId'] = $this->datos['categoriaLibro_catLibId'];
                     $_SESSION['mensaje'] = "   El código " . $this->datos['isbn'] . " ya existe en el sistema.";
 
-                    header("location:../../Controlador.php?ruta=mostrarInsertarLibros");
+                    header("location:principal.php?contenido=vistas/vistasLibros/mostrarInsertarLibros.php");
                 }
 
                 break;
@@ -89,7 +89,7 @@ class LibrosControlador {
                 $_SESSION['registroCategoriasLibros'] = $registroCategoriasLibros;
                 $gestarLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibros = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:plantillas/Dashio/listarRegistrosLibros.php");
+                header("location:principal.php?contenido=plantillas/Dashio/listarRegistrosLibros.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
@@ -103,7 +103,7 @@ class LibrosControlador {
 
                                 $_SESSION['actualizarDatosLibro'] = $actualizarDatosLibro;
 
-                header("location:vistas/vistasLibros/vistaActualizarLibro.php");
+                header("location:principal.php?contenido=vistas/vistasLibros/vistaActualizarLibro.php");
                 break;
             case "confirmaActualizarLibro":
                 $gestarLibros = new LibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
@@ -113,7 +113,7 @@ class LibrosControlador {
                 $actualizarLibro = $consultaDeLibro['registroEncontrado'][0];
 
                                 $_SESSION['mensaje'] = "Actualización realizada.";
-                header("location:../../Controlador.php?ruta=listarLibros");
+                header("location:Controlador.php?ruta=listarLibros");
                 break;
         }
     }
@@ -135,12 +135,12 @@ class LibrosControlador {
         $enlacesProvisional = array();
         $conteoEnlaces = 0;
 
-        $mostrar['inicio'] = "../../Controlador.php?ruta=" . $ruta . "&pag=0"; //Enlace a enviar para páginas Iniciales
-        $mostrar['anterior'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . (($anterior)); //Enlace a enviar para páginas anteriores
+        $mostrar['inicio'] = "Controlador.php?ruta=" . $ruta . "&pag=0"; //Enlace a enviar para páginas Iniciales
+        $mostrar['anterior'] = "Controlador.php?ruta=" . $ruta . "&pag=" . (($anterior)); //Enlace a enviar para páginas anteriores
 
         for ($i = $offset; $i < ($offset + $limit) && $i < $totalRegistros && $conteoEnlaces < $totalEnlacesPaginacion; $i++) {
 
-            $mostrar[$i + 1] = "../../Controlador.php?ruta=" . $ruta . "&pag=$i";
+            $mostrar[$i + 1] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
             $enlacesProvisional[$i] = "Controlador.php?ruta=" . $ruta . "&pag=$i";
             $conteoEnlaces++;
             $siguiente = $i;
@@ -149,17 +149,17 @@ class LibrosControlador {
         $cantidadProvisional = count($enlacesProvisional);
 
         if ($offset < $totalRegistros) {
-            $mostrar['siguiente'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
 //            $mostrar.="<a href='controladores/ControladorPrincipal.php?ruta=listarLibros&pag=" . ($totalPag - $totalEnlacesPaginacion) . "'>..::BLOQUE FINAL::..</a><br></center>";
-            $mostrar ['final'] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
+            $mostrar ['final'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
         }
 
         if ($offset >= $totalRegistros) {
-            $mostrar[$siguiente + 1] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
+            $mostrar[$siguiente + 1] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente + 1);
             for ($j = 0; $j < $cantidadProvisional; $j++) {
                 $mostrar [] = $enlacesProvisional[$j];
             }
-            $mostrar [$totalRegistros - $offset] = "../../Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $offset);
+            $mostrar [$totalRegistros - $offset] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $offset);
         }
 
         return $mostrar;
