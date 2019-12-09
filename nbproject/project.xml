@@ -10,6 +10,7 @@
             <word>Codigo</word>
             <word>Estado</word>
             <word>prestados</word>
+            <word>prestadp</word>
             <word>Prestaos</word>
         </spellchecker-wordlist>
     </configuration>

@@ -4,8 +4,8 @@ session_start();
 include_once 'modelos/ConstantesDeConexion.php';
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 
-//$seguridad = new BloqueDeSeguridad();
-//$seguridad->seguridad("login.php");
+$seguridad = new BloqueDeSeguridad();
+$seguridad->seguridad("login.php");
 
 
 if (isset($_SESSION['mensaje'])) {
@@ -88,6 +88,31 @@ if (isset($_SESSION['mensaje'])) {
                             </a>
                         </li>
                         
+                                <?php
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
+                        <li class="sub-menu">
+                            <a <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
+                                <i class="fa fa-cogs"></i>
+                                <span>Bibliotecario </span>
+                            </a>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
+
+                            </ul>
+                        </li>  
+                        <?php
+     }
+?>
                                 <?php
  if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))||(in_array(3, $_SESSION['rolesEnSesion']))) {
      ?>
