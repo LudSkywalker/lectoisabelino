@@ -120,22 +120,12 @@ class UsuariosRolDao extends ConexDBMySQL {
             $this->cierreDB(); } }
   
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
-
         $planConsulta = "select SQL_CALC_FOUND_ROWS ur.id_usuario_s, u.usuId, u.usuLogin,r.rolId, r.rolNombre
                                   FROM ((usuario_s_roles ur LEFT JOIN usuario_s u ON ur.id_usuario_s=u.usuId)
-                                  LEFT JOIN rol r ON ur.id_rol = r.rolId) ;";
+                                  LEFT JOIN rol r ON ur.id_rol = r.rolId)";
         $planConsulta .= $filtrarBuscar;
 
         $planConsulta .= "  ORDER BY ur.id_usuario_s ASC";
-        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
-
-        $listar = $this->conexion->prepare($planConsulta);
-        $listar->execute();
-
-
-
-        $planConsulta .= $filtrarBuscar;
-        $planConsulta .= " ORDER BY ur.id_usuario_s ASC";
         $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
 
         $listar = $this->conexion->prepare($planConsulta);
@@ -145,7 +135,7 @@ class UsuariosRolDao extends ConexDBMySQL {
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $listadoLibros[] = $registro;
         }
-
+        echo "no lo pinta";
         $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
         $listar2->execute();
         while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {

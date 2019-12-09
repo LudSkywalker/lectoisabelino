@@ -4,8 +4,8 @@ session_start();
 include_once 'modelos/ConstantesDeConexion.php';
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 
-$seguridad = new BloqueDeSeguridad();
-$seguridad->seguridad("login.php");
+//$seguridad = new BloqueDeSeguridad();
+//$seguridad->seguridad("login.php");
 
 
 if (isset($_SESSION['mensaje'])) {
