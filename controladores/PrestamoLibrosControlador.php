@@ -16,7 +16,7 @@ class PrestamoLibrosControlador{
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
         $this->limite=5;
         $this->datos = $datos;
-        $this->librosLectoControlador();
+        $this->prestamolibrosControlador();
     }
 
     public function prestamolibrosControlador() {
@@ -36,6 +36,7 @@ class PrestamoLibrosControlador{
                 // SE HACE LA CONSULTA A LA BASE PARA TRAER LA CANTIDAD DE REGISTROS SOLICITADOS Y EL TOTAL PARA PAGINARLOS//
                 $gestarLibrosPrestados = new ControlPrestamoLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                 $resultadoConsultaPaginada = $gestarLibrosPrestados->consultaPaginada($limit, $offset, $filtrarBuscar);
+
                 
 
                 $totalRegistrosPrestamos = $resultadoConsultaPaginada[0];
@@ -59,7 +60,7 @@ class PrestamoLibrosControlador{
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
                 $_SESSION['listaDePrestamos'] = $listaDePrestamos;
                 $_SESSION['paginacionVinculosPrestamos'] = $paginacionVinculos;
-                $_SESSION['totalRegistrosLibrosPrestamos'] = $totalRegistrosPrestamos;
+                $_SESSION['totalRegistrosPrestamos'] = $totalRegistrosPrestamos;
                 $_SESSION['registroLibrosLecto'] = $registroLibrosLecto;
                 $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriasLibros;
                 $_SESSION['registroEstadosLibrosLecto'] = $registroEstadosLibros;
@@ -67,7 +68,7 @@ class PrestamoLibrosControlador{
                 $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarEstadosLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:principal.php?contenido=plantillas/Dashio/todosLosLibros.php");
+                header("location:principal.php?contenido=plantillas/Dashio/librosPrestados.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 
@@ -127,19 +128,15 @@ class PrestamoLibrosControlador{
 
     public function armarFiltradoYBusqueda() {
 
-        $planConsulta = "";
+        $planConsulta = "  where cpl.conPPrestado = 1 ";
 
         if (!empty($_SESSION['conPIdF'])) {
-            $planConsulta .= " where cpl.conPId='" . $_SESSION['conPIdF'] . "'";
-            $filtros = 0;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta        
+            $planConsulta .= " and cpl.conPId='" . $_SESSION['conPIdF'] . "'";
+            $filtros = 1;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta        
         } else {
             $where = false; // inicializar $where a falso ( al comenzar la consulta NO HAY condiciones o criterios de búsqueda)
-            $filtros = 0;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta            
-            if (!empty($_SESSION['conPPrestadoF'])) {
-                $where = true; // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . "cpl.conPPrestado like ('%" . $_SESSION['conPPrestadoF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
-                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
-            }
+            $filtros = 1;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta            
+            
             if (!empty($_SESSION['persona_usuario_s_usuIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
                 $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cpl.persona_usuario_s_usuId like ('%" . $_SESSION['persona_usuario_s_usuIdF'] . "%')";
@@ -152,12 +149,18 @@ class PrestamoLibrosControlador{
             }
             if (!empty($_SESSION['perNombreF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " pe.perNombre like upper('%" . $_SESSION['perNombreF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " pe.perNombre like ('%" . $_SESSION['perNombreF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             if (!empty($_SESSION['perApellidoF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " pe.perApellido like upper('%" . $_SESSION['perApellidoF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " pe.perApellido like ('%" . $_SESSION['perApellidoF'] . "%')";
+                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
+            }
+            
+            if (!empty($_SESSION['libros_lecto_libLecIdF'])) {
+                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cpl.libros_lecto_libLecId like ('%" . $_SESSION['libros_lecto_libLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             
@@ -206,12 +209,13 @@ class PrestamoLibrosControlador{
             $planConsulta .= $condicionBuscar;
             $planConsulta .= "( cpl.conPId like '%" . $_SESSION['buscarPresF'] . "%'";
             $planConsulta .= " or pe.usuario_s_usuId like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perDocumento like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perDocumento like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perDocumento like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perDocumento like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= " or pe.perNombre like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= " or pe.perApellido like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= " or ll.libLecCodigo like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= " or ll.libLecTitulo like '%" . $_SESSION['buscarPresF'] . "%'";
             $planConsulta .= " or cll.catLecNombre like '%" . $_SESSION['buscarPresF'] . "%'";
             $planConsulta .= " or el.estLibNombre like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= " or cpl.conPFechaSal like '%" . $_SESSION['buscarPresF'] . "%'";
             $planConsulta .= " ) ";
         }
         return $planConsulta;
@@ -219,6 +223,18 @@ class PrestamoLibrosControlador{
 
     public function conservarFiltroYBuscar() {
 //        se almacenan en sesion las variables del filtro y buscar para conservarlas en el formulario
+        $_SESSION['conPIdF'] = (isset($_POST['conPId']) && !isset($_SESSION['conPIdF'])) ? $_POST['conPId'] : $_SESSION['conPIdF'];
+        $_SESSION['conPIdF'] = (!isset($_POST['conPId']) && isset($_SESSION['conPIdF'])) ? $_SESSION['conPIdF'] : $_POST['conPId'];
+        
+        $_SESSION['perDocumentoF'] = (isset($_POST['perDocumento']) && !isset($_SESSION['perDocumentoF'])) ? $_POST['perDocumento'] : $_SESSION['perDocumentoF'];
+        $_SESSION['perDocumentoF'] = (!isset($_POST['perDocumento']) && isset($_SESSION['perDocumentoF'])) ? $_SESSION['perDocumentoF'] : $_POST['perDocumento'];
+        
+        $_SESSION['perNombreF'] = (isset($_POST['perNombre']) && !isset($_SESSION['perNombreF'])) ? $_POST['perNombre'] : $_SESSION['perNombreF'];
+        $_SESSION['perNombreF'] = (!isset($_POST['perNombre']) && isset($_SESSION['perNombreF'])) ? $_SESSION['perNombreF'] : $_POST['perNombre'];
+        
+        $_SESSION['perApellidoF'] = (isset($_POST['perApellido']) && !isset($_SESSION['perApellidoF'])) ? $_POST['perApellido'] : $_SESSION['perApellidoF'];
+        $_SESSION['perApellidoF'] = (!isset($_POST['perApellido']) && isset($_SESSION['perApellidoF'])) ? $_SESSION['perApellidoF'] : $_POST['perApellido'];
+        
         $_SESSION['libLecIdF'] = (isset($_POST['libLecId']) && !isset($_SESSION['libLecIdF'])) ? $_POST['libLecId'] : $_SESSION['libLecIdF'];
         $_SESSION['libLecIdF'] = (!isset($_POST['libLecId']) && isset($_SESSION['libLecIdF'])) ? $_SESSION['libLecIdF'] : $_POST['libLecId'];
         
@@ -228,16 +244,15 @@ class PrestamoLibrosControlador{
         $_SESSION['libLecTituloF'] = (isset($_POST['libLecTitulo']) && !isset($_SESSION['libLecTituloF'])) ? $_POST['libLecTitulo'] : $_SESSION['libLecTituloF'];
         $_SESSION['libLecTituloF'] = (!isset($_POST['libLecTitulo']) && isset($_SESSION['libLecTituloF'])) ? $_SESSION['libLecTituloF'] : $_POST['libLecTitulo'];
 
-        $_SESSION['libLecAutorF'] = (isset($_POST['libLecAutor']) && !isset($_SESSION['libLecAutorF'])) ? $_POST['libLecAutor'] : $_SESSION['libLecAutorF'];
-        $_SESSION['libLecAutorF'] = (!isset($_POST['libLecAutor']) && isset($_SESSION['libLecAutorF'])) ? $_SESSION['libLecAutorF'] : $_POST['libLecAutor'];
+        
         $_SESSION['categoria_libro_lecto_catLecIdF'] = (isset($_POST['categoria_libro_lecto_catLecId']) && !isset($_SESSION['categoria_libro_lecto_catLecIdF'])) ? $_POST['categoria_libro_lecto_catLecId'] : $_SESSION['categoria_libro_lecto_catLecIdF'];
         $_SESSION['categoria_libro_lecto_catLecIdF'] = (!isset($_POST['categoria_libro_lecto_catLecId']) && isset($_SESSION['categoria_libro_lecto_catLecIdF'])) ? $_SESSION['categoria_libro_lecto_catLecIdF'] : $_POST['categoria_libro_lecto_catLecId'];
 
         $_SESSION['estado_libros_estLibIdF'] = (isset($_POST['estado_libros_estLibId']) && !isset($_SESSION['estado_libros_estLibIdF'])) ? $_POST['estado_libros_estLibId'] : $_SESSION['estado_libros_estLibIdF'];
         $_SESSION['estado_libros_estLibIdF'] = (!isset($_POST['estado_libros_estLibId']) && isset($_SESSION['estado_libros_estLibIdF'])) ? $_SESSION['estado_libros_estLibIdF'] : $_POST['estado_libros_estLibId'];
         
-        $_SESSION['buscarLibLecF'] = (isset($_POST['buscarLibLec']) && !isset($_SESSION['buscarLibLecF'])) ? $_POST['buscarLibLec'] : $_SESSION['buscarLibLecF'];
-        $_SESSION['buscarLibLecF'] = (!isset($_POST['buscarLibLec']) && isset($_SESSION['buscarLibLecF'])) ? $_SESSION['buscarLibLecF'] : $_POST['buscarLibLec'];
+        $_SESSION['buscarPresF'] = (isset($_POST['buscarPres']) && !isset($_SESSION['buscarPresF'])) ? $_POST['buscarPres'] : $_SESSION['buscarPresF'];
+        $_SESSION['buscarPresF'] = (!isset($_POST['buscarPres']) && isset($_SESSION['buscarPresF'])) ? $_SESSION['buscarPresF'] : $_POST['buscarPres'];
 
     }
 

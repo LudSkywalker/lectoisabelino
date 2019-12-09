@@ -3,24 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloLibrosLecto/LibrosLectoDAO.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloLibros/LibrosDAO.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/controlador.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/index.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/.gitignore</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/login.php</file>
-            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloControlElementos/ControlElementosDAO.php</file>
-
-            <file>file:/C:/Lud/php/lectoisabelino/modelos/modeloEstadoLibros/EstadoLibrosDAO.php</file>
-            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/listarRegistrosLibros.php</file>
-
-            <file>file:/C:/Lud/php/lectoisabelino/modelos/modeloLibrosLecto/LibrosLectoDAO.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/PrestamoLibrosControlador.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/librosPrestados.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/todosLosLibros.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/principal.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosLectoControlador.php</file>
-
         </group>
     </open-files>
 </project-private>
