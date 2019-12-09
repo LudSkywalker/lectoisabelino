@@ -3,7 +3,7 @@ include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloUsuariosRol/UsuariosRolDAO.php";
 
-echo "    ";
+//-- SELECCIONAR TODOS.
 $usuRol=new UsuariosRolDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$usuRol->seleccionarTodos();
 echo '<pre>';
@@ -57,23 +57,20 @@ echo "</pre>";
 $id= array(11);
 $isd=$usuRol->habilitar($id);
 echo"<pres>";
-print_r($isd);
+//print_r($isd);
 echo"</pres>";
 
-$id= array(11);
-$isd=$usuRol->consultaPaginada($id);
-echo"<pres>";
+$id=[5,0];
+$isd=$usuRol->consultaPaginada($id[0], $id[1]);
+echo"<pre>";
 print_r($isd);
-echo"</pres>";
+echo"</pre>";
 
 //coutn
 $cu=$usuRol->totalRegistros();        
 echo "<pre>";
-print_r($cu);
+//print_r($cu);
 echo "</pre>";
-
-
-
 ?>
 
 

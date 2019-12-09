@@ -11,10 +11,13 @@ class ControlPrestamoLibrosDao extends ConexDBMySQL {
     public function seleccionarTodos() {
 
         $consulta = "SELECT cpl.conPId, cpl.conPPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido,
-                                  ll.libLecId, ll.libLecCodigo,ll.libLecTitulo,
-                                  cpl.conPFechaSal,cpl.conPFechaEnt,cpl.conPFechaDev,cpl.conPObsSalida,cpl.conPObsEntrada 
-                                  FROM ((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_usuario_s_usuId=pe.usuario_s_usuId )
-                                  LEFT JOIN libros_lecto ll ON cpl.libros_lecto_libLecId= ll.libLecId); ";
+                                  ll.libLecId, ll.libLecCodigo,ll.libLecTitulo,cll.catLecId,cll.catLecNombre,
+                                  el.estLibId,el.estLibNombre,
+                                  ,cpl.conPFechaEnt,cpl.conPFechaDev,cpl.conPObsSalida,cpl.conPObsEntrada 
+                                  FROM ((((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_usuario_s_usuId=pe.usuario_s_usuId )
+                                  LEFT JOIN libros_lecto ll ON cpl.libros_lecto_libLecId= ll.libLecId)
+                                  LEFT JOIN categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId=cll.catLecId)
+                                  LEFT JOIN estado_libros el ON ll.estado_libros_estLibId=el.estLibId);";
 
         $registrar = $this->conexion->prepare($consulta);
         $registrar->execute();
@@ -164,12 +167,13 @@ class ControlPrestamoLibrosDao extends ConexDBMySQL {
 
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
 
-        $planConsulta = "select SQL_CALC_FOUND_ROWS cpl.conPId, cpl.conPPrestado,pe.usuario_s_usuId, pe.perDocumento, 
-            pe.perNombre, pe.perApellido,
-            ll.libLecId, ll.libLecCodigo,ll.libLecTitulo,
-            cpl.conPFechaSal,cpl.conPFechaEnt,cpl.conPFechaDev,cpl.conPObsSalida,cpl.conPObsEntrada 
-            FROM ((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_usuario_s_usuId=pe.usuario_s_usuId )
-            LEFT JOIN libros_lecto ll ON cpl.libros_lecto_libLecId= ll.libLecId) ";
+        $planConsulta = "select SQL_CALC_FOUND_ROWS cpl.conPId, cpl.conPPrestado,pe.usuario_s_usuId, pe.perDocumento, pe.perNombre, pe.perApellido,                               ll.libLecId, ll.libLecCodigo,ll.libLecTitulo,cll.catLecId,cll.catLecNombre,
+                                  el.estLibId,el.estLibNombre,
+                                  cpl.conPFechaSal,cpl.conPFechaEnt,cpl.conPFechaDev,cpl.conPObsSalida,cpl.conPObsEntrada 
+                                  FROM ((((contr_prestamos_libros cpl LEFT JOIN persona pe ON cpl.persona_usuario_s_usuId=pe.usuario_s_usuId )
+                                  LEFT JOIN libros_lecto ll ON cpl.libros_lecto_libLecId= ll.libLecId)
+                                  LEFT JOIN categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId=cll.catLecId)
+                                  LEFT JOIN estado_libros el ON ll.estado_libros_estLibId=el.estLibId)";
 
         $planConsulta .= $filtrarBuscar;
 
