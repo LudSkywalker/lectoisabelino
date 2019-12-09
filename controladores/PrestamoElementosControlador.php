@@ -1,13 +1,13 @@
 <?php
 
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
-require_once PATH . 'modelos/modeloCategoriaLibrosLecto/CategoriaLibrosLectoDAO.php';
-require_once PATH . 'modelos/modeloLibrosLecto/LibrosLectoDAO.php';
-require_once PATH . 'modelos/modeloEstadoLibros/EstadoLibrosDAO.php';
-require_once PATH . 'modelos/modeloControlPrestamoLibros/ControlPrestamoLibrosDAO.php';
+require_once PATH . 'modelos/modeloCategoriaElementos/CategoriaElementosDAO.php';
+require_once PATH . 'modelos/modeloElementos/LibrosElementos.php';
+require_once PATH . 'modelos/modeloEstadoElementos/EstadoElementosDAO.php';
+require_once PATH . 'modelos/modeloControlElementos/ControlElementosDAO.php';
 
 
-class PrestamoLibrosControlador{
+class PrestamoElementosControlador{
 
     private $datos = array();
     private $limite;
@@ -16,12 +16,12 @@ class PrestamoLibrosControlador{
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
         $this->limite=5;
         $this->datos = $datos;
-        $this->prestamolibrosControlador();
+        $this->PrestamoElementosControlador();
     }
 
-    public function prestamolibrosControlador() {
+    public function PrestamoElementosControlador() {
         switch ($this->datos["ruta"]) {
-            case "verLibrosPrestados":
+            case "verElementosPrestados":
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
                 $limit = (isset($_GET['limit'])) ? $_GET['limit'] :$this->limite;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
@@ -34,8 +34,8 @@ class PrestamoLibrosControlador{
                 $filtrarBuscar = $this->armarFiltradoYBusqueda();
 
                 // SE HACE LA CONSULTA A LA BASE PARA TRAER LA CANTIDAD DE REGISTROS SOLICITADOS Y EL TOTAL PARA PAGINARLOS//
-                $gestarLibrosPrestados = new ControlPrestamoLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $resultadoConsultaPaginada = $gestarLibrosPrestados->consultaPaginada($limit, $offset, $filtrarBuscar);
+                $gestarElementosPrestados = new ControlElementosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $resultadoConsultaPaginada = $gestarElementosPrestados->consultaPaginada($limit, $offset, $filtrarBuscar);
 
                 
 
@@ -47,27 +47,27 @@ class PrestamoLibrosControlador{
                 $paginacionVinculos = $this->enlacesPaginacion($totalRegistrosPrestamos, $limit, $offset, $totalEnlacesPaginacion); //Se obtienen los enlaces de paginación
                 //
                 // SE HACE LA CONSULTA A LA BASE PARA TRAER LA CANTIDAD DE REGISTROS SOLICITADOS Y EL TOTAL PARA PAGINARLOS//
-                $gestarLibrosLecto = new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $registroLibrosLecto= $gestarLibrosLecto->seleccionarTodos();
+                $gestarElementos = new ElementosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $registroElementos= $gestarElementos->seleccionarTodos();
                 
                 //SE ALISTA LA CONSULTA DE CATEGORIAS DE LIBROS PARA FUTURO FORMULARIO DE FILTRAR//
-                $gestarCategoriasLibrosLecto = new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $registroCategoriasLibros = $gestarCategoriasLibrosLecto->seleccionarTodos();
+                $gestarCategoriaElementos = new CategoriaElementosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $registroCategoriaElementos = $gestarCategoriaElementos->seleccionarTodos();
                 
-                $gestarEstadosLibrosLecto = new EstadoLibrosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
-                $registroEstadosLibros =$gestarEstadosLibrosLecto->seleccionarTodos();
+                $gestarEstadoElementos = new EstadoElementosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $registroEstadoElementos =$gestarEstadoElementos->seleccionarTodos();
 
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
                 $_SESSION['listaDePrestamos'] = $listaDePrestamos;
                 $_SESSION['paginacionVinculosPrestamos'] = $paginacionVinculos;
                 $_SESSION['totalRegistrosPrestamos'] = $totalRegistrosPrestamos;
-                $_SESSION['registroLibrosLecto'] = $registroLibrosLecto;
-                $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriasLibros;
+                $_SESSION['registroLibrosLecto'] = $registroElementos;
+                $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriaElementos;
                 $_SESSION['registroEstadosLibrosLecto'] = $registroEstadosLibros;
-                $gestarLibrosPrestados = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                $gestarEstadosLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarElementosPrestados = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarCategoriaElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                $gestarEstadoElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 header("location:principal.php?contenido=plantillas/Dashio/librosPrestados.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
@@ -76,7 +76,7 @@ class PrestamoLibrosControlador{
     }
   public function enlacesPaginacion($totalRegistros = NULL, $limit = 5, $offset = 0, $totalEnlacesPaginacion = 5) {
 
-        $ruta = "verLibrosPrestados";
+        $ruta = "verElementosPrestados";
 
         if (isset($offset) && (int) $offset <= 0) {
             $offset = 0;
@@ -111,7 +111,7 @@ class PrestamoLibrosControlador{
             $siguiente=$totalRegistros -$totalEnlacesPaginacion;
             $mostrar['siguiente'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($siguiente);    
             }
-//            $mostrar.="<a href='controladores/ControladorPrincipal.php?ruta=listarLibros&pag=" . ($totalPag - $totalEnlacesPaginacion) . "'>..::BLOQUE FINAL::..</a><br></center>";
+//            $mostrar.="<a href='controladores/ControladorPrincipal.php?ruta=listarElementos&pag=" . ($totalPag - $totalEnlacesPaginacion) . "'>..::BLOQUE FINAL::..</a><br></center>";
             $mostrar ['final'] = "Controlador.php?ruta=" . $ruta . "&pag=" . ($totalRegistros - $totalEnlacesPaginacion);
         }
 
@@ -128,18 +128,18 @@ class PrestamoLibrosControlador{
 
     public function armarFiltradoYBusqueda() {
 
-        $planConsulta = "  where cpl.conPPrestado = 1 ";
+        $planConsulta = "  where ce.conEPrestado = 1 ";
 
-        if (!empty($_SESSION['conPIdF'])) {
-            $planConsulta .= " and cpl.conPId='" . $_SESSION['conPIdF'] . "'";
+        if (!empty($_SESSION['conEIdF'])) {
+            $planConsulta .= " and ce.conEId='" . $_SESSION['conEIdF'] . "'";
             $filtros = 1;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta        
         } else {
             $where = false; // inicializar $where a falso ( al comenzar la consulta NO HAY condiciones o criterios de búsqueda)
             $filtros = 1;  // cantidad de filtros/condiciones o criterios de búsqueda al comenzar la consulta            
             
-            if (!empty($_SESSION['persona_usuario_s_usuIdF'])) {
+            if (!empty($_SESSION['persona_usuario_s_usuId'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cpl.persona_usuario_s_usuId like ('%" . $_SESSION['persona_usuario_s_usuIdF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ce.persona_usuario_s_usuId ('%" . $_SESSION['persona_usuario_s_usuIdF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             if (!empty($_SESSION['perDocumentoF'])) {
@@ -158,13 +158,13 @@ class PrestamoLibrosControlador{
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             
-            if (!empty($_SESSION['libros_lecto_libLecIdF'])) {
+            if (!empty($_SESSION['elementos_lecto_eleLecIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cpl.libros_lecto_libLecId like ('%" . $_SESSION['libros_lecto_libLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ce.elementos_lecto_eleLecId like ('%" . $_SESSION['elementos_lecto_eleLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             
-            if (!empty($_SESSION['libLecIdF'])) {
+            if (!empty($_SESSION['eleLecIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
                 $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.libLecId like ('%" . $_SESSION['libLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
