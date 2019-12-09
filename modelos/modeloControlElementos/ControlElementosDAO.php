@@ -166,10 +166,12 @@ public function insertar($registro) {
 
         $planConsulta = "select SQL_CALC_FOUND_ROWS ce.conEId, ce.conEPrestado,pe.usuario_s_usuId, pe.perDocumento, 
         pe.perNombre, pe.perApellido, el.eleLecId, el.eleLecCodigo,cel.catEleId,cel.catEleNombre,
+        ee.estEleId,ee.estEleNombre,
         ce.conEFechaSal,ce.conEFechaEnt,ce.conEFechaDev,ce.conEObsSalida,ce.conEObsEntrada
-        FROM (((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
+        FROM ((((contr_elementos ce LEFT JOIN persona pe ON ce.persona_usuario_s_usuId= pe.usuario_s_usuId)
         LEFT JOIN elementos_lecto el ON ce.elementos_lecto_eleLecId= el.eleLecId)
-        LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId) ";
+        LEFT JOIN categoria_elementos cel ON el.categoria_elementos_catEleId= cel.catEleId)
+        LEFT JOIN estado_elementos ee ON el.estado_elementos_estEleId=ee.estEleId) ";
 
         $planConsulta .= $filtrarBuscar;
 
