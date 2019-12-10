@@ -18,7 +18,7 @@ if (isset($_SESSION['registroCategoriasElementos'])) { /* * ********************
 }
 if (isset($_SESSION['registroEstadosElementos'])) { /* * ************************ */
     $registroEstadosElementos = $_SESSION['registroEstadosElementos'];
-    $cantEstados = count($registroEstadosLibros);
+    $cantEstados = count($registroEstadosElementos);
 }
 
 if (isset($_SESSION['mensaje'])) {
