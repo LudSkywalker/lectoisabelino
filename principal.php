@@ -45,7 +45,7 @@ if (isset($_SESSION['mensaje'])) {
         
     </head>
 
-    <body>
+    <body  onload="pantallaBloqueo()">
         <section id="container">
             <!-- **********************************************************************************************************************************************************
                 TOP BAR CONTENT & NOTIFICATIONS
@@ -226,6 +226,14 @@ if (isset($_SESSION['mensaje'])) {
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
         </script>
+          <script>
+    function pantallaBloqueo() {
+        enviara = setInterval(enviar, 300000);
+    }
+    function enviar() {
+     window.location.href = "pantallaBloqueada.php";
+    }
+  </script>
     </body>
 
 </html>
