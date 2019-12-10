@@ -58,12 +58,12 @@ class PrestamoElementosControlador{
                 $registroEstadoElementos =$gestarEstadoElementos->seleccionarTodos();
 
                 //SE SUBEN A SESION LOS DATOS NECESARIOS PARA QUE LA VISTA LOS IMPRIMA O UTILICE//
-                $_SESSION['listaDePrestamos'] = $listaDePrestamos;
-                $_SESSION['paginacionVinculosPrestamos'] = $paginacionVinculos;
-                $_SESSION['totalRegistrosPrestamos'] = $totalRegistrosPrestamos;
-                $_SESSION['registroLibrosLecto'] = $registroElementos;
-                $_SESSION['registroCategoriasLibrosLecto'] = $registroCategoriaElementos;
-                $_SESSION['registroEstadosLibrosLecto'] = $registroEstadosLibros;
+                $_SESSION['listaDePrestamosEle'] = $listaDePrestamos;
+                $_SESSION['paginacionVinculosPrestamosEle'] = $paginacionVinculos;
+                $_SESSION['totalRegistrosPrestamosEle'] = $totalRegistrosPrestamos;
+                $_SESSION['registroElementos'] = $registroElementos;
+                $_SESSION['registroCategoriasElementos'] = $registroCategoriaElementos;
+                $_SESSION['registroEstadosElementos'] = $registroEstadoElementos;
                 $gestarElementosPrestados = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriaElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
@@ -166,56 +166,49 @@ class PrestamoElementosControlador{
             
             if (!empty($_SESSION['eleLecIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.libLecId like ('%" . $_SESSION['libLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.eleLecId like ('%" . $_SESSION['eleLecIdF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
-            if (!empty($_SESSION['libLecCodigoF'])) {
+            if (!empty($_SESSION['eleLecCodigoF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.libLecCodigo like ('%" . $_SESSION['libLecCodigoF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.eleLecCodigo like ('%" . $_SESSION['eleLecCodigoF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
+                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
+            }            
+            if (!empty($_SESSION['categoria_elementos_catEleIdF'])) {
+                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.categoria_elementos_catEleId like ('%" . $_SESSION['categoria_elementos_catEleIdF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
-            if (!empty($_SESSION['libLecTituloF'])) {
+            if (!empty($_SESSION['catEleNombreF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.libLecTitulo like upper('%" . $_SESSION['libLecTituloF'] . "%')"; // con tipo de búsqueda aproximada sin importar mayúsculas ni minúsculas
-                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
-            }
-            
-            if (!empty($_SESSION['categoria_libro_lecto_catLecIdF'])) {
-                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.categoria_libro_lecto_catLecId like ('%" . $_SESSION['categoria_libro_lecto_catLecIdF'] . "%')";
-                $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
-            }
-            if (!empty($_SESSION['catLecNombreF'])) {
-                $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cll.catLecNombre like upper('%" . $_SESSION['catLecNombreF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " cel.catEleNombre like upper('%" . $_SESSION['catEleNombreF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
             
-            if (!empty($_SESSION['estado_libros_estLibIdF'])) {
+            if (!empty($_SESSION['estado_elementos_estEleIdF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ll.estado_libros_estLibId like ('%" . $_SESSION['estado_libros_estLibIdF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.estado_elementos_estEleId like ('%" . $_SESSION['estado_elementos_estEleIdF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
-            if (!empty($_SESSION['estLibNombreF'])) {
+            if (!empty($_SESSION['estEleNombreF'])) {
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
-                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " el.estLibNombre like upper('%" . $_SESSION['estLibNombreF'] . "%')";
+                $planConsulta .= (($where && !$filtros) ? " where " : " and ") . " ee.estEleNombre like upper('%" . $_SESSION['estLibNombreF'] . "%')";
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
             }
         }
-        if (!empty($_SESSION['buscarPresF'])) {
+        if (!empty($_SESSION['buscarPresEleF'])) {
             $where = TRUE;
             $condicionBuscar = (($where && !$filtros == 0) ? " or " : " where ");
             $filtros++;
             $planConsulta .= $condicionBuscar;
-            $planConsulta .= "( cpl.conPId like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.usuario_s_usuId like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perNombre like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or pe.perApellido like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or ll.libLecCodigo like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or ll.libLecTitulo like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or cll.catLecNombre like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or el.estLibNombre like '%" . $_SESSION['buscarPresF'] . "%'";
-            $planConsulta .= " or cpl.conPFechaSal like '%" . $_SESSION['buscarPresF'] . "%'";
+            $planConsulta .= "( cpl.conPId like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or pe.usuario_s_usuId like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or pe.perNombre like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or pe.perApellido like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or el.eleLecCodigo like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or cel.catEleNombre like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or ee.estEleNombre like '%" . $_SESSION['buscarPresEleF'] . "%'";
+            $planConsulta .= " or ce.conEFechaSal like '%" . $_SESSION['buscarPresEleF'] . "%'";
             $planConsulta .= " ) ";
         }
         return $planConsulta;
@@ -223,8 +216,8 @@ class PrestamoElementosControlador{
 
     public function conservarFiltroYBuscar() {
 //        se almacenan en sesion las variables del filtro y buscar para conservarlas en el formulario
-        $_SESSION['conPIdF'] = (isset($_POST['conPId']) && !isset($_SESSION['conPIdF'])) ? $_POST['conPId'] : $_SESSION['conPIdF'];
-        $_SESSION['conPIdF'] = (!isset($_POST['conPId']) && isset($_SESSION['conPIdF'])) ? $_SESSION['conPIdF'] : $_POST['conPId'];
+        $_SESSION['conEIdF'] = (isset($_POST['conEId']) && !isset($_SESSION['conEIdF'])) ? $_POST['conEId'] : $_SESSION['conEIdF'];
+        $_SESSION['conEIdF'] = (!isset($_POST['conEId']) && isset($_SESSION['conEIdF'])) ? $_SESSION['conEIdF'] : $_POST['conEId'];
         
         $_SESSION['perDocumentoF'] = (isset($_POST['perDocumento']) && !isset($_SESSION['perDocumentoF'])) ? $_POST['perDocumento'] : $_SESSION['perDocumentoF'];
         $_SESSION['perDocumentoF'] = (!isset($_POST['perDocumento']) && isset($_SESSION['perDocumentoF'])) ? $_SESSION['perDocumentoF'] : $_POST['perDocumento'];
@@ -235,24 +228,20 @@ class PrestamoElementosControlador{
         $_SESSION['perApellidoF'] = (isset($_POST['perApellido']) && !isset($_SESSION['perApellidoF'])) ? $_POST['perApellido'] : $_SESSION['perApellidoF'];
         $_SESSION['perApellidoF'] = (!isset($_POST['perApellido']) && isset($_SESSION['perApellidoF'])) ? $_SESSION['perApellidoF'] : $_POST['perApellido'];
         
-        $_SESSION['libLecIdF'] = (isset($_POST['libLecId']) && !isset($_SESSION['libLecIdF'])) ? $_POST['libLecId'] : $_SESSION['libLecIdF'];
-        $_SESSION['libLecIdF'] = (!isset($_POST['libLecId']) && isset($_SESSION['libLecIdF'])) ? $_SESSION['libLecIdF'] : $_POST['libLecId'];
+        $_SESSION['eleLecIdF'] = (isset($_POST['eleLecId']) && !isset($_SESSION['eleLecIdF'])) ? $_POST['eleLecId'] : $_SESSION['eleLecIdF'];
+        $_SESSION['eleLecIdF'] = (!isset($_POST['eleLecId']) && isset($_SESSION['eleLecIdF'])) ? $_SESSION['eleLecIdF'] : $_POST['eleLecId'];
         
-        $_SESSION['libLecCodF'] = (isset($_POST['libLecCod']) && !isset($_SESSION['libLecCodF'])) ? $_POST['libLecCod'] : $_SESSION['libLecCodF'];
-        $_SESSION['libLecCodF'] = (!isset($_POST['libLecCod']) && isset($_SESSION['libLecCodF'])) ? $_SESSION['libLecCodF'] : $_POST['libLecCod'];
+        $_SESSION['eleLecCodigoF'] = (isset($_POST['eleLecCodigo']) && !isset($_SESSION['eleLecCodigoF'])) ? $_POST['eleLecCodigo'] : $_SESSION['eleLecCodigoF'];
+        $_SESSION['eleLecCodigoF'] = (!isset($_POST['eleLecCodigo']) && isset($_SESSION['eleLecCodigoF'])) ? $_SESSION['eleLecCodigoF'] : $_POST['eleLecCodigo'];
 
-        $_SESSION['libLecTituloF'] = (isset($_POST['libLecTitulo']) && !isset($_SESSION['libLecTituloF'])) ? $_POST['libLecTitulo'] : $_SESSION['libLecTituloF'];
-        $_SESSION['libLecTituloF'] = (!isset($_POST['libLecTitulo']) && isset($_SESSION['libLecTituloF'])) ? $_SESSION['libLecTituloF'] : $_POST['libLecTitulo'];
+        $_SESSION['categoria_elementos_catEleIdF'] = (isset($_POST['categoria_elementos_catEleId']) && !isset($_SESSION['categoria_elementos_catEleId'])) ? $_POST['categoria_elementos_catEleId'] : $_SESSION['categoria_elementos_catEleIdF'];
+        $_SESSION['categoria_elementos_catEleIdF'] = (!isset($_POST['categoria_elementos_catEleId']) && isset($_SESSION['categoria_elementos_catEleIdF'])) ? $_SESSION['categoria_elementos_catEleIdF'] : $_POST['categoria_elementos_catEleId'];
 
+        $_SESSION['estado_elementos_estEleIdF'] = (isset($_POST['estado_elementos_estEleId']) && !isset($_SESSION['estado_elementos_estEleIdF'])) ? $_POST['estado_elementos_estEleId'] : $_SESSION['estado_elementos_estEleIdF'];
+        $_SESSION['estado_elementos_estEleIdF'] = (!isset($_POST['estado_elementos_estEleId']) && isset($_SESSION['estado_elementos_estEleId'])) ? $_SESSION['estado_elementos_estEleIdF'] : $_POST['estado_elementos_estEleId'];
         
-        $_SESSION['categoria_libro_lecto_catLecIdF'] = (isset($_POST['categoria_libro_lecto_catLecId']) && !isset($_SESSION['categoria_libro_lecto_catLecIdF'])) ? $_POST['categoria_libro_lecto_catLecId'] : $_SESSION['categoria_libro_lecto_catLecIdF'];
-        $_SESSION['categoria_libro_lecto_catLecIdF'] = (!isset($_POST['categoria_libro_lecto_catLecId']) && isset($_SESSION['categoria_libro_lecto_catLecIdF'])) ? $_SESSION['categoria_libro_lecto_catLecIdF'] : $_POST['categoria_libro_lecto_catLecId'];
-
-        $_SESSION['estado_libros_estLibIdF'] = (isset($_POST['estado_libros_estLibId']) && !isset($_SESSION['estado_libros_estLibIdF'])) ? $_POST['estado_libros_estLibId'] : $_SESSION['estado_libros_estLibIdF'];
-        $_SESSION['estado_libros_estLibIdF'] = (!isset($_POST['estado_libros_estLibId']) && isset($_SESSION['estado_libros_estLibIdF'])) ? $_SESSION['estado_libros_estLibIdF'] : $_POST['estado_libros_estLibId'];
-        
-        $_SESSION['buscarPresF'] = (isset($_POST['buscarPres']) && !isset($_SESSION['buscarPresF'])) ? $_POST['buscarPres'] : $_SESSION['buscarPresF'];
-        $_SESSION['buscarPresF'] = (!isset($_POST['buscarPres']) && isset($_SESSION['buscarPresF'])) ? $_SESSION['buscarPresF'] : $_POST['buscarPres'];
+        $_SESSION['buscarPresEleF'] = (isset($_POST['buscarPresEle']) && !isset($_SESSION['buscarPresEleF'])) ? $_POST['buscarPresEle'] : $_SESSION['buscarPresEleF'];
+        $_SESSION['buscarPresEleF'] = (!isset($_POST['buscarPresEle']) && isset($_SESSION['buscarPresEleF'])) ? $_SESSION['buscarPresEleF'] : $_POST['buscarPresEle'];
 
     }
 
