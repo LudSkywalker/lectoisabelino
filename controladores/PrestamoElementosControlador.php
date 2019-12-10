@@ -2,7 +2,7 @@
 
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 require_once PATH . 'modelos/modeloCategoriaElementos/CategoriaElementosDAO.php';
-require_once PATH . 'modelos/modeloElementos/LibrosElementos.php';
+require_once PATH . 'modelos/modeloElementos/ElementosDAO.php';
 require_once PATH . 'modelos/modeloEstadoElementos/EstadoElementosDAO.php';
 require_once PATH . 'modelos/modeloControlElementos/ControlElementosDAO.php';
 
