@@ -76,7 +76,7 @@ class ControladorPrincipal {
                     }
                     if ($this->datos['ruta'] == "insertarUsuario_s") {
 
-                        header("location:principal.php?contenido=vistas/vistasUsuario_s/vistaInsertarUsuario_s.php");
+                        header("location:principal.php?contenido=plantillas/Dashio/registro.php");
                     }
                     if ($this->datos['ruta'] == "confirmaActualizarUsuario_s") {
                         header("location:principal.php?contenido=vistas/vistasUsuario_s/vistaActualizarUsuario_s.php");

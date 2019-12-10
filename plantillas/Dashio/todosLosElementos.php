@@ -168,4 +168,3 @@ foreach ($listaDeLibros as $key => $value) {
         <!--/ row -->
     </section>
     <!-- /wrapper -->
-</section>
