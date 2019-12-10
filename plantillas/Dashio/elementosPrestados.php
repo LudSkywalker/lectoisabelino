@@ -37,7 +37,7 @@ if (isset($_SESSION['mensaje'])) {
             <table border='1' class="display table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width: 100;text-align: center" colspan="4">DATOS SOBRE EL ELEMENTO PRESTADO</td>
+                        <td style="width: 100;text-align: center" colspan="3">DATOS SOBRE EL ELEMENTO PRESTADO</td>
                         <td style="width: 100;text-align: center" colspan="2">PERSONA RESPONSABLE</td>
                         <td style="width: 100;text-align: center"colspan="2">INFORMACION DEL PRESTAMO</td>
                     </tr>
