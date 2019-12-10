@@ -119,7 +119,7 @@ if (isset($_SESSION['mensaje'])) {
   
                         <li class="sub-menu">
                             <a <?php
-                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))){
+                            if ((isset($_GET["contenido"])&&($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))||(isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosElementos.php"))){
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
@@ -132,6 +132,14 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?>><a  href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Ver Libros </a></li>
+
+                            </ul>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosElementos.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verInventarioElementos&pag=0&#cont">Ver Elementos </a></li>
 
                             </ul>
                         </li>  

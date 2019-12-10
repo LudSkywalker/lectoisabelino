@@ -7,6 +7,7 @@ include_once PATH . 'controladores/Usuario_sControlador.php';
 include_once PATH . 'controladores/LibrosLectoControlador.php';
 include_once PATH . 'controladores/PrestamoLibrosControlador.php';
 include_once PATH . 'modelos/modeloUsuarios/ValidadorUsuarios.php';
+include_once PATH . 'controladores/ElementosControlador.php';
 
 class ControladorPrincipal {
 
@@ -89,10 +90,14 @@ class ControladorPrincipal {
             case "verInventarioLibros":
                      $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
             break;
+            case "verInventarioElementos":
+                     $ElementosControlador= new ElementosControlador($this->datos);
+            break;
 
             case "verLibrosPrestados":
                      $PrestamoLibrosControlador = new PrestamoLibrosControlador($this->datos);
             break;        
+        
                 
                 
                 
