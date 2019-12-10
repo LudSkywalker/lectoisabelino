@@ -1,10 +1,10 @@
 <?php
-if (isset($_SESSION['listaDePrestamos'])) {
-    $listaDeElementos = $_SESSION['listaDePrestamos'];
+if (isset($_SESSION['listaDePrestamosEle'])) {
+    $listaDeElementos = $_SESSION['listaDePrestamosEle'];
 }
 
-if (isset($_SESSION['paginacionVinculosPrestamos'])) {
-    $paginacionVinculos = $_SESSION['paginacionVinculosPrestamos'];
+if (isset($_SESSION['paginacionVinculosPrestamosEle'])) {
+    $paginacionVinculos = $_SESSION['paginacionVinculosPrestamosEle'];
 }
 if (isset($_SESSION['totalRegistrosPrestamosEle'])) {
     $totalRegistrosElementos = $_SESSION['totalRegistrosPrestamosEle'];
