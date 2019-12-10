@@ -68,7 +68,7 @@ class PrestamoElementosControlador{
                 $gestarElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriaElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarEstadoElementos = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:principal.php?contenido=plantillas/Dashio/librosPrestados.php");
+                header("location:principal.php?contenido=plantillas/Dashio/ElementosPrestados.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
                 break;
 

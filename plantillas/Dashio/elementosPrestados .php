@@ -37,17 +37,16 @@ if (isset($_SESSION['mensaje'])) {
             <table border='1' class="display table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width: 100;text-align: center" colspan="4">DATOS SOBRE EL LIBRO PRESTADO</td>
+                        <td style="width: 100;text-align: center" colspan="4">DATOS SOBRE EL ELEMENTO PRESTADO</td>
                         <td style="width: 100;text-align: center" colspan="2">PERSONA RESPONSABLE</td>
                         <td style="width: 100;text-align: center"colspan="2">INFORMACION DEL PRESTAMO</td>
                     </tr>
                     <tr>
                         <td style="width: 100">Codigo Elemento</td>
-                        <td style="width: 100">Titulo Libro</td>
-                        <td style="width: 100">Estado Elemento</td>
                         <td style="width: 100">Categoria Elemento</td>
+                        <td style="width: 100">Estado Elemento</td>
                         <td style="width: 100">Documento</td>
-                        <td style="width: 100"> Nombre</td>
+                        <td style="width: 100">Nombre</td>
                         <td style="width: 100">Fecha salida</td>
                         <td style="width: 100">Observacion salida</td>
                     </tr>
@@ -55,17 +54,16 @@ if (isset($_SESSION['mensaje'])) {
                 <tbody>
 <?php
 $i = 0;
-foreach ($listaDeLibros as $key => $value) {
+foreach ($listaDeElementos as $key => $value) {
     ?>
                         <tr>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->libLecCodigo ?></td>
-                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecTitulo) ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->estLibNombre; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->catLecNombre; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->perDocumento ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->perNombre." ".$listaDeLibros[$i]->perApellido ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->conPFechaSal; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->conPObsSalida; ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->eleLecCodigo ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->catEleNombre; ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->estEleNombre; ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->perDocumento ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->perNombre." ".$listaDeElementos[$i]->perApellido ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->conEFechaSal; ?></td>
+                            <td style="width: 100"><?php echo $listaDeElementos[$i]->conEObsSalida; ?></td>
                                 <?php
                                 $i++;
                                 ?>

@@ -109,6 +109,15 @@ if (isset($_SESSION['mensaje'])) {
                             ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
 
                             </ul>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verElementosPrestados&pag=0&#cont">Elementos Prestados</a></li>
+
+                            </ul>
+          
                         </li>  
                         <?php
      }
