@@ -102,7 +102,7 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-desktop"></i>
                                 <span>Administrador </span>
                             </a>
                             <ul class="sub">
@@ -123,7 +123,7 @@ if (isset($_SESSION['mensaje'])) {
   
                         <li class="sub-menu">
                             <a <?php
-                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php")))){
+                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarElementos.php")))){
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">

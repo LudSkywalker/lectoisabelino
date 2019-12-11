@@ -19,6 +19,7 @@ class ElementosControlador{
     public function elementosControlador() {
         switch ($this->datos["ruta"]) {
             case "verInventarioElementos":
+            case "gestionElementos":
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
                 $limit = (isset($_GET['limit'])) ? $_GET['limit'] :$this->limite;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
@@ -56,8 +57,14 @@ class ElementosControlador{
                 $gestarElementosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasElementosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                  $gestarEstadosElementosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
-                header("location:principal.php?contenido=plantillas/Dashio/todosLosElementos.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
+                 if($this->datos["ruta"]=="verInventarioElementos"){
+                header("location:principal.php?contenido=plantillas/Dashio/todosLosElementos.php");
+                }
+                if($this->datos["ruta"]=="gestionElementos"){
+                header("location:principal.php?contenido=plantillas/Dashio/gestionarElementos.php");
+//                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
+            }
                 break;
 
         }
