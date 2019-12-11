@@ -110,7 +110,7 @@ if (isset($_SESSION['mensaje'])) {
                             if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php"))){
                                 echo 'class="active"';
                             }
-                            ?>><a  href="Controlador.php?ruta=gestionDeRegistro&#cont">Ingresar usuario</a></li>
+                            ?>><a  href="principal.php?contenido=plantillas/Dashio/registro.php">Ingresar usuario</a></li>
                             </ul>
           
                         </li>  

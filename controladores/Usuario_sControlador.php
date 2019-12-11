@@ -19,7 +19,7 @@ class Usuario_sControlador {
         switch ($this->datos["ruta"]) {
             case "gestionDeRegistro":
             case "insertarUsuario_s":
-                $gestarUsuario_s = new UsuariosDao(SERVIDOR,BASE);
+                $gestarUsuario_s = new UsuariosDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 //                $insertarUsuario = new Usuario_sVO();
                 $existeUsuario_s = $gestarUsuario_s->seleccionarId(array($this->datos["documento"], $this->datos['email'])); //Se revisa si existe la persona en la base
                 if (0 == $existeUsuario_s['exitoSeleccionId']) {//Si no existe la persona en la base se procede a insertar

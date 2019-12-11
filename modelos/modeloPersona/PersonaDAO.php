@@ -30,10 +30,10 @@ class PersonaDao extends ConexDBMySQL {
         try {
 
             $inserta = $this->conexion->prepare('INSERT INTO persona (usuario_s_usuId, perDocumento, perNombre, perApellido) VALUES (:usuario_s_usuId, :perDocumento, :perNombre, :perApellido );');
-            $inserta->bindParam(":perDocumento", $registro['perDocumento']);
             $inserta->bindParam(":usuario_s_usuId", $registro['usuario_s_usuId']);
-            $inserta->bindParam(":perNombre", $registro['perNombre']);
-            $inserta->bindParam(":perApellido", $registro['perApellido']);
+            $inserta->bindParam(":perDocumento", $registro['documento']);
+            $inserta->bindParam(":perNombre", $registro['nombre']);
+            $inserta->bindParam(":perApellido", $registro['apellidos']);
             $execute = $inserta->execute();
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
 
@@ -69,9 +69,9 @@ class PersonaDao extends ConexDBMySQL {
 
         try {
 
-            $perDocumento = $registro[0]['perDocumento'];
-            $perNombre = $registro[0]['perNombre'];
-            $perApellido = $registro[0]['perApellido'];
+            $perDocumento = $registro[0]['Documento'];
+            $perNombre = $registro[0]['Nombre'];
+            $perApellido = $registro[0]['Apellido'];
             $usuario_s_usuId = $registro[0]['usuario_s_usuId'];
 
             if (isset($usuario_s_usuId)) {

@@ -102,20 +102,12 @@ if (isset($_SESSION['mensaje'])) {
                         <input id="InputPassword" placeholder="Password" name="password" type="password" value=""  required="required">
                     </div>
                     <div>
-                        <input id="InputPassword2" class="form-control" placeholder="Confirmar Password" name="password2" type="password" value="">
+                        <input id="InputPassword2" placeholder="Confirmar Password" name="password2" type="password" value="">
                     </div>
                     <input type="hidden" name="ruta" value="gestionDeRegistro">
                     <button onclick="valida_registro()">Registrar</button>
                 </fieldset>
-                <div>
-                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                        Ya está registrado? 
-                        <a href="login.php">
-                            Ingrese Aquí
-                        </a>
-                    </div>
-                </div>
-                <?php
+          <?php
                 if (isset($erroresValidacion))
                     $erroresValidacion = NULL;
                 ?>
