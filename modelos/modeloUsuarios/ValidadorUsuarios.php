@@ -40,9 +40,9 @@ class ValidadorUsuarios_s {
                     }
                     break;
                 case 'password':
-                    $patronPassword = "/^\s*$/"; //si está vacío
+                    $patronPassword = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/";
                     if (preg_match($patronPassword, $value)) {
-                        $mensajesError['password'] = "*7-Formato o valor del Dato incorrecto";
+                        $mensajesError['password'] = "*7-La contraseña debe tener digitos minusculas y mayusculas";
                         $marcaCampo['password'] = "*8";
                     }
 

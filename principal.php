@@ -73,9 +73,11 @@ if (isset($_SESSION['mensaje'])) {
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="profile.php"><img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/12328712/CPSIH.jpg" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a href="https://www.colparsantaisabeldehungria.com"target="_blank">
+                                <img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/12328712/CPSIH.jpg" class="img-circle" width="80">
+                        </a>
+                        </p>
                         <h5 class="centered">  Colegio Parroquial Santa <br> Isabel de Hungria  </h5>
-
                         
                         <li class="mt">
                             <a  <?php
@@ -84,7 +86,7 @@ if (isset($_SESSION['mensaje'])) {
                             }
                             ?> href="principal.php">
                                 <i class="fa fa-dashboard"></i>
-                                <span>Dashboard</span>
+                                <span>Inicio</span>
                             </a>
                         </li>
                         
@@ -94,11 +96,36 @@ if (isset($_SESSION['mensaje'])) {
   
                         <li class="sub-menu">
                             <a <?php
-                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))||(isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php"))){
+                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php")))){
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
-                                <i class="fa fa-cogs"></i>
+                                <i class="fa fa-book"></i>
+                                <span>Administrador </span>
+                            </a>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=gestionDeRegistro&#cont">Ingresar usuario</a></li>
+                            </ul>
+          
+                        </li>  
+                        <?php
+     }
+?>
+                                <?php
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
+                        <li class="sub-menu">
+                            <a <?php
+                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php")))){
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
+                                <i class="fa fa-book"></i>
                                 <span>Bibliotecario </span>
                             </a>
                             <ul class="sub">
@@ -107,6 +134,12 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
+                                
+                            <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=gestionLibrosLecto&pag=0&#cont">Gestionar Libros </a></li>
                             
                             
                                 <li <?php
@@ -131,7 +164,7 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
-                                <i class="fa fa-cogs"></i>
+                                <i class="fa fa-tasks"></i>
                                 <span>Miembro </span>
                             </a>
                             <ul class="sub">

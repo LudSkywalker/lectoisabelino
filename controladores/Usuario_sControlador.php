@@ -19,7 +19,7 @@ class Usuario_sControlador {
         switch ($this->datos["ruta"]) {
             case "gestionDeRegistro":
             case "insertarUsuario_s":
-                $gestarUsuario_s = new Usuario_sDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                $gestarUsuario_s = new UsuariosDao(SERVIDOR,BASE);
 //                $insertarUsuario = new Usuario_sVO();
                 $existeUsuario_s = $gestarUsuario_s->seleccionarId(array($this->datos["documento"], $this->datos['email'])); //Se revisa si existe la persona en la base
                 if (0 == $existeUsuario_s['exitoSeleccionId']) {//Si no existe la persona en la base se procede a insertar
@@ -28,7 +28,7 @@ class Usuario_sControlador {
                     $exitoInsercionUsuario_s = $insertoUsuario_s['inserto']; //indica si se logró inserción de los campos en la tabla usuario_s
                     $resultadoInsercionUsuario_s = $insertoUsuario_s['resultado']; //Traer el id con que quedó el usuario de lo contrario la excepción o fallo
 //                    if (1 == $exitoInsercionUsuario_s) {//si se logró la inserción de los campos en la tabla usuario_s insertar datos en tabla persona
-                    $gestarPersona = new PersonaDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                    $gestarPersona = new PersonaDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                     $this->datos['usuario_s_usuId'] = $resultadoInsercionUsuario_s; //Id 'usuID' con quedó insertado el usuario, con el fin que quede el mismo en la tabla 'persona'
                     $insertoPersona = $gestarPersona->insertar($this->datos); //inserción de los campos en la tabla persona
 //                    echo __FILE__ . "-----" . __LINE__;
@@ -38,13 +38,13 @@ class Usuario_sControlador {
                     //FALTA AQUÍ IMPLEMENTAR LA VALIDACIÓN EN CASO DE NO INSERTAR EN LA TABLA persona
                     //
                     // SE ASIGNA UN ROL GENÉRICO (en este ejemplo 1) AL USUARIO REGISTRADO//
-                    $asignarRol = new Usuario_s_rolesDAO(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+                    $asignarRol = new UsuariosRolDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
                     $rolAsignado=$asignarRol->insertar(array($resultadoInsercionUsuario_s,1));//Se envía el id con que quedó el usuario_s y el id del rol 
 
                      //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Registrado con èxito para ingreso al sistema"; //mensaje de inserción
                     if ($this->datos['ruta'] == 'gestionDeRegistro') {//si el formulario de la inserción es el de registrarse y fue exitoso se devuelve a login.php
-                        header("location:../../login.php");
+                        header("location:principal.php?contenido=plantillas/Dashio/registro.php");
                     }
                     if ($this->datos['ruta'] == 'insertarUsuario_s') {//si el formulario de la inserción es el de Agregar Usuarios y fue exitoso se devuelve a listarRegistrosUsuario_s.php
 //                        header("location:../principal.php?contenido=vistas/vistasUsuario_s/listarRegistrosUsuario_s.php");
