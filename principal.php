@@ -96,7 +96,9 @@ if (isset($_SESSION['mensaje'])) {
   
                         <li class="sub-menu">
                             <a <?php
+
                             if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php")))){
+
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
