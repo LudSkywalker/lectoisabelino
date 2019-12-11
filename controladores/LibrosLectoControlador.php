@@ -23,6 +23,7 @@ class LibrosLectoControlador{
     public function librosLectoControlador() {
         switch ($this->datos["ruta"]) {
             case "verInventarioLibros":
+            case "gestionLibrosLecto":
                                 // PARA LA PAGINACIÒN SE VERIFICA Y VALIDA QUE EL LIMIT Y EL OFFSET ESTÈN EN LOS RANGOS QUE CORRESPONDAN//
                 $limit = (isset($_GET['limit'])) ? $_GET['limit'] :$this->limite;
                 $offset = (isset($_GET['pag'])) ? $_GET['pag'] : 0;
@@ -60,11 +61,15 @@ class LibrosLectoControlador{
                 $gestarLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarCategoriasLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
                 $gestarEstadosLibrosLecto = null; //CIERRE DE LA CONEXIÓN CON LA BASE DE DATOS//
+                if($this->datos["ruta"]=="verInventarioLibros"){
                 header("location:principal.php?contenido=plantillas/Dashio/todosLosLibros.php");
+                }
+                if($this->datos["ruta"]=="gestionLibrosLecto"){
+                header("location:principal.php?contenido=plantillas/Dashio/gestionarLibrosLecto.php");
 //                header("location:vistas/vistasLibros/listarRegistrosLibros.php");
+            }
                 break;
-
-        }
+    }
     }
   public function enlacesPaginacion($totalRegistros = NULL, $limit = 5, $offset = 0, $totalEnlacesPaginacion = 3) {
 
