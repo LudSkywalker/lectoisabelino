@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`libros` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_libros_categoriaLibro1_idx` ON `lectoisabelino`.`libros` (`categoriaLibro_catLibId` ASC) INVISIBLE;
+CREATE INDEX `fk_libros_categoriaLibro1_idx` ON `lectoisabelino`.`libros` (`categoriaLibro_catLibId` );
 
 
 -- -----------------------------------------------------
@@ -75,7 +75,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
-CREATE UNIQUE INDEX `uniq_login` ON `lectoisabelino`.`usuario_s` (`usuLogin` ASC) VISIBLE;
+CREATE UNIQUE INDEX `uniq_login` ON `lectoisabelino`.`usuario_s` (`usuLogin` );
 
 
 -- -----------------------------------------------------
@@ -101,7 +101,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 COMMENT = 'Esta tabla nos muestra los datos de la persona ';
 
-CREATE UNIQUE INDEX `perDocumento_UNIQUE` ON `lectoisabelino`.`persona` (`perDocumento` ASC) VISIBLE;
+CREATE UNIQUE INDEX `perDocumento_UNIQUE` ON `lectoisabelino`.`persona` (`perDocumento` );
 
 
 -- -----------------------------------------------------
@@ -121,7 +121,7 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
-CREATE UNIQUE INDEX `uniq_nombrerol` ON `lectoisabelino`.`rol` (`rolNombre` ASC) VISIBLE;
+CREATE UNIQUE INDEX `uniq_nombrerol` ON `lectoisabelino`.`rol` (`rolNombre` );
 
 
 -- -----------------------------------------------------
@@ -147,7 +147,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
-CREATE INDEX `usuario_s_roles_fk_rolidrol` ON `lectoisabelino`.`usuario_s_roles` (`id_rol` ASC) VISIBLE;
+CREATE INDEX `usuario_s_roles_fk_rolidrol` ON `lectoisabelino`.`usuario_s_roles` (`id_rol` );
 
 
 -- -----------------------------------------------------
@@ -222,11 +222,11 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`libros_lecto` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_libros_lecto_categoria_libro_lecto1_idx` ON `lectoisabelino`.`libros_lecto` (`categoria_libro_lecto_catLecId` ASC) VISIBLE;
+CREATE INDEX `fk_libros_lecto_categoria_libro_lecto1_idx` ON `lectoisabelino`.`libros_lecto` (`categoria_libro_lecto_catLecId` );
 
-CREATE INDEX `fk_libros_lecto_estado_libros1_idx` ON `lectoisabelino`.`libros_lecto` (`estado_libros_estLibId` ASC) VISIBLE;
+CREATE INDEX `fk_libros_lecto_estado_libros1_idx` ON `lectoisabelino`.`libros_lecto` (`estado_libros_estLibId` );
 
-CREATE UNIQUE INDEX `libLecCodigo_UNIQUE` ON `lectoisabelino`.`libros_lecto` (`libLecCodigo` ASC) VISIBLE;
+CREATE UNIQUE INDEX `libLecCodigo_UNIQUE` ON `lectoisabelino`.`libros_lecto` (`libLecCodigo` );
 
 
 -- -----------------------------------------------------
@@ -259,9 +259,9 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_prestamos_libros` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_contr_prestamos_libros_libros_lecto1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`libros_lecto_libLecId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_prestamos_libros_libros_lecto1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`libros_lecto_libLecId` );
 
-CREATE INDEX `fk_contr_prestamos_libros_persona1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`persona_usuario_s_usuId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_prestamos_libros_persona1_idx` ON `lectoisabelino`.`contr_prestamos_libros` (`persona_usuario_s_usuId` );
 
 
 -- -----------------------------------------------------
@@ -304,11 +304,11 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`elementos_lecto` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_elementos_lecto_estado_elementos1_idx` ON `lectoisabelino`.`elementos_lecto` (`estado_elementos_estEleId` ASC) VISIBLE;
+CREATE INDEX `fk_elementos_lecto_estado_elementos1_idx` ON `lectoisabelino`.`elementos_lecto` (`estado_elementos_estEleId` );
 
-CREATE INDEX `fk_elementos_lecto_categoria_elementos1_idx` ON `lectoisabelino`.`elementos_lecto` (`categoria_elementos_catEleId` ASC) VISIBLE;
+CREATE INDEX `fk_elementos_lecto_categoria_elementos1_idx` ON `lectoisabelino`.`elementos_lecto` (`categoria_elementos_catEleId` );
 
-CREATE UNIQUE INDEX `eleLecCodigo_UNIQUE` ON `lectoisabelino`.`elementos_lecto` (`eleLecCodigo` ASC) VISIBLE;
+CREATE UNIQUE INDEX `eleLecCodigo_UNIQUE` ON `lectoisabelino`.`elementos_lecto` (`eleLecCodigo` );
 
 
 -- -----------------------------------------------------
@@ -341,9 +341,9 @@ CREATE TABLE IF NOT EXISTS `lectoisabelino`.`contr_elementos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_contr_elementos_elementos_lecto1_idx` ON `lectoisabelino`.`contr_elementos` (`elementos_lecto_eleLecId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_elementos_elementos_lecto1_idx` ON `lectoisabelino`.`contr_elementos` (`elementos_lecto_eleLecId` );
 
-CREATE INDEX `fk_contr_elementos_persona1_idx` ON `lectoisabelino`.`contr_elementos` (`persona_usuario_s_usuId` ASC) VISIBLE;
+CREATE INDEX `fk_contr_elementos_persona1_idx` ON `lectoisabelino`.`contr_elementos` (`persona_usuario_s_usuId` );
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

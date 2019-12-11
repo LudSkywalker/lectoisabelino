@@ -165,4 +165,8 @@ foreach ($listaDeLibros as $key => $value) {
 
         <!--/ row -->
     </section>
+<<<<<<< HEAD
     <!-- /wrapper -->
+=======
+    <!-- /wrapper -->
+>>>>>>> 6f5e94aab2725a66ee7e3b885c1afa9e618b95d1

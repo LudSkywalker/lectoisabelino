@@ -20,7 +20,7 @@ $registro['conEPrestado'] = 1;
 $registro['conEObsSalida'] = 'Excelente Estado';
 $registro['conEObsEntrada'] = 'Buen Estado';
 $registro['persona_perId'] = 2;
-$registro['elementos_lecto_eleLecId'] = 6;
+$registro['elementos_lecto_estLibId'] = 6;
 
 $insert = $estLib->insertar($registro);
 
@@ -51,13 +51,13 @@ echo "<pre>";
 echo "</pre>";
 //--> eliminar logico
 $id= array (11);
-$isd= $libLec->eliminarLogico($id); 
+$isd= $estLib->eliminarLogico($id); 
 echo "<pre>";
 //print_r($isd);
 echo "</pre>";
 //--->habilitar logicos
 $id= array(11);
-$isd=$libLec->habilitar($id);
+$isd=$estLib->habilitar($id);
 echo"<pres>";
 //print_r($isd);
 echo"</pres>";

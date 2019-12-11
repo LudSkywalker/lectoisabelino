@@ -6,6 +6,7 @@ include_once PATH . 'modelos/modeloLibros/ValidadorLibros.php';
 include_once PATH . 'controladores/Usuario_sControlador.php';
 include_once PATH . 'controladores/LibrosLectoControlador.php';
 include_once PATH . 'controladores/PrestamoLibrosControlador.php';
+include_once PATH . 'controladores/PrestamoElementosControlador.php';
 include_once PATH . 'modelos/modeloUsuarios/ValidadorUsuarios.php';
 include_once PATH . 'controladores/ElementosControlador.php';
 
@@ -75,7 +76,7 @@ class ControladorPrincipal {
                     }
                     if ($this->datos['ruta'] == "insertarUsuario_s") {
 
-                        header("location:principal.php?contenido=vistas/vistasUsuario_s/vistaInsertarUsuario_s.php");
+                        header("location:principal.php?contenido=plantillas/Dashio/registro.php");
                     }
                     if ($this->datos['ruta'] == "confirmaActualizarUsuario_s") {
                         header("location:principal.php?contenido=vistas/vistasUsuario_s/vistaActualizarUsuario_s.php");
@@ -97,7 +98,13 @@ class ControladorPrincipal {
             case "verLibrosPrestados":
                      $PrestamoLibrosControlador = new PrestamoLibrosControlador($this->datos);
             break;        
+
+            case "verElementosPrestados":
+                     $PrestamoElementosControlador = new PrestamoElementosControlador($this->datos);
+            break;        
+
         
+
                 
                 
                 

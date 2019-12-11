@@ -45,7 +45,7 @@ if (isset($_SESSION['mensaje'])) {
         
     </head>
 
-    <body>
+    <body  onload="pantallaBloqueo()">
         <section id="container">
             <!-- **********************************************************************************************************************************************************
                 TOP BAR CONTENT & NOTIFICATIONS
@@ -53,7 +53,7 @@ if (isset($_SESSION['mensaje'])) {
             <!--header start-->
             <header class="header black-bg">
                 <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Barra de Navegación"></div>
                 </div>
                 <!--logo start-->
                 <a href="principal.php" class="logo"><b>LECTO<span>ISABELINO</span></b></a>
@@ -94,7 +94,7 @@ if (isset($_SESSION['mensaje'])) {
   
                         <li class="sub-menu">
                             <a <?php
-                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))){
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))||(isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php"))){
                                 echo 'class="active"';
                             }
                             ?> href="javascript:;">
@@ -107,8 +107,16 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
+                            
+                            
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verElementosPrestados&pag=0&#cont">Elementos Prestados</a></li>
 
                             </ul>
+          
                         </li>  
                         <?php
      }
@@ -133,8 +141,7 @@ if (isset($_SESSION['mensaje'])) {
                             }
                             ?>><a  href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Ver Libros </a></li>
 
-                            </ul>
-                            <ul class="sub">
+                         
                                 <li <?php
                             if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosElementos.php"))){
                                 echo 'class="active"';
@@ -225,6 +232,14 @@ if (isset($_SESSION['mensaje'])) {
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
         </script>
+          <script>
+    function pantallaBloqueo() {
+        enviara = setInterval(enviar, 300000);
+    }
+    function enviar() {
+     window.location.href = "pantallaBloqueada.php";
+    }
+  </script>
     </body>
 
 </html>
