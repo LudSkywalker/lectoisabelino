@@ -136,7 +136,6 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
-                                
                             <li <?php
                             if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php"))){
                                 echo 'class="active"';
@@ -149,6 +148,12 @@ if (isset($_SESSION['mensaje'])) {
                                 echo 'class="active"';
                             }
                             ?>><a  href="Controlador.php?ruta=verElementosPrestados&pag=0&#cont">Elementos Prestados</a></li>
+ 
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarElementos.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=gestionElementos&pag=0&#cont">Gestionar Elementos</a></li>
 
                             </ul>
           

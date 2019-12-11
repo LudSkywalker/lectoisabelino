@@ -89,19 +89,19 @@ class ControladorPrincipal {
              break;
 //Gestion la tabal libros lecto                
             case "verInventarioLibros":
-            case "gestionLibrosLecto":
+            case "gestionLibrosLecto":  
                      $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
             break;
-            case "verInventarioElementos":
+            case "verInventarioElementos":    
+            case "gestionElementos":
                      $ElementosControlador= new ElementosControlador($this->datos);
             break;
-
             case "verLibrosPrestados":
                      $PrestamoLibrosControlador = new PrestamoLibrosControlador($this->datos);
             break;        
 
             case "verElementosPrestados":
-                     $PrestamoElementosControlador = new PrestamoElementosControlador($this->datos);
+                     $PrstamoElementosControlador = new PrestamoElementosControlador($this->datos);
             break;        
 
         
