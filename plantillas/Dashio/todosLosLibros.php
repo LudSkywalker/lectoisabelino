@@ -137,7 +137,7 @@ foreach ($listaDeLibros as $key => $value) {
                                 <?php
                                 for ($j = 0; $j < $cantEstados; $j++) {
                                     ?>
-                                    <option value = "<?php echo $registroEstadosLibros[$j]->catLecId; ?>" <?php
+                                    <option value = "<?php echo $registroEstadosLibros[$j]->estLibId; ?>" <?php
                                             if (isset($_SESSION['estLibNombreF']) && $_SESSION['estLibNombreF'] == $registroEstadosLibros[$j]->estLibId) {
                                                 echo " selected";
                                             }
