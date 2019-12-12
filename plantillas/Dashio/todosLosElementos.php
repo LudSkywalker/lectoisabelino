@@ -18,12 +18,6 @@ if (isset($_SESSION['registroEstadosElementosLecto'])) { /* * ******************
     $cantEstados = count($registroEstadosLibros);
 }
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
 
 <section id="main-content">
@@ -56,22 +50,22 @@ foreach ($listaDeLibros as $key => $value) {
                             }
                             ?>
                 </tbody>
-                <tfoot> 
+</table>
+         
                     <tr>
                         <td colspan="8">
-                            <nav aria-label="Page navigation example">
+                                                <div class="btn-group">
                         <?php $i = 0; ?>
-                                <ul class="pagination justify-content-center">
+                        
                         <?php foreach ($paginacionVinculos as $key => $value) { ?>    
-                                        <li class="page-item"><a class="page-link" href="<?php echo $value; ?>"><?php echo ($key); ?></a></li>
+                                        <a class="btn btn-theme" href="<?php echo $value; ?>"><?php echo ($key); ?></a>
+
+                            
                             <?php }
                         ?>
-                                </ul>
-                            </nav>
+                        </div>
                         </td>
                     </tr>
-                </tfoot>
-            </table>
         </div>
         
         <fieldset class="scheduler-border">
@@ -165,8 +159,4 @@ foreach ($listaDeLibros as $key => $value) {
 
         <!--/ row -->
     </section>
-<<<<<<< HEAD
-    <!-- /wrapper -->
-=======
-    <!-- /wrapper -->
->>>>>>> 6f5e94aab2725a66ee7e3b885c1afa9e618b95d1
+

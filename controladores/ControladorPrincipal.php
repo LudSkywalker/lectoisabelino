@@ -62,6 +62,7 @@ class ControladorPrincipal {
             case "gestionDeRegistro":
             case "insertarUsuario_s":
             case "confirmaActualizarUsuario_s":
+            case "registro":
                 if ($this->datos['ruta'] == "gestionDeRegistro" || $this->datos['ruta'] == "insertarUsuario_s" || $this->datos['ruta'] == "confirmaActualizarUsuario_s") {
                     $validarRegistro = new ValidadorUsuarios_s();
                     $erroresValidacion = $validarRegistro->validarFormularioUsuarios_s($this->datos);
@@ -89,6 +90,7 @@ class ControladorPrincipal {
              break;
 //Gestion la tabal libros lecto                
             case "verInventarioLibros":
+            case "eliminarLibroLecto":
             case "gestionLibrosLecto":  
                      $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
             break;

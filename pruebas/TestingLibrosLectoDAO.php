@@ -4,7 +4,7 @@ include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";
 
 //-- SELECCIONAR TODOS.
-echo "Seleccionar todo";
+//echo "Seleccionar todo";
 $libLec=new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$libLec->seleccionarTodos();
 
@@ -51,10 +51,10 @@ echo "<pre>";
 //print_r($isd);
 echo "</pre>";
 //--> eliminar logico
-$id= array (11);
+$id= array (2);
 $isd= $libLec->eliminarLogico($id); 
 echo "<pre>";
-//print_r($isd);
+print_r($isd);
 echo "</pre>";
 //--->habilitar logicos
 $id= array(11);

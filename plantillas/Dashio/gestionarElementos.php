@@ -18,12 +18,6 @@ if (isset($_SESSION['registroEstadosElementosLecto'])) { /* * ******************
     $cantEstados = count($registroEstadosLibros);
 }
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
 
 <section id="main-content">
@@ -59,22 +53,23 @@ foreach ($listaDeLibros as $key => $value) {
                             }
                             ?>
                 </tbody>
-                <tfoot> 
+                </table>
+         
                     <tr>
                         <td colspan="8">
-                            <nav aria-label="Page navigation example">
+                                                <div class="btn-group">
                         <?php $i = 0; ?>
-                                <ul class="pagination justify-content-center">
+                        
                         <?php foreach ($paginacionVinculos as $key => $value) { ?>    
-                                        <li class="page-item"><a class="page-link" href="<?php echo $value; ?>"><?php echo ($key); ?></a></li>
+                                        <a class="btn btn-theme" href="<?php echo $value; ?>"><?php echo ($key); ?></a>
+
+                            
                             <?php }
                         ?>
-                                </ul>
-                            </nav>
+                        </div>
                         </td>
                     </tr>
-                </tfoot>
-            </table>
+              
         </div>
         
         <fieldset class="scheduler-border">
@@ -83,7 +78,7 @@ foreach ($listaDeLibros as $key => $value) {
             <div class="col-lg-6">
             <h4><i class="fa fa-angle-right"></i>FILTRO</h4>
                 <div class="form-panel">
-                <input type="hidden" name="ruta" value="verInventarioElementos"/>
+                <input type="hidden" name="ruta" value="gestionElementos"/>
                 <table> 
                     <tr><td>Codigo:</td>
                         <td><input type="text" name="eleLecCod" onclick="" value="<?php

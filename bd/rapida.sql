@@ -379,7 +379,8 @@ INSERT INTO `usuario_s` (`usuLogin`, `usuPassword`, `usuUsuSesion`, `usuEstado`,
 	('halgarjr3@gmail.com', 'd9840773233fa6b19fde8caf765402f5', NULL, 1, '', '2019-06-07 02:19:06', '2019-06-07 02:19:06'),
 	('notengo@no.com', 'd9840773233fa6b19fde8caf765402f5', NULL, 1, '', '2019-06-07 17:41:59', '2019-06-07 17:41:59'),
 	('jm@lk.com', 'd9840773233fa6b19fde8caf765402f5', NULL, 1, '', '2019-06-07 19:38:40', '2019-06-07 19:38:40'),
-	('huawei@juan.uei', 'd9840773233fa6b19fde8caf765402f5', NULL, 1, '', '2019-06-13 13:45:27', '2019-06-13 13:45:27');
+	('huawei@juan.uei', 'd9840773233fa6b19fde8caf765402f5', NULL, 1, '', '2019-06-13 13:45:27', '2019-06-13 13:45:27'),
+	('admin@misena.edu.co', 'c27d3375f38530ffaa4dcc63ae230b2e', NULL, 1, '', '2019-06-13 13:45:27', '2019-06-13 13:45:27');
 
 INSERT INTO `usuario_s_roles` (`id_usuario_s`, `id_rol`, `usuRolEstado`, `usuRolFecha`, `usuRolObsFecha`, `usuRolUsuSesion`, `usuRolCreated_at`, `usuRolUpdated_at`) VALUES
 	(1, 1, 1, '2019-10-27 18:52:00', NULL, NULL, '2019-08-23 18:52:00', '2019-10-27 18:30:00'),
@@ -399,7 +400,8 @@ INSERT INTO `usuario_s_roles` (`id_usuario_s`, `id_rol`, `usuRolEstado`, `usuRol
 	(8, 2, 1, '2016-12-29 18:51:00', NULL, NULL, '2017-03-29 09:52:00', '2015-12-27 16:35:00'),
 	(8, 3, 1, '2015-10-07 12:22:00', NULL, NULL, '2018-10-20 20:21:00', '2016-01-19 05:22:00'),
 	(9, 2, 1, '2018-04-20 17:58:00', NULL, NULL, '2019-10-07 18:32:00', '2014-11-27 17:30:00'),
-	(9, 3, 1, '2019-11-02 16:10:25', NULL, NULL, '2019-10-29 18:52:17', '2019-11-02 16:10:25');
+	(9, 3, 1, '2019-11-02 16:10:25', NULL, NULL, '2019-10-29 18:52:17', '2019-11-02 16:10:25'),
+	(10, 1, 1, '2019-11-02 16:10:25', NULL, NULL, '2019-10-29 18:52:17', '2019-11-02 16:10:25');
 
 INSERT INTO `categorialibro` (`catLibId`, `catLibNombre`, `catLibEstado`, `catLibObservacion`) VALUES
 	(1, 'General', 1, 'Libros que implican varias categorías o que no se les ha definido'),
@@ -591,8 +593,8 @@ INSERT INTO `persona` (`perDocumento`, `perNombre`, `perApellido`, `perEstado`, 
 	(12345, 'Henry', 'garzon', 1, NULL, '2019-06-07 02:19:06', '2019-06-07 02:19:06'),
 	(51879458, 'Ana', 'Sanchez', 1, NULL, '2019-06-07 17:41:59', '2019-06-07 17:41:59'),
 	(987654, 'jose', 'maria', 1, NULL, '2019-06-07 19:38:40', '2019-06-07 19:38:40'),
-	(666555, 'JUAN', 'PEREZ', 1, NULL, '2019-06-13 13:45:28', '2019-06-13 13:46:12');
-
+	(666555, 'JUAN', 'PEREZ', 1, NULL, '2019-06-13 13:45:28', '2019-06-13 13:46:12'),
+	(1906846, 'Lud', 'Sky', 1, NULL, '2019-06-13 13:45:28', '2019-06-13 13:46:12');
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

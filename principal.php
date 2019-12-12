@@ -7,14 +7,8 @@ include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 $seguridad = new BloqueDeSeguridad();
 $seguridad->seguridad("login.php");
 
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +104,7 @@ if (isset($_SESSION['mensaje'])) {
                             if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php"))){
                                 echo 'class="active"';
                             }
-                            ?>><a  href="principal.php?contenido=plantillas/Dashio/registro.php">Ingresar usuario</a></li>
+                            ?>><a  href="Controlador.php?ruta=registro">Ingresar usuario</a></li>
                             </ul>
           
                         </li>  
@@ -283,3 +277,11 @@ if (isset($_SESSION['mensaje'])) {
     </body>
 
 </html>
+<?php
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
+}
+?>

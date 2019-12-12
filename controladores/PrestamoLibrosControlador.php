@@ -14,7 +14,7 @@ class PrestamoLibrosControlador{
     
 
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
-        $this->limite=5;
+        $this->limite=3;
         $this->datos = $datos;
         $this->prestamolibrosControlador();
     }

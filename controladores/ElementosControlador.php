@@ -11,7 +11,7 @@ class ElementosControlador{
     private $limite;
     private $enlaces;    
     public function __construct($datos) { //Lo primero que haga es llamar la funcion librosLectoControlador.
-        $this->limite=5;
+        $this->limite=3;
         $this->enlaces=3;
         $this->datos = $datos;
         $this->elementosControlador();
@@ -71,7 +71,7 @@ class ElementosControlador{
     }
   public function enlacesPaginacion($totalRegistros = NULL, $limit = 5, $offset = 0, $totalEnlacesPaginacion = 3) {
 
-        $ruta = "verInventarioElementos";
+        $ruta =$this->datos["ruta"] ;
         if (isset($offset) && (int) $offset <= 0) {
             $offset = 0;
         }

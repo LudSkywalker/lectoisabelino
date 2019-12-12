@@ -16,12 +16,6 @@ if (isset($_SESSION['registroCategoriasLibros'])) { /* * ***********************
     $cantCategorias = count($registroCategoriasLibros);
 }
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
 
 
