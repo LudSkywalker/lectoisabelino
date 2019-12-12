@@ -182,4 +182,3 @@ foreach ($listaDeElementos as $key => $value) {
         <!--/ row -->
     </section>
     <!-- /wrapper -->
-</section>

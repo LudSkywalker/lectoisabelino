@@ -1,20 +1,20 @@
 <?php
-if (isset($_SESSION['listaDeLibrosLecto'])) {
-    $listaDeLibros = $_SESSION['listaDeLibrosLecto'];
+if (isset($_SESSION['listaDeElementos'])) {
+    $listaDeLibros = $_SESSION['listaDeElementos'];
 }
 
-if (isset($_SESSION['paginacionVinculosLecto'])) {
-    $paginacionVinculos = $_SESSION['paginacionVinculosLecto'];
+if (isset($_SESSION['paginacionVinculosElementos'])) {
+    $paginacionVinculos = $_SESSION['paginacionVinculosElementos'];
 }
-if (isset($_SESSION['totalRegistrosLibrosLecto'])) {
-    $totalRegistrosLibros = $_SESSION['totalRegistrosLibrosLecto'];
+if (isset($_SESSION['totalRegistrosElementosLecto'])) {
+    $totalRegistrosLibros = $_SESSION['totalRegistrosElementosLecto'];
 }
-if (isset($_SESSION['registroCategoriasLibrosLecto'])) { /* * ************************ */
-    $registroCategoriasLibros = $_SESSION['registroCategoriasLibrosLecto'];
+if (isset($_SESSION['registroCategoriasElementosLecto'])) { /* * ************************ */
+    $registroCategoriasLibros = $_SESSION['registroCategoriasElementosLecto'];
     $cantCategorias = count($registroCategoriasLibros);
 }
-if (isset($_SESSION['registroEstadosLibrosLecto'])) { /* * ************************ */
-    $registroEstadosLibros = $_SESSION['registroEstadosLibrosLecto'];
+if (isset($_SESSION['registroEstadosElementosLecto'])) { /* * ************************ */
+    $registroEstadosLibros = $_SESSION['registroEstadosElementosLecto'];
     $cantEstados = count($registroEstadosLibros);
 }
 
@@ -28,15 +28,13 @@ if (isset($_SESSION['mensaje'])) {
 
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Libros</h3>
+        <h3><i class="fa fa-angle-right"></i>Elementos</h3>
         <div style="width: 800">
             <p>Total de libros: <?php if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
             <table border='1' class="display table table-bordered">
                 <thead>
                     <tr>
                         <td style="width: 100">Codigo</td>
-                        <td style="width: 100">Titulo</td>
-                        <td style="width: 100">Autor</td>
                         <td style="width: 100">Categoria</td>
                         <td style="width: 100">Estado</td>
                     </tr>
@@ -47,11 +45,9 @@ $i = 0;
 foreach ($listaDeLibros as $key => $value) {
     ?>
                         <tr>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->libLecCodigo; ?></td>
-                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecTitulo); ?></td>
-                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecAutor); ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->catLecNombre; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->estLibNombre; ?></td>
+                            <td style="width: 100"><?php echo $listaDeLibros[$i]->eleLecCodigo; ?></td>
+                            <td style="width: 100"><?php echo $listaDeLibros[$i]->catEleNombre; ?></td>
+                            <td style="width: 100"><?php echo $listaDeLibros[$i]->estEleNombre; ?></td>
                                 <?php
                                 $i++;
                                 ?>
@@ -84,36 +80,19 @@ foreach ($listaDeLibros as $key => $value) {
             <div class="col-lg-6">
             <h4><i class="fa fa-angle-right"></i>FILTRO</h4>
                 <div class="form-panel">
-                <input type="hidden" name="ruta" value="verInventarioLibros"/>
+                <input type="hidden" name="ruta" value="verInventarioElementos"/>
                 <table> 
                     <tr><td>Codigo:</td>
-                        <td><input type="text" name="libLecCod" onclick="" value="<?php
-                                            if (isset($_SESSION['libLecCodF'])) {
-                                                echo $_SESSION['libLecCodF'];
+                        <td><input type="text" name="eleLecCod" onclick="" value="<?php
+                                            if (isset($_SESSION['eleLecCodF'])) {
+                                                echo $_SESSION['eleLecCodF'];
                                             }
                                             ?>"/>
                         </td>                      
                     </tr> 
-                    <tr><td>Titulo:</td>
-                        <td><input type="text" name="libLecTitulo" onclick="" value="<?php
-                                    if (isset($_SESSION['libLecTituloF'])) {
-                                        echo $_SESSION['libLecTituloF'];
-                                    }
-                                            ?>"/>
-                        </td>                       
-                    </tr> 
-                    <tr><td>Autor:</td>
-                        <td><input type="text" onclick="" name="libLecAutor" value="<?php
-                                    if (isset($_SESSION['libLecAutorF'])) {
-                                        echo $_SESSION['libLecAutorF'];
-                                    }
-                                            ?>"/>
-                        </td>
-                        <td>                         
-                    </tr>              
                     <tr><td>Categoria: </td>
                         <td>
-                            <select id="categoriaLibro_catLibId" name="categoria_libro_lecto_catLecId"style="width: 129px">
+                            <select id="categoria_elementos_catEleId" name="categoria_libro_lecto_catLecId"style="width: 129px">
                                 <option value = "">Seleccionar</option>
                             <?php
                             for ($j = 0; $j < $cantCategorias; $j++) {
@@ -165,15 +144,15 @@ foreach ($listaDeLibros as $key => $value) {
                 </div>
                 </div>
                 <fieldset class="scheduler-border">
-                    <h4><i class="fa fa-angle-right"></i>Buscar</h4>
+                    <h4><i class="fa fa-angle-right"></i>Buscar elementos</h4>
             <div class="col-lg-6">
                 <div class="form-panel">
                     
                     <div style="width: 800">
                         <!--BOTÓN PARA BUSCAR*************************-->
-                        <input type="text" name="buscarLibLec" placeholder="Término a Buscar" value="<?php
-                                    if (isset($_SESSION['buscarLibLecF'])) {
-                                        echo $_SESSION['buscarLibLecF'];
+                        <input type="text" name="buscarEleLecCodF" placeholder="Término a Buscar" value="<?php
+                                    if (isset($_SESSION['buscarEleLecCodF'])) {
+                                        echo $_SESSION['buscarEleLecCodF'];
                                     }
                                     ?>">
                     </div>        
@@ -189,4 +168,3 @@ foreach ($listaDeLibros as $key => $value) {
         <!--/ row -->
     </section>
     <!-- /wrapper -->
-</section>
