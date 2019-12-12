@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/lib/bootstrap/css/bootstrap.min.css</file>
             <file>file:/C:/Lud/php/lectoisabelino/principal.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/gestionarElementos.php</file>
@@ -10,6 +11,21 @@
             <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/registro.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
             <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosControlador.php</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/xampp/htdocs/lectoisabelino/principal.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/elementosPrestados.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/PrestamoElementosControlador.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloControlElementos/ControlElementosDAO.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/ControladorPrincipal.php</file>
+=======
+            <file>file:/C:/Lud/php/lectoisabelino/modelos/modeloUsuarios/ValidadorUsuarios.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/ElementosControlador.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/todosLosElementos.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/elementosPrestados.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
+>>>>>>> 6f5e94aab2725a66ee7e3b885c1afa9e618b95d1
+>>>>>>> 3b604311badad8903791cc0b26a105ddfb8c6bd3
         </group>
     </open-files>
 </project-private>
