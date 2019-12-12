@@ -18,12 +18,6 @@ if (isset($_SESSION['registroEstadosElementosLecto'])) { /* * ******************
     $cantEstados = count($registroEstadosLibros);
 }
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
 
 <section id="main-content">
@@ -165,8 +159,4 @@ foreach ($listaDeLibros as $key => $value) {
 
         <!--/ row -->
     </section>
-<<<<<<< HEAD
-    <!-- /wrapper -->
-=======
-    <!-- /wrapper -->
->>>>>>> 6f5e94aab2725a66ee7e3b885c1afa9e618b95d1
+

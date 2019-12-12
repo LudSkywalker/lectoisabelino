@@ -18,14 +18,9 @@ if (isset($_SESSION['registroEstadosLibrosLecto'])) { /* * *********************
     $cantEstados = count($registroEstadosLibros);
 }
 
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
 
+  
 <section id="main-content">
     <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>Libros</h3>
@@ -53,8 +48,8 @@ foreach ($listaDeLibros as $key => $value) {
                             <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecAutor); ?></td>
                             <td style="width: 100"><?php echo $listaDeLibros[$i]->catLecNombre; ?></td>
                             <td style="width: 100"><?php echo $listaDeLibros[$i]->estLibNombre; ?></td>
-                            <td style="width: 100"><?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>" >Actualizar</a><?php } ?></td>
-                            <td style="width: 100"><?php if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>  <a href="Controlador.php?ruta=eliminarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>">Eliminar</a><?php } ?>  </td>       
+                            <td style="width: 100"><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php echo $listaDeLibros[$i]->libLecId; ?>" >Actualizar</a></td>
+                            <td style="width: 100"><a href="Controlador.php?ruta=eliminarLibroLecto&idEli=<?php echo $listaDeLibros[$i]->libLecId; ?>">Eliminar</a></td>       
                          <?php
                                 $i++;
                                 ?>
@@ -87,7 +82,7 @@ foreach ($listaDeLibros as $key => $value) {
             <div class="col-lg-6">
             <h4><i class="fa fa-angle-right"></i>FILTRO</h4>
                 <div class="form-panel">
-                <input type="hidden" name="ruta" value="verInventarioLibros"/>
+                <input type="hidden" name="ruta" value="gestionLibrosLecto"/>
                 <table> 
                     <tr><td>Codigo:</td>
                         <td><input type="text" name="libLecCod" onclick="" value="<?php
@@ -192,4 +187,3 @@ foreach ($listaDeLibros as $key => $value) {
         <!--/ row -->
     </section>
     <!-- /wrapper -->
-</section>

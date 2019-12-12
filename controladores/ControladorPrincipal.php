@@ -89,6 +89,7 @@ class ControladorPrincipal {
              break;
 //Gestion la tabal libros lecto                
             case "verInventarioLibros":
+            case "eliminarLibroLecto":
             case "gestionLibrosLecto":  
                      $LibrosLectoControlador= new LibrosLectoControlador($this->datos);
             break;
