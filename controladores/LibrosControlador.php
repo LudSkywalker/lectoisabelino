@@ -120,7 +120,7 @@ class LibrosControlador {
 
     public function enlacesPaginacion($totalRegistros = NULL, $limit = 2, $offset = 0, $totalEnlacesPaginacion = 2) {
 
-        $ruta = "listarLibros";
+        $ruta = $this->datos['ruta'];
 
         if (isset($offset) && (int) $offset <= 0) {
             $offset = 0;

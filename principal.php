@@ -104,7 +104,7 @@ $seguridad->seguridad("login.php");
                             if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php"))){
                                 echo 'class="active"';
                             }
-                            ?>><a  href="principal.php?contenido=plantillas/Dashio/registro.php">Ingresar usuario</a></li>
+                            ?>><a  href="Controlador.php?ruta=registro">Ingresar usuario</a></li>
                             </ul>
           
                         </li>  

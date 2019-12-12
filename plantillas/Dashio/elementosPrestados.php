@@ -66,22 +66,22 @@ foreach ($listaDeElementos as $key => $value) {
                             }
                             ?>
                 </tbody>
-                <tfoot> 
+</table>
+         
                     <tr>
                         <td colspan="8">
-                            <nav aria-label="Page navigation example">
+                                                <div class="btn-group">
                         <?php $i = 0; ?>
-                                <ul class="pagination justify-content-center">
+                        
                         <?php foreach ($paginacionVinculos as $key => $value) { ?>    
-                                        <li class="page-item"><a class="page-link" href="<?php echo $value; ?>"><?php echo ($key); ?></a></li>
+                                        <a class="btn btn-theme" href="<?php echo $value; ?>"><?php echo ($key); ?></a>
+
+                            
                             <?php }
                         ?>
-                                </ul>
-                            </nav>
+                        </div>
                         </td>
                     </tr>
-                </tfoot>
-            </table>
         </div>
         
         <fieldset class="scheduler-border">
