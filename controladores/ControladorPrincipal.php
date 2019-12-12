@@ -63,6 +63,7 @@ class ControladorPrincipal {
             case "insertarUsuario_s":
             case "confirmaActualizarUsuario_s":
             case "registro":
+            case "inicio":
                 if ($this->datos['ruta'] == "gestionDeRegistro" || $this->datos['ruta'] == "insertarUsuario_s" || $this->datos['ruta'] == "confirmaActualizarUsuario_s") {
                     $validarRegistro = new ValidadorUsuarios_s();
                     $erroresValidacion = $validarRegistro->validarFormularioUsuarios_s($this->datos);
