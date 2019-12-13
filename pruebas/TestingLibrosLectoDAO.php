@@ -1,16 +1,15 @@
 <?php
-
 include_once "../modelos/ConstantesDeConexion.php";
 include_once PATH."modelos/ConexDBMySQL.php";
 include_once PATH."modelos/modeloLibrosLecto/LibrosLectoDAO.php";
 
 //-- SELECCIONAR TODOS.
-echo "Seleccionar todo";
-$libLec=new CategoriaLibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
+//echo "Seleccionar todo";
+$libLec=new LibrosLectoDao(SERVIDOR,BASE,USUARIO_BD,CONTRASENA);
 $listado=$libLec->seleccionarTodos();
 
 echo '<pre>';
-print_r($listado);
+//print_r($listado);
 echo '</pre>';
 //-- IMPRIMIR.
 $registro['conEFechaSal'] = '2019-06-06 15:02:04';
@@ -25,7 +24,7 @@ $registro['elementos_lecto_eleLecId'] = 6;
 $insert = $libLec->insertar($registro);
 
 echo '<pre>';
-//print_r($insert);
+print_r($insert);
 echo '</pre>';
 
 //--> SELECCIONAR ID
@@ -52,10 +51,10 @@ echo "<pre>";
 //print_r($isd);
 echo "</pre>";
 //--> eliminar logico
-$id= array (11);
+$id= array (2);
 $isd= $libLec->eliminarLogico($id); 
 echo "<pre>";
-//print_r($isd);
+print_r($isd);
 echo "</pre>";
 //--->habilitar logicos
 $id= array(11);
@@ -67,13 +66,12 @@ echo"</pres>";
 $id=[6,0];
 $isd=$libLec->consultaPaginada($id[0],$id[1]);
 echo"<pre>";
-print_r($isd);
+//print_r($isd);
 echo"</pre>";
 
 //coutn
 $cu=$libLec->totalRegistros();        
 echo "<pre>";
-print_r($cu);
+//print_r($cu);
 echo "</pre>";
-
 ?>

@@ -7,14 +7,8 @@ include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 //$seguridad = new BloqueDeSeguridad();
 //$seguridad->seguridad("login.php");
 
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-    $mensaje = NULL;
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +39,7 @@ if (isset($_SESSION['mensaje'])) {
         
     </head>
 
-    <body>
+    <body  onload="pantallaBloqueo()">
         <section id="container">
             <!-- **********************************************************************************************************************************************************
                 TOP BAR CONTENT & NOTIFICATIONS
@@ -53,7 +47,7 @@ if (isset($_SESSION['mensaje'])) {
             <!--header start-->
             <header class="header black-bg">
                 <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Barra de Navegación"></div>
                 </div>
                 <!--logo start-->
                 <a href="principal.php" class="logo"><b>LECTO<span>ISABELINO</span></b></a>
@@ -73,32 +67,126 @@ if (isset($_SESSION['mensaje'])) {
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="profile.php"><img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/12328712/CPSIH.jpg" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a href="https://www.colparsantaisabeldehungria.com"target="_blank">
+                                <img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/12328712/CPSIH.jpg" class="img-circle" width="80">
+                        </a>
+                        </p>
                         <h5 class="centered">  Colegio Parroquial Santa <br> Isabel de Hungria  </h5>
-
                         
                         <li class="mt">
-                            <a class="active" href="principal.php">
+                            <a  <?php
+                            if (!isset($_GET["contenido"])){
+                                echo 'class="active"';
+                            }
+                            ?> href="principal.php">
                                 <i class="fa fa-dashboard"></i>
-                                <span>Dashboard</span>
+                                <span>Inicio</span>
                             </a>
                         </li>
-                    
+                        
+                                <?php
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
                         <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-cogs"></i>
-                                <span>Gestión de Libros</span>
+                            <a <?php
+
+                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php")))){
+
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
+                                <i class="fa fa-desktop"></i>
+                                <span>Administrador </span>
                             </a>
                             <ul class="sub">
-                                <li><a href="Controlador.php?ruta=listarLibros&pag=0&#cont">Listar Libros</a></li>
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/registro.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=registro">Ingresar usuario</a></li>
+                            </ul>
+          
+                        </li>  
+                        <?php
+     }
+?>
                                 <?php
- if (in_array(1, $_SESSION['rolesEnSesion'])) { ?>
-                                 <li><a href="Controlador.php?ruta=mostrarInsertarLibros#cont">Insertar Nuevo Libro</a></li>
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
+                        <li class="sub-menu">
+                            <a <?php
+                            if (((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php")))||((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarElementos.php")))){
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Bibliotecario </span>
+                            </a>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/librosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verLibrosPrestados&pag=0&#cont">Libros Prestados</a></li>
+                            <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarLibrosLecto.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=gestionLibrosLecto&pag=0&#cont">Gestionar Libros </a></li>
+                            
+                            
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/elementosPrestados.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verElementosPrestados&pag=0&#cont">Elementos Prestados</a></li>
+ 
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/gestionarElementos.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=gestionElementos&pag=0&#cont">Gestionar Elementos</a></li>
+
+                            </ul>
+          
+                        </li>  
+                        <?php
+     }
+?>
                                 <?php
- } ?>
+ if ((in_array(1, $_SESSION['rolesEnSesion']))||(in_array(2, $_SESSION['rolesEnSesion']))||(in_array(3, $_SESSION['rolesEnSesion']))) {
+     ?>
+  
+                        <li class="sub-menu">
+                            <a <?php
+                            if ((isset($_GET["contenido"])&&($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))||(isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosElementos.php"))){
+                                echo 'class="active"';
+                            }
+                            ?> href="javascript:;">
+                                <i class="fa fa-tasks"></i>
+                                <span>Miembro </span>
+                            </a>
+                            <ul class="sub">
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosLibros.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verInventarioLibros&pag=0&#cont">Ver Libros </a></li>
+
+                         
+                                <li <?php
+                            if ((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/todosLosElementos.php"))){
+                                echo 'class="active"';
+                            }
+                            ?>><a  href="Controlador.php?ruta=verInventarioElementos&pag=0&#cont">Ver Elementos </a></li>
+
                             </ul>
                         </li>  
-                        
+                        <?php
+     }
+?>
 
                     </ul>
                     <!-- sidebar menu end-->
@@ -110,7 +198,6 @@ if (isset($_SESSION['mensaje'])) {
                 *********************************************************************************************************************************************************** -->
           
 
-                            </div>
                             <section id="cont">
                             <br/>
                             <?php
@@ -136,26 +223,7 @@ if (isset($_SESSION['mensaje'])) {
         <!--script for this page-->
         <script src="plantillas/Dashio/lib/sparkline-chart.js"></script>
         <script src="plantillas/Dashio/lib/zabuto_calendar.js"></script>
-        <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        var unique_id = $.gritter.add({
-                                            // (string | mandatory) the heading of the notification
-                                            title: 'Welcome to Dashio!',
-                                            // (string | mandatory) the text inside the notification
-                                            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
-                                            // (string | optional) the image to display on the left
-                                            image: 'plantillas/Dashio/img/ui-sam.jpg',
-                                            // (bool | optional) if you want it to fade out on its own or just sit there
-                                            sticky: false,
-                                            // (int | optional) the time you want it to be alive for before fading out
-                                            time: 8000,
-                                            // (string | optional) the class name you want to apply to that specific message
-                                            class_name: 'my-sticky-class'
-                                        });
-
-                                        return false;
-                                    });
-        </script>
+                                   
         <script type="application/javascript">
             $(document).ready(function() {
             $("#date-popover").popover({
@@ -198,6 +266,22 @@ if (isset($_SESSION['mensaje'])) {
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
         </script>
+          <script>
+    function pantallaBloqueo() {
+        enviara = setInterval(enviar, 300000);
+    }
+    function enviar() {
+     window.location.href = "pantallaBloqueada.php";
+    }
+  </script>
     </body>
 
 </html>
+<?php
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+    $mensaje = NULL;
+}
+?>

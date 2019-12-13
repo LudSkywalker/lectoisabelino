@@ -58,18 +58,17 @@ echo "</pre>";
 //--->habilitar logicos
 $id= array(11);
 $isd=$ele->habilitar($id);
-echo"<pres>";
+echo"<pre>";
 //print_r($isd);
-echo"</pres>";
+echo"</pre>";
 
-$id= array(11);
-$isd=$ele->consultaPaginada($id);
-echo"<pres>";
+$id=array(5,0);
+$isd=$ele->consultaPaginada($id[0],$id[1]);
+echo"<pre>";
 //print_r($isd);
-echo"</pres>";
-
+echo"</pre>";
 //coutn
-$cu=$conEle->totalRegistros();        
+$cu=$ele->totalRegistros();        
 echo "<pre>";
 print_r($cu);
 echo "</pre>";

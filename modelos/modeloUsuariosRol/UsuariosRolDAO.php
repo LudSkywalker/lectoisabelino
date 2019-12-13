@@ -28,23 +28,30 @@ class UsuariosRolDao extends ConexDBMySQL {
         return $listado;
     }
 
-    public function insertar ($registro) {
+        public function insertar($registro) {
         try {
-            $query = "INSERT INTO usuario_s_roles";
-            $query .= "(id_usuario_s,id_rol, usuRolEstado, usuRolFecha, categoria_elementos_catEleId) ";
-            $query .= " VALUES";
-            $query .= "(:id_usuario_s, :id_rol, :usuRolEstado, :usuRolFecha, :categoria_elementos_catEleId); ";
+
+            $query = "INSERT INTO usuario_s_roles ";
+            $query .= "(id_usuario_s, id_rol) ";
+            $query .= " VALUES ";
+            $query .= "(:id_usuario_s , :id_rol ); ";
+
             $inserta = $this->conexion->prepare($query);
-            $inserta->bindParam(":id_usuario_s", $registro['id_usuario_s']);
-            $inserta->bindParam(":id_rol", $registro['id_rol']);
-            $inserta->bindParam(":usuRolEstado", $registro['usuRolEstado']);
-            $inserta->bindParam(":usuRolFecha", $registro['usuRolFecha']);
-            $inserta->bindParam(":categoria_elementos_catEleId", $registro['categoria_elementos_catEleId']);
+
+            $inserta->bindParam(":id_usuario_s", $registro[0]);
+            $inserta->bindParam(":id_rol", $registro[1]);
+
             $insercion = $inserta->execute();
+
             $clavePrimariaConQueInserto = $this->conexion->lastInsertId();
+
             return ['inserto' => 1, 'resultado' => $clavePrimariaConQueInserto];
         } catch (PDOException $pdoExc) {
-            return ['inserto' => 0, 'resultado' => $pdoExc];}}
+
+            return ['inserto' => 0, 'resultado' => $pdoExc];
+        }
+    }
+            
     public function seleccionarId($id_usuario_s = array()) {
         $planConsulta = "select * from usuario_s_roles ur ";
         $planConsulta .= " where ur.id_usuario_s= ? ;";
@@ -120,22 +127,12 @@ class UsuariosRolDao extends ConexDBMySQL {
             $this->cierreDB(); } }
   
     public function consultaPaginada($limit = null, $offset = null, $filtrarBuscar = "") {
-
         $planConsulta = "select SQL_CALC_FOUND_ROWS ur.id_usuario_s, u.usuId, u.usuLogin,r.rolId, r.rolNombre
                                   FROM ((usuario_s_roles ur LEFT JOIN usuario_s u ON ur.id_usuario_s=u.usuId)
-                                  LEFT JOIN rol r ON ur.id_rol = r.rolId) ;";
+                                  LEFT JOIN rol r ON ur.id_rol = r.rolId)";
         $planConsulta .= $filtrarBuscar;
 
         $planConsulta .= "  ORDER BY ur.id_usuario_s ASC";
-        $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
-
-        $listar = $this->conexion->prepare($planConsulta);
-        $listar->execute();
-
-
-
-        $planConsulta .= $filtrarBuscar;
-        $planConsulta .= " ORDER BY ur.id_usuario_s ASC";
         $planConsulta .= " LIMIT " . $limit . " OFFSET " . $offset . " ; ";
 
         $listar = $this->conexion->prepare($planConsulta);
@@ -145,7 +142,7 @@ class UsuariosRolDao extends ConexDBMySQL {
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $listadoLibros[] = $registro;
         }
-
+        echo "no lo pinta";
         $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
         $listar2->execute();
         while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {

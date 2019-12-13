@@ -1,29 +1,13 @@
 <?php
-<<<<<<< HEAD
-session_start();
-
-include_once '../../modelos/ConstantesDeConexion.php';
-include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
-
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-=======
-if (isset($_SESSION['listaDePrestamos'])) {
-    $listaDeLibros = $_SESSION['listaDePrestamos'];
->>>>>>> 2e39e2408480c57908a79ef65cf3fe048813d69c
+if (isset($_SESSION['listaDeLibrosLecto'])) {
+    $listaDeLibros = $_SESSION['listaDeLibrosLecto'];
 }
 
-if (isset($_SESSION['paginacionVinculosPrestamos'])) {
-    $paginacionVinculos = $_SESSION['paginacionVinculosPrestamos'];
+if (isset($_SESSION['paginacionVinculosLecto'])) {
+    $paginacionVinculos = $_SESSION['paginacionVinculosLecto'];
 }
-if (isset($_SESSION['totalRegistrosPrestamos'])) {
-    $totalRegistrosLibros = $_SESSION['totalRegistrosPrestamos'];
-}
-if (isset($_SESSION['registroLibrosLecto'])) { /* * ************************ */
-    $registroLibros = $_SESSION['registroLibrosLecto'];
+if (isset($_SESSION['totalRegistrosLibrosLecto'])) {
+    $totalRegistrosLibros = $_SESSION['totalRegistrosLibrosLecto'];
 }
 if (isset($_SESSION['registroCategoriasLibrosLecto'])) { /* * ************************ */
     $registroCategoriasLibros = $_SESSION['registroCategoriasLibrosLecto'];
@@ -38,25 +22,17 @@ if (isset($_SESSION['registroEstadosLibrosLecto'])) { /* * *********************
 
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Libros Prestados</h3>
+        <h3><i class="fa fa-angle-right"></i>Libros</h3>
         <div style="width: 800">
-            <p>Libros sin devolver: <?php if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
+            <p>Total de libros: <?php if (isset($totalRegistrosLibros)) echo $totalRegistrosLibros; ?></p>
             <table border='1' class="display table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width: 100;text-align: center" colspan="4">DATOS SOBRE EL LIBRO PRESTADO</td>
-                        <td style="width: 100;text-align: center" colspan="2">PERSONA RESPONSABLE</td>
-                        <td style="width: 100;text-align: center"colspan="2">INFORMACION DEL PRESTAMO</td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100">Codigo Libro</td>
-                        <td style="width: 100">Titulo Libro</td>
-                        <td style="width: 100">Estado Libro</td>
-                        <td style="width: 100">Categoria Libro</td>
-                        <td style="width: 100">Documento</td>
-                        <td style="width: 100"> Nombre</td>
-                        <td style="width: 100">Fecha salida</td>
-                        <td style="width: 100">Observacion salida</td>
+                        <td style="width: 100">Codigo</td>
+                        <td style="width: 100">Titulo</td>
+                        <td style="width: 100">Autor</td>
+                        <td style="width: 100">Categoria</td>
+                        <td style="width: 100">Estado</td>
                     </tr>
                 </thead> 
                 <tbody>
@@ -65,14 +41,11 @@ $i = 0;
 foreach ($listaDeLibros as $key => $value) {
     ?>
                         <tr>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->libLecCodigo ?></td>
-                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecTitulo) ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->estLibNombre; ?></td>
+                            <td style="width: 100"><?php echo $listaDeLibros[$i]->libLecCodigo; ?></td>
+                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecTitulo); ?></td>
+                            <td style="width: 100"><?php echo strtoupper($listaDeLibros[$i]->libLecAutor); ?></td>
                             <td style="width: 100"><?php echo $listaDeLibros[$i]->catLecNombre; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->perDocumento ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->perNombre." ".$listaDeLibros[$i]->perApellido ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->conPFechaSal; ?></td>
-                            <td style="width: 100"><?php echo $listaDeLibros[$i]->conPObsSalida; ?></td>
+                            <td style="width: 100"><?php echo $listaDeLibros[$i]->estLibNombre; ?></td>
                                 <?php
                                 $i++;
                                 ?>
@@ -108,7 +81,7 @@ foreach ($listaDeLibros as $key => $value) {
                 <input type="hidden" name="ruta" value="verInventarioLibros"/>
                 <table> 
                     <tr><td>Codigo:</td>
-                        <td><input type="number" name="libLecCod" onclick="" value="<?php
+                        <td><input type="text" name="libLecCod" onclick="" value="<?php
                                             if (isset($_SESSION['libLecCodF'])) {
                                                 echo $_SESSION['libLecCodF'];
                                             }
@@ -158,7 +131,7 @@ foreach ($listaDeLibros as $key => $value) {
                                 <?php
                                 for ($j = 0; $j < $cantEstados; $j++) {
                                     ?>
-                                    <option value = "<?php echo $registroEstadosLibros[$j]->catLecId; ?>" <?php
+                                    <option value = "<?php echo $registroEstadosLibros[$j]->estLibId; ?>" <?php
                                             if (isset($_SESSION['estLibNombreF']) && $_SESSION['estLibNombreF'] == $registroEstadosLibros[$j]->estLibId) {
                                                 echo " selected";
                                             }
@@ -210,4 +183,3 @@ foreach ($listaDeLibros as $key => $value) {
         <!--/ row -->
     </section>
     <!-- /wrapper -->
-</section>

@@ -1,12 +1,11 @@
 <?php
-
-//include_once "../ConstantesDeConexion.php";
-include_once PATH ."modelos/ConexDBMySQL.php";
-class CategoriaLibrosLectoDao extends ConexDBMySQL {
+include_once PATH . "modelos/ConexDBMySQL.php";
+class LibrosLectoDao extends ConexDBMySQL {
     public function __construct($servidor, $base, $loginDB, $passwordDB) {
         parent::__construct($servidor, $base, $loginDB, $passwordDB);}
     public function seleccionarTodos() {
-        $consulta = "SELECT ll.libLecId, ll.libLecCodigo, ll.libLecTitulo, ll.libLecAutor,cll.catLecId, cll.catLecNombre,el.estLibId, el.estLibNombre 
+        $consulta = "SELECT ll.libLecId, ll.libLecCodigo, ll.libLecTitulo, ll.libLecAutor,cll.catLecId, cll.catLecNombre,el.estLibId, el.estLibNombre, 
+                                  ll.libLecEstado 
                                   FROM ((libros_lecto ll Left JOIN categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId=cll.catLecId)
                                   LEFT JOIN estado_libros el ON ll.estado_libros_estLibId=el.estLibId);";
         $registrar = $this->conexion->prepare($consulta);
@@ -90,7 +89,7 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
             $cambiarEstado = 0;
 
             if (isset($sId[0])) {
-                $actualizar = "UPDATE libros_lecto SET libLectEstado = ? WHERE libLecId= ?;";
+                $actualizar = "UPDATE libros_lecto SET libLecEstado= ? WHERE libLecId= ?;";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $sId[0]));
                 return ['actualizacion' => $actualizacion, 'mensaje' => "Registro Inactivado."];
@@ -118,9 +117,10 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
 
 
         $planConsulta = "select SQL_CALC_FOUND_ROWS ll.libLecId, ll.libLecCodigo, ll.libLecTitulo, ll.libLecAutor,
-                         cll.catLecId, cll.catLecNombre, el.estLibId, el.estLibNombre
+                         cll.catLecId, cll.catLecNombre, el.estLibId, el.estLibNombre,ll.libLecEstado 
                          FROM ((libros_lecto ll LEFT JOIN  categoria_libro_lecto cll ON ll.categoria_libro_lecto_catLecId= cll.catLecId)
-                         LEFT JOIN  estado_libros el ON ll.categoria_libro_lecto_catLecId = el.estLibId)";
+
+                       LEFT JOIN  estado_libros el ON ll.estado_libros_estLibId = el.estLibId)";
 
         $planConsulta.= $filtrarBuscar;
 
@@ -128,16 +128,16 @@ class CategoriaLibrosLectoDao extends ConexDBMySQL {
         $planConsulta .= " LIMIT ".$limit." OFFSET ".$offset." ; ";
         $listar = $this->conexion->prepare($planConsulta);
         $listar->execute();
-
         $listadoLibros = array();
         while ($registro = $listar->fetch(PDO::FETCH_OBJ)) {
             $listadoLibros[] = $registro;
         }
 
-        $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
+         $listar2 = $this->conexion->prepare("SELECT FOUND_ROWS() as total;");
         $listar2->execute();
         while ($registro = $listar2->fetch(PDO::FETCH_OBJ)) {
             $totalRegistros = $registro->total;
+       
         }
          $this->cantidadTotalRegistros = $totalRegistros;
 
