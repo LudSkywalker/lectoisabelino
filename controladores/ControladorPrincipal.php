@@ -8,6 +8,7 @@ include_once PATH . 'controladores/LibrosLectoControlador.php';
 include_once PATH . 'controladores/PrestamoLibrosControlador.php';
 include_once PATH . 'controladores/PrestamoElementosControlador.php';
 include_once PATH . 'modelos/modeloUsuarios/ValidadorUsuarios.php';
+include_once PATH . 'modelos/modeloPersona/ValidadorPersona.php';
 include_once PATH . 'controladores/ElementosControlador.php';
 
 class ControladorPrincipal {
