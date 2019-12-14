@@ -200,7 +200,7 @@ class LibrosLectoControlador {
         }
         $condicionBuscar = (($where && !$filtros == 0) ? " ) and " : " where  ");
         $planConsulta .= $condicionBuscar;
-        $planConsulta .= " ( ll.libLecEstado > 0) ";
+        $planConsulta .= "  ll.libLecEstado = 1 ";
                 $where = true;  // inicializar $where a verdadero ( hay condiciones o criterios de búsqueda)
                 $filtros++; //cantidad de filtros/condiciones o criterios de búsqueda
                 

@@ -142,7 +142,6 @@ class LibrosLectoDao extends ConexDBMySQL {
          $this->cantidadTotalRegistros = $totalRegistros;
 
         return array($totalRegistros, $listadoLibros);
-        $this->cierreDB();
     }
 
     public function totalRegistros() {

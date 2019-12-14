@@ -13,7 +13,7 @@ include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 <html>
     <head>
         <script language="javascript">
-            window.location.href = "principal.php";
+            window.location.href = "Controlador.php?ruta=inicio";
         </script>
     </head>
     <body>

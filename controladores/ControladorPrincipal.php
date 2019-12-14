@@ -8,6 +8,7 @@ include_once PATH . 'controladores/LibrosLectoControlador.php';
 include_once PATH . 'controladores/PrestamoLibrosControlador.php';
 include_once PATH . 'controladores/PrestamoElementosControlador.php';
 include_once PATH . 'modelos/modeloUsuarios/ValidadorUsuarios.php';
+include_once PATH . 'modelos/modeloPersona/ValidadorPersona.php';
 include_once PATH . 'controladores/ElementosControlador.php';
 
 class ControladorPrincipal {
@@ -63,6 +64,7 @@ class ControladorPrincipal {
             case "insertarUsuario_s":
             case "confirmaActualizarUsuario_s":
             case "registro":
+            case "inicio":
                 if ($this->datos['ruta'] == "gestionDeRegistro" || $this->datos['ruta'] == "insertarUsuario_s" || $this->datos['ruta'] == "confirmaActualizarUsuario_s") {
                     $validarRegistro = new ValidadorUsuarios_s();
                     $erroresValidacion = $validarRegistro->validarFormularioUsuarios_s($this->datos);

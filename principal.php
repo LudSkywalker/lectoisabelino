@@ -4,8 +4,9 @@ session_start();
 include_once 'modelos/ConstantesDeConexion.php';
 include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
 
-$seguridad = new BloqueDeSeguridad();
-$seguridad->seguridad("login.php");
+//$seguridad = new BloqueDeSeguridad();
+//$seguridad->seguridad("login.php");
+
 
 ?>
 
@@ -75,10 +76,10 @@ $seguridad->seguridad("login.php");
                         
                         <li class="mt">
                             <a  <?php
-                            if (!isset($_GET["contenido"])){
+                            if((isset($_GET["contenido"]))&&(($_GET["contenido"]=="plantillas/Dashio/ini.php"))){
                                 echo 'class="active"';
                             }
-                            ?> href="principal.php">
+                            ?> href="principal.php?contenido=plantillas/Dashio/ini.php">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Inicio</span>
                             </a>

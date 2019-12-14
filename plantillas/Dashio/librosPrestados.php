@@ -193,8 +193,6 @@ foreach ($listaDeLibros as $key => $value) {
         </fieldset>
 
 </section>
+    </section>
 
         <!--/ row -->
-    </section>
-    <!-- /wrapper -->
-</section>

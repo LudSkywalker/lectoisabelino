@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloElementos/ElementosDAO.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/principal.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/elementosPrestados.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/PrestamoElementosControlador.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloControlElementos/ControlElementosDAO.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/ControladorPrincipal.php</file>
+=======
+>>>>>>> 2508f7f873f7ce3d4995cf57e253ba5b821ed4f2
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/ini.php</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/LibrosLectoControlador.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/librosPrestados.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/LibrosControlador.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/principal.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/contactform/contactform.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/index.php</file>
+            <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/ControladorPrincipal.php</file>
+=======
+<<<<<<< HEAD
+>>>>>>> 25d4a68954861351595120facb272abea592f092
             <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/gestionarLibrosLecto.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/LibrosLectoControlador.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/plantillas/Dashio/gestionarElementos.php</file>
@@ -10,6 +36,35 @@
             <file>file:/C:/xampp/htdocs/lectoisabelino/modelos/modeloLibrosLecto/LibrosLectoDAO.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/principal.php</file>
             <file>file:/C:/xampp/htdocs/lectoisabelino/controladores/ControladorPrincipal.php</file>
+<<<<<<< HEAD
+=======
+=======
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/lib/bootstrap/css/bootstrap.min.css</file>
+            <file>file:/C:/Lud/php/lectoisabelino/principal.php</file>
+<<<<<<< HEAD
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/gestionarElementos.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/Usuario_sControlador.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/registro.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/LibrosControlador.php</file>
+
+            <file>file:/C:/Lud/php/lectoisabelino/modelos/modeloUsuarios/ValidadorUsuarios.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/ElementosControlador.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/todosLosElementos.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/plantillas/Dashio/elementosPrestados.php</file>
+            <file>file:/C:/Lud/php/lectoisabelino/controladores/ControladorPrincipal.php</file>
+
+>>>>>>> 6aa46a34a094aec824c152c9e391c83428187569
+>>>>>>> 2e39e2408480c57908a79ef65cf3fe048813d69c
+>>>>>>> ed4f789458f08e67567c04d37c0a3cba838934b9
+=======
+>>>>>>> 6bb169a1d2ceb44724b9cec04a682fc5f180ecd9
+>>>>>>> 2508f7f873f7ce3d4995cf57e253ba5b821ed4f2
+=======
+            <file>file:/C:/Lud/php/lectoisabelino/javascript/md5.js</file>
+            <file>file:/C:/Lud/php/lectoisabelino/javascript/funciones.js</file>
+>>>>>>> master
+>>>>>>> 25d4a68954861351595120facb272abea592f092
         </group>
     </open-files>
 </project-private>

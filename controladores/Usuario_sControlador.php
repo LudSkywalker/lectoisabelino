@@ -78,8 +78,10 @@ class Usuario_sControlador {
 
                 $this->datos["password"] = md5($this->datos["password"]); //Encriptamos password para que coincida con la base de datos
                 $this->datos["documento"] = ""; //Para logueo crear ésta variable límpia por cuanto se utiliza el mismo método de registrarse a continuación
-                $existeUsuario_s = $gestarUsuario_s->seleccionarId(array($this->datos["documento"], $this->datos['email'], $this->datos["password"])); //Se revisa si existe la persona en la base                
-                if ((0 != $existeUsuario_s['exitoSeleccionId']) && ($existeUsuario_s['registroEncontrado'][0]->usuLogin == $this->datos['email'])) {
+                $existeUsuario_s = $gestarUsuario_s->seleccionarId(array($this->datos["documento"], $this->datos['email'], $this->datos["password"])); //Se revisa si existe la persona en la base
+                $logingg=$existeUsuario_s["registroEncontrado"];
+                $_SESSION['log'] = $logingg[0]->perDocumento ;
+                  if ((0 != $existeUsuario_s['exitoSeleccionId']) && ($existeUsuario_s['registroEncontrado'][0]->usuLogin == $this->datos['email'])) {
                     //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Bienvenido a nuestra Aplicación."; //mensaje de inserción
                     //Consultamos los roles de la persona logueada
@@ -93,13 +95,27 @@ class Usuario_sControlador {
                     //ABRIR SESION ******************************************
                     $sesionPermitida = new ClaseSesion(); //Se abre sesiòn
                     $sesionPermitida->crearSesion(array($existeUsuario_s['registroEncontrado'][0], $rolesUsuario, $rolesEnSesion)); //Se envìa a la sesiòn los datos del usuario logeado
-                    header("location:principal.php");
+                    header("location:principal.php?contenido=plantillas/Dashio/ini.php");
                 } else {
                     //se abre sesión para almacenar en ella el mensaje de inserción
                     $_SESSION['mensaje'] = "Credenciales de acceso incorrectas"; //mensaje de inserción
                     header("location:login.php");
                 }
 
+                break;
+            case "inicio":
+                $log[0]=$_SESSION['log']; 
+                $log[1]=null; 
+                $usuario = new UsuariosDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
+                $usuarios = $usuario->seleccionarId($log);
+                $_SESSION['usuarios'] = $usuarios;
+                
+                $persona = new PersonaDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
+                $personas = $persona->seleccionarId($log);
+                $_SESSION['personas'] = $personas;
+                
+
+                header("location:principal.php?contenido=plantillas/Dashio/ini.php");
                 break;
             case "registro":
                 $roles = new RolDao(SERVIDOR, BASE, USUARIO_BD, CONTRASENA);
