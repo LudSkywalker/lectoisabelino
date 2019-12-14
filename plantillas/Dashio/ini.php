@@ -20,8 +20,5 @@
       </section>
 
 </section>
-<?php
-if (isset($erroresValidacion))
-    $erroresValidacion = NULL;
-?>
+
 
