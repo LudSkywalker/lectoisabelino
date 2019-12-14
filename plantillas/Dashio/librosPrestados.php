@@ -1,19 +1,6 @@
 <?php
-<<<<<<< HEAD
-session_start();
-
-include_once '../../modelos/ConstantesDeConexion.php';
-include_once PATH . 'controladores/ManejoSesiones/BloqueDeSeguridad.php';
-
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-=======
 if (isset($_SESSION['listaDePrestamos'])) {
     $listaDeLibros = $_SESSION['listaDePrestamos'];
->>>>>>> 2e39e2408480c57908a79ef65cf3fe048813d69c
 }
 
 if (isset($_SESSION['paginacionVinculosPrestamos'])) {
@@ -206,8 +193,6 @@ foreach ($listaDeLibros as $key => $value) {
         </fieldset>
 
 </section>
+    </section>
 
         <!--/ row -->
-    </section>
-    <!-- /wrapper -->
-</section>

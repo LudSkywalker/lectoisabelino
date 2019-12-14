@@ -1,4 +1,5 @@
 <?php
+
 class ValidadorUsuarios_s {
 
     public function validarFormularioUsuarios_s($datos) {
@@ -40,9 +41,9 @@ class ValidadorUsuarios_s {
                     }
                     break;
                 case 'password':
-                    $patronPassword = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/";
+                    $patronPassword = "/^\s*$/"; //si está vacío
                     if (preg_match($patronPassword, $value)) {
-                        $mensajesError['password'] = "*7-La contraseña debe tener digitos minusculas y mayusculas";
+                        $mensajesError['password'] = "*7-Formato o valor del Dato incorrecto";
                         $marcaCampo['password'] = "*8";
                     }
 
