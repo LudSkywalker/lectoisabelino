@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -55,6 +55,10 @@
 =======
 >>>>>>> 6bb169a1d2ceb44724b9cec04a682fc5f180ecd9
 >>>>>>> 2508f7f873f7ce3d4995cf57e253ba5b821ed4f2
+=======
+            <file>file:/C:/Lud/php/lectoisabelino/javascript/md5.js</file>
+            <file>file:/C:/Lud/php/lectoisabelino/javascript/funciones.js</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
